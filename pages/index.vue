@@ -1,6 +1,11 @@
 <template>
   <div>
     <HeroSection v-if="heroSection" :content="heroSection" />
+    <TestimonialSection
+      v-if="testimonialSection"
+      :content="testimonialSection"
+    />
+    <SoftCtaSection v-if="softCtaSection" :content="softCtaSection" />
   </div>
 </template>
 
@@ -13,6 +18,18 @@ const { data } = useSanityQuery(homepageQuery);
 const heroSection = computed(() => {
   return data.value?.pageBuilder?.find(
     (section) => section._type === "heroSection"
+  );
+});
+
+const testimonialSection = computed(() => {
+  return data.value?.pageBuilder?.find(
+    (section) => section._type === "testimonialSection"
+  );
+});
+
+const softCtaSection = computed(() => {
+  return data.value?.pageBuilder?.find(
+    (section) => section._type === "softCtaSection"
   );
 });
 </script>

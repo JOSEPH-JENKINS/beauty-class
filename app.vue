@@ -1,29 +1,33 @@
 <script setup>
 import { siteDefaults } from "@/queries/siteDefaults";
 const { data: settings } = useSanityQuery(siteDefaults);
+
+onMounted(() => {
+  const toggle = document.querySelector(".js-mobile-menu-toggle");
+  const menuWrapper = document.querySelector(".Mobile-menu-wrapper");
+
+  toggle?.addEventListener("click", () => {
+    menuWrapper.classList.toggle("is-open");
+  });
+
+  document.querySelectorAll("nav a").forEach((link) => {
+    link.addEventListener("click", () => {
+      document
+        .querySelector(".Mobile-menu-wrapper")
+        .classList.remove("is-open");
+    });
+  });
+});
 </script>
 
 <template>
   <div class="main-container">
     <header class="header transparent">
       <nav>
-        <a tabindex="1" id="skip-to-content" href="#content"
-          >Skip to Main Content</a
-        >
         <div class="nav-left-container">
-          <span v-for="link in settings?.navigation" :key="link.url">
-            <NuxtLink
-              :to="link.url"
-              :target="link.openInNewTab ? '_blank' : '_self'"
-              rel="noopener noreferrer"
-              class="u-showMd"
-            >
-              {{ link.label }}
-            </NuxtLink>
-          </span>
-          <NuxtLink to="/" class="u-showMd">About</NuxtLink>
-          <NuxtLink to="/" class="u-showMd">About</NuxtLink>
-          <NuxtLink to="/" class="u-showMd">About</NuxtLink>
+          <NuxtLink to="/about" class="u-showMd">about</NuxtLink>
+          <NuxtLink to="/artists" class="u-showMd">artists</NuxtLink>
+          <NuxtLink to="/events" class="u-showMd">events</NuxtLink>
 
           <div class="Mobile-menu u-hideMd">
             <div
@@ -48,29 +52,23 @@ const { data: settings } = useSanityQuery(siteDefaults);
                 <div class="Mobile-menu-content-container">
                   <div class="Mobile-menu-content-container-section">
                     <h3 class="Mobile-menu-content-container-section-title">
-                      <NuxtLink class="link" to="/pages/about-us"
-                        >ABOUT</NuxtLink
-                      >
+                      <NuxtLink class="link" to="/about">ABOUT</NuxtLink>
                     </h3>
 
                     <h3 class="Mobile-menu-content-container-section-title">
-                      <NuxtLink class="link" to="/pages/philanthropy"
-                        >RHODE FUTURES</NuxtLink
-                      >
+                      <NuxtLink class="link" to="/artists">ARTISTS</NuxtLink>
                     </h3>
 
                     <h3 class="Mobile-menu-content-container-section-title">
-                      <NuxtLink class="link" to="/pages/sustainability"
-                        >IMPACT</NuxtLink
-                      >
+                      <NuxtLink class="link" to="/events">EVENTS</NuxtLink>
                     </h3>
 
                     <h3 class="Mobile-menu-content-container-section-title">
-                      <NuxtLink class="link" to="/pages/faq">FAQ</NuxtLink>
+                      <NuxtLink class="link" to="/blog">BLOG</NuxtLink>
                     </h3>
 
                     <h3 class="Mobile-menu-content-container-section-title">
-                      <NuxtLink class="link" to="/account">ACCOUNT</NuxtLink>
+                      <NuxtLink class="link" to="/founder">FOUNDER</NuxtLink>
                     </h3>
                   </div>
                 </div>
@@ -82,9 +80,12 @@ const { data: settings } = useSanityQuery(siteDefaults);
           <img :src="settings?.logo?.asset?.url" alt="Site Logo" />
         </NuxtLink>
         <div class="nav-right-container">
-          <NuxtLink to="/" class="u-showMd">About</NuxtLink>
-          <NuxtLink to="/" class="u-showMd">About</NuxtLink>
-          <NuxtLink to="/" class="u-showMd">About</NuxtLink>
+          <NuxtLink to="/blog" class="u-showMd">blog</NuxtLink>
+          <NuxtLink to="/founder" class="u-showMd">founder</NuxtLink>
+          <NuxtLink to="#footer" class="u-showMd">contact</NuxtLink>
+          <NuxtLink to="#footer" class="u-hideMd" style="color: #67645e"
+            >contact</NuxtLink
+          >
         </div>
       </nav>
     </header>
@@ -93,7 +94,7 @@ const { data: settings } = useSanityQuery(siteDefaults);
       <NuxtPage />
     </main>
 
-    <footer class="Footer">
+    <footer class="Footer" id="footer">
       <div class="Footer-logo">
         <img :src="settings?.logo?.asset?.url" alt="Site Logo" />
       </div>
@@ -109,9 +110,7 @@ const { data: settings } = useSanityQuery(siteDefaults);
                 <ul class="Footer-navigation-list">
                   <li>
                     <NuxtLink
-                      to="/"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      to="/about"
                       class="FooterMenu-itemLink u-animate-underline"
                     >
                       About
@@ -119,32 +118,34 @@ const { data: settings } = useSanityQuery(siteDefaults);
                   </li>
                   <li>
                     <NuxtLink
-                      to="/"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      to="/artists"
                       class="FooterMenu-itemLink u-animate-underline"
                     >
-                      About
+                      Artists
                     </NuxtLink>
                   </li>
                   <li>
                     <NuxtLink
-                      to="/"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      to="/events"
                       class="FooterMenu-itemLink u-animate-underline"
                     >
-                      About
+                      Events
                     </NuxtLink>
                   </li>
                   <li>
                     <NuxtLink
-                      to="/"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      to="/blog"
                       class="FooterMenu-itemLink u-animate-underline"
                     >
-                      About
+                      Blog
+                    </NuxtLink>
+                  </li>
+                  <li>
+                    <NuxtLink
+                      to="/founder"
+                      class="FooterMenu-itemLink u-animate-underline"
+                    >
+                      Founder
                     </NuxtLink>
                   </li>
                 </ul>

@@ -17,7 +17,7 @@
       <div class="Hero-content BOTTOM-LEFT">
         <div class="Hero-content-wrapper TEXT__LEFT BUTTON__LEFT">
           <h1 data-splitting="lines" style="font-weight: 400">
-            <p>{{ data?.title }}</p>
+            <p>{{ data?.name }}. <i>Founder, Beauty Class</i></p>
           </h1>
         </div>
       </div>
@@ -25,7 +25,7 @@
     <section class="About">
       <div class="section-header">
         <h1 data-splitting="lines" style="font-weight: 400">
-          <p class="text-indent">{{ data.content }}</p>
+          <p class="text-indent">{{ data.bio }}</p>
         </h1>
       </div>
     </section>
@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import { aboutQuery } from "@/queries/about";
+import { founderQuery } from "@/queries/founder";
 
-const { data } = useSanityQuery(aboutQuery);
+const { data } = useSanityQuery(founderQuery);
 </script>

@@ -9,9 +9,7 @@ export const siteDefaults = groq`
         metadata { lqip, dimensions }
       }
     },
-    navigation,
     footerText,
-    footerLinks,
     socialLinks
   }
 `;
