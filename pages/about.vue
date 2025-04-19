@@ -17,7 +17,7 @@
       <div class="Hero-content BOTTOM-LEFT">
         <div class="Hero-content-wrapper TEXT__LEFT BUTTON__LEFT">
           <h1 data-splitting="lines" style="font-weight: 400">
-            <p>{{ data?.title }}</p>
+            <p style="font-size: 1.2rem">{{ data?.title }}</p>
           </h1>
         </div>
       </div>
