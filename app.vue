@@ -101,6 +101,48 @@ onMounted(() => {
       <div class="Footer-content-container">
         <div class="Footer-newsletter">
           <p>{{ settings?.footerText }}</p>
+          <form
+            class="Form Form__single-field"
+            id="klaviyo"
+            action=""
+            target="_blank"
+            novalidate="novalidate"
+            data-js-newsletter=""
+            data-ajax-submit=""
+            method="POST"
+            title="External Klaviyo link. Open in a new tab or window."
+          >
+            <input type="hidden" name="g" value="VyfPYc" />
+            <input
+              class="Input"
+              name="email"
+              aria-label="Email Address"
+              type="email"
+              placeholder="Email Address"
+              required="true"
+              target-element-id="1745050686649"
+            />
+
+            <div class="Button-container Footer-newsletter-submit-container">
+              <button
+                class="Button u-pSize Footer-newsletter-submit Button__white Button__large"
+                type="submit"
+                data-form-id=""
+                data-mode="default"
+              >
+                SUBSCRIBE
+              </button>
+            </div>
+          </form>
+          <p
+            role="alert"
+            class="u-pSize Footer-newsletter-success"
+            style="display: none"
+            id="js-newsletter-message"
+          ></p>
+          <p class="u-pSize Footer-privacy-policy">
+            By signing up, you agree to our Privacy Policy*
+          </p>
         </div>
         <div class="Footer-content">
           <div class="Footer-info">
@@ -162,6 +204,17 @@ onMounted(() => {
                     >
                       {{ social.platform }}
                     </NuxtLink>
+                  </li>
+                </ul>
+              </div>
+              <div class="Footer-navigation-list">
+                <p class="u-bold">SUPPORT</p>
+                <ul class="Footer-navigation-list">
+                  <li>
+                    <p>We're here M-F 9am - 5pm PST.</p>
+                  </li>
+                  <li>
+                    <p>Drop us a note anytime.</p>
                   </li>
                 </ul>
               </div>
