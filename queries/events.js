@@ -17,3 +17,29 @@ export const allEventsQuery = groq`
     }
   }
 `;
+
+export const allEventsWithTestimonialsQuery = groq`
+  *[_type == "event"] | order(date desc){
+    _id,
+    title,
+    description,
+    date,
+    location,
+    image {
+      asset->{
+        url
+      }
+    },
+    testimonials[]->{
+      _id,
+      name,
+      quote,
+      role,
+      image {
+        asset->{
+          url
+        }
+      }
+    }
+  }
+`;

@@ -26,7 +26,7 @@ onMounted(() => {
       <nav>
         <div class="nav-left-container">
           <NuxtLink to="/about" class="u-showMd">about</NuxtLink>
-          <NuxtLink to="/artists" class="u-showMd">artists</NuxtLink>
+          <NuxtLink to="/work" class="u-showMd">work</NuxtLink>
           <NuxtLink to="/events" class="u-showMd">events</NuxtLink>
 
           <div class="Mobile-menu u-hideMd">
@@ -56,11 +56,15 @@ onMounted(() => {
                     </h3>
 
                     <h3 class="Mobile-menu-content-container-section-title">
-                      <NuxtLink class="link" to="/artists">ARTISTS</NuxtLink>
+                      <NuxtLink class="link" to="/work">WORK</NuxtLink>
                     </h3>
 
                     <h3 class="Mobile-menu-content-container-section-title">
                       <NuxtLink class="link" to="/events">EVENTS</NuxtLink>
+                    </h3>
+
+                    <h3 class="Mobile-menu-content-container-section-title">
+                      <NuxtLink class="link" to="/events">PAST EVENTS</NuxtLink>
                     </h3>
 
                     <h3 class="Mobile-menu-content-container-section-title">
@@ -80,9 +84,12 @@ onMounted(() => {
           <img :src="settings?.logo?.asset?.url" alt="Site Logo" />
         </NuxtLink>
         <div class="nav-right-container">
+          <NuxtLink to="/past-events" class="u-showMd">past events</NuxtLink>
           <NuxtLink to="/blog" class="u-showMd">blog</NuxtLink>
           <NuxtLink to="/founder" class="u-showMd">founder</NuxtLink>
-          <NuxtLink to="#footer" class="u-showMd">contact</NuxtLink>
+          <NuxtLink to="#footer" class="u-showMd margin-right-0"
+            >contact</NuxtLink
+          >
           <NuxtLink to="#footer" class="u-hideMd" style="color: #67645e"
             >contact</NuxtLink
           >
@@ -160,10 +167,10 @@ onMounted(() => {
                   </li>
                   <li>
                     <NuxtLink
-                      to="/artists"
+                      to="/work"
                       class="FooterMenu-itemLink u-animate-underline"
                     >
-                      Artists
+                      Work
                     </NuxtLink>
                   </li>
                   <li>
@@ -172,6 +179,14 @@ onMounted(() => {
                       class="FooterMenu-itemLink u-animate-underline"
                     >
                       Events
+                    </NuxtLink>
+                  </li>
+                  <li>
+                    <NuxtLink
+                      to="/past-events"
+                      class="FooterMenu-itemLink u-animate-underline"
+                    >
+                      Past Events
                     </NuxtLink>
                   </li>
                   <li>

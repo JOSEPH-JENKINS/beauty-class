@@ -13,7 +13,7 @@
       </div>
     </section>
     <section class="Events">
-      <div v-for="event in content" class="Event" :key="event._id">
+      <div v-for="event in currentEvents" class="Event" :key="event._id">
         <div class="event-img">
           <img
             width="100"
@@ -41,7 +41,12 @@
 <script setup>
 import { allEventsQuery } from "@/queries/events";
 
-const { data: content } = useSanityQuery(allEventsQuery);
+import { computed } from "vue";
+const { data: events } = await useSanityQuery(allEventsQuery);
+const now = new Date();
+const currentEvents = computed(() =>
+  events.value.filter((ev) => new Date(ev.date) >= now)
+);
 
 function formatDateTime(dateStr) {
   const date = new Date(dateStr);
