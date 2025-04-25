@@ -74,6 +74,10 @@ onMounted(() => {
                     <h3 class="Mobile-menu-content-container-section-title">
                       <NuxtLink class="link" to="/founder">FOUNDER</NuxtLink>
                     </h3>
+
+                    <h3 class="Mobile-menu-content-container-section-title">
+                      <NuxtLink class="link" to="/contact">CONTACT</NuxtLink>
+                    </h3>
                   </div>
                 </div>
               </div>
@@ -87,10 +91,10 @@ onMounted(() => {
           <NuxtLink to="/past-events" class="u-showMd">past events</NuxtLink>
           <NuxtLink to="/blog" class="u-showMd">blog</NuxtLink>
           <NuxtLink to="/founder" class="u-showMd">founder</NuxtLink>
-          <NuxtLink to="#footer" class="u-showMd margin-right-0"
+          <NuxtLink to="/contact" class="u-showMd margin-right-0"
             >contact</NuxtLink
           >
-          <NuxtLink to="#footer" class="u-hideMd" style="color: #67645e"
+          <NuxtLink to="/contact" class="u-hideMd" style="color: #67645e"
             >contact</NuxtLink
           >
         </div>

@@ -10,6 +10,7 @@
       v-if="testimonialSection"
       :content="testimonialSection"
     />
+    <EventModal v-if="modalSection" :content="modalSection" />
     <SoftCtaSection v-if="softCtaSection" :content="softCtaSection" />
   </div>
 </template>
@@ -41,6 +42,12 @@ const softCtaSection = computed(() => {
 const brandsSection = computed(() => {
   return data.value?.pageBuilder?.find(
     (section) => section._type === "brandsSection"
+  );
+});
+
+const modalSection = computed(() => {
+  return data.value?.pageBuilder?.find(
+    (section) => section._type === "modalSection"
   );
 });
 </script>

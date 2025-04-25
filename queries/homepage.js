@@ -52,6 +52,13 @@ export const homepageQuery = groq`
             metadata { dimensions }
           }
         }
+      },
+      _type == "modalSection" => {
+        _type,
+        heading,
+        subtext,
+        ctaLabel,
+        ctaLink
       }
     }
   }
