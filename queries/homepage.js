@@ -42,6 +42,16 @@ export const homepageQuery = groq`
         ctaLink,
         heading,
         paragraph
+      },
+      
+      _type == "brandsSection" => {
+        _type,
+        logos[]{
+          asset->{
+            url,
+            metadata { dimensions }
+          }
+        }
       }
     }
   }

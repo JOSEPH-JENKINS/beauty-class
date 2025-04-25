@@ -1,6 +1,11 @@
 <template>
   <div>
     <HeroSection v-if="heroSection" :content="heroSection" />
+    <BrandLogoCarousel
+      v-if="brandsSection"
+      :logos="brandsSection.logos"
+      :speed="25"
+    />
     <TestimonialSection
       v-if="testimonialSection"
       :content="testimonialSection"
@@ -30,6 +35,12 @@ const testimonialSection = computed(() => {
 const softCtaSection = computed(() => {
   return data.value?.pageBuilder?.find(
     (section) => section._type === "softCtaSection"
+  );
+});
+
+const brandsSection = computed(() => {
+  return data.value?.pageBuilder?.find(
+    (section) => section._type === "brandsSection"
   );
 });
 </script>
