@@ -28,9 +28,9 @@
           <p>{{ formatDateTime(event.date) }}</p>
           <p>{{ event.location }}</p>
           <div class="Button-container">
-            <NuxtLink class="Button Button__dark" :to="event.eventbriteLink">
+            <button class="Button Button__dark" @click="startCheckout(event)">
               book a spot
-            </NuxtLink>
+            </button>
           </div>
         </div>
       </div>
@@ -40,14 +40,21 @@
 
 <script setup>
 import { allEventsQuery } from "@/queries/events";
-
 import { computed } from "vue";
+import { useRouter } from "vue-router";
+import { useFetch } from "#app";
+
 const { data: events } = await useSanityQuery(allEventsQuery);
 const now = new Date();
+const router = useRouter();
+const route = useRoute();
+
+// Filter current events based on the date
 const currentEvents = computed(() =>
   events.value.filter((ev) => new Date(ev.date) >= now)
 );
 
+// Format the event date into a human-readable string
 function formatDateTime(dateStr) {
   const date = new Date(dateStr);
   return date.toLocaleString("en-US", {
@@ -59,4 +66,48 @@ function formatDateTime(dateStr) {
     hour12: false,
   });
 }
+
+// Checkout function
+async function startCheckout(event) {
+  // Ensure price exists and is a valid number
+  const priceInCents = event.price
+    ? Math.round(parseFloat(event.price) * 100)
+    : 0;
+
+  // Log to verify the data
+  console.log("Event Data:", {
+    title: event.title,
+    price: priceInCents,
+    currency: "usd",
+    eventId: event._id,
+  });
+
+  try {
+    // Make the request to your server API to initiate Stripe Checkout
+    const result = await $fetch("/api/checkout", {
+      method: "POST",
+      body: {
+        title: event.title,
+        price: priceInCents,
+        currency: "usd", // USD currency
+        eventId: event._id, // Optional: track event
+      },
+    });
+
+    if (result) {
+      // Redirect to Stripe Checkout if URL is returned
+      window.location.href = result.url;
+    } else {
+      console.error("No URL returned from the checkout API.");
+    }
+  } catch (err) {
+    console.error("API Request failed:", err);
+  }
+}
+
+onMounted(() => {
+  if (route.query.paymentSuccess === "true") {
+    alert("Thank you for your purchase!");
+  }
+});
 </script>

@@ -5,13 +5,14 @@
       <div class="contact-description">
         <p>{{ contact.description }}</p>
       </div>
-      <form action="post" class="contact-form">
+      <form action="post" class="contact-form" @submit.prevent="sendMessage">
         <div class="contact-input-wrapper js-input-wrapper">
           <input
             type="text"
             name="name"
             placeholder="First and Last Name*"
             required=""
+            v-model="name"
             aria-required="true"
             class="contact-input js-form-input"
           />
@@ -21,6 +22,7 @@
             type="email"
             name="email"
             required=""
+            v-model="emailContact"
             aria-required="true"
             placeholder="Email*"
             class="contact-input js-form-input"
@@ -31,11 +33,21 @@
             name="message"
             placeholder="Tell us the details.*"
             required=""
+            v-model="message"
             aria-required="true"
             style="resize: none"
-            class="mod_kustomer_form_SBqyca_Kustomer__textarea mod_kustomer_form_SBqyca_Kustomer__input js-form-input"
+            class="contact-textarea contact-input js-form-input"
           ></textarea>
         </div>
+        <div class="Button-container">
+          <button
+            class="Button u-pSize uppercase Button__dark Button__large Button__fullWidth js-form-submit"
+            type="submit"
+          >
+            Submit
+          </button>
+        </div>
+        <p v-if="messageSent">Your message has been sent!</p>
       </form>
     </div>
   </div>
@@ -45,4 +57,19 @@
 import { contactQuery } from "@/queries/contact";
 
 const { data: contact } = useSanityQuery(contactQuery);
+
+import { ref } from "vue";
+
+const name = ref("");
+const emailContact = ref("");
+const message = ref("");
+
+let messageSent = ref(false);
+
+function sendMessage() {
+  messageSent.value = true;
+  name.value = "";
+  emailContact.value = "";
+  message.value = "";
+}
 </script>

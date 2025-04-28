@@ -7,6 +7,7 @@ export const allEventsQuery = groq`
     description,
     date,
     location,
+    price,
     eventbriteLink,
     image {
       asset->{

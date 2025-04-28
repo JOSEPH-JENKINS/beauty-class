@@ -18,6 +18,16 @@ onMounted(() => {
     });
   });
 });
+
+import { ref } from "vue";
+
+const email = ref("");
+const subscribed = ref(false);
+
+function subscribe() {
+  subscribed.value = true;
+  email.value = "";
+}
 </script>
 
 <template>
@@ -64,7 +74,9 @@ onMounted(() => {
                     </h3>
 
                     <h3 class="Mobile-menu-content-container-section-title">
-                      <NuxtLink class="link" to="/events">PAST EVENTS</NuxtLink>
+                      <NuxtLink class="link" to="/past-events"
+                        >PAST EVENTS</NuxtLink
+                      >
                     </h3>
 
                     <h3 class="Mobile-menu-content-container-section-title">
@@ -111,17 +123,15 @@ onMounted(() => {
       </div>
       <div class="Footer-content-container">
         <div class="Footer-newsletter">
-          <p>{{ settings?.footerText }}</p>
+          <p v-if="!subscribed">{{ settings?.footerText }}</p>
+          <p v-if="subscribed">Thank you for subscribing!</p>
           <form
             class="Form Form__single-field"
             id="klaviyo"
             action=""
-            target="_blank"
             novalidate="novalidate"
-            data-js-newsletter=""
-            data-ajax-submit=""
             method="POST"
-            title="External Klaviyo link. Open in a new tab or window."
+            @submit.prevent="subscribe"
           >
             <input type="hidden" name="g" value="VyfPYc" />
             <input
@@ -129,6 +139,7 @@ onMounted(() => {
               name="email"
               aria-label="Email Address"
               type="email"
+              v-model="email"
               placeholder="Email Address"
               required="true"
               target-element-id="1745050686649"

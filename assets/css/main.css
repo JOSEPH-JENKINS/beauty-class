@@ -1380,6 +1380,13 @@ nav a {
   display: flex;
 }
 
+.contact-textarea {
+  min-height: 14.75rem;
+  display: block;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
 .contact-input {
   appearance: none;
   color: #67645e;
@@ -1395,9 +1402,19 @@ nav a {
   transition: outline 0.1s;
 }
 
-.contact-textarea {
-  min-height: 14.75rem;
-  display: block;
-  box-sizing: border-box;
-  max-width: 100%;
+.Button__fullWidth {
+  width: 100%;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+@media only screen and (max-width: 760px) {
+  .contact-section {
+    margin-bottom: 1.25rem;
+    padding: 4rem 1rem 2.5rem;
+  }
 }
