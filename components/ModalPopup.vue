@@ -16,11 +16,54 @@
           </h1>
         </div>
         <p>{{ subtext }}</p>
-        <div class="Button-container">
+        <div class="Footer-newsletter">
+          <p v-if="subscribed">Thank you for subscribing!</p>
+          <form
+            class="Form Form__single-field"
+            id="klaviyo"
+            action=""
+            novalidate="novalidate"
+            method="POST"
+            @submit.prevent="subscribe"
+          >
+            <input type="hidden" name="g" value="VyfPYc" />
+            <input
+              class="Input"
+              name="email"
+              aria-label="Email Address"
+              type="email"
+              v-model="email"
+              placeholder="Email Address"
+              required="true"
+              target-element-id="1745050686649"
+            />
+
+            <div class="Button-container Footer-newsletter-submit-container">
+              <button
+                class="Button u-pSize Footer-newsletter-submit Button__white Button__large"
+                type="submit"
+                data-form-id=""
+                data-mode="default"
+              >
+                SUBSCRIBE
+              </button>
+            </div>
+          </form>
+          <p
+            role="alert"
+            class="u-pSize Footer-newsletter-success"
+            style="display: none"
+            id="js-newsletter-message"
+          ></p>
+          <p class="u-pSize Footer-privacy-policy">
+            By signing up, you agree to our Privacy Policy*
+          </p>
+        </div>
+        <!-- <div class="Button-container">
           <button class="Button Button__dark" to="/events" @click="handleCTA">
             {{ ctaLabel }}
           </button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -51,9 +94,18 @@ const router = useRouter();
 function handleCTA() {
   emit("close"); // First, close the modal
   // Delay navigation slightly to allow modal to close visually
-  setTimeout(() => {
-    router.push("/events");
-  }, 100);
+  // setTimeout(() => {
+  //   router.push("/events");
+  // }, 100);
+}
+
+const email = ref("");
+const subscribed = ref(false);
+
+function subscribe() {
+  subscribed.value = true;
+  email.value = "";
+  handleCTA();
 }
 </script>
 
@@ -72,12 +124,24 @@ function handleCTA() {
   display: grid;
   background: #fff;
   padding: 1rem;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
   gap: 1rem;
   height: 50vh;
   position: relative;
   width: 70vw;
   border-radius: 12px;
+}
+
+.modal-content .Footer-newsletter {
+  border-right: 0px;
+}
+
+@media screen and (min-width: 760px) {
+  .modal-content {
+    grid-template-columns: 1fr 1fr;
+    width: 85vw;
+  }
 }
 
 .modal-close {
@@ -90,6 +154,7 @@ function handleCTA() {
   padding: 5px 1rem;
   line-height: 100%;
   cursor: pointer;
+  z-index: 999;
 }
 
 .image-container {
