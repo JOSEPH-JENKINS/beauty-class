@@ -24,13 +24,16 @@
         </div>
         <div class="event-info">
           <h1>{{ event.title }}</h1>
-          <p>{{ event.description }}</p>
+          <p>{{ event.excerpt }}</p>
           <p>{{ formatDateTime(event.date) }}</p>
           <p>{{ event.location }}</p>
           <div class="Button-container">
-            <button class="Button Button__dark" @click="startCheckout(event)">
-              book a spot
-            </button>
+            <NuxtLink
+              class="Button Button__dark"
+              :to="`/events/${event.slug.current}`"
+            >
+              learn more
+            </NuxtLink>
           </div>
         </div>
       </div>

@@ -23,3 +23,27 @@ export const allPostsQuery = groq`
     }
   }
 `;
+
+export const featuredPostsQuery = groq`
+  *[_type == "post"] | order(publishedAt desc)[0...3] {
+    _id,
+    title,
+    body,
+    excerpt,
+    slug {
+        current
+    },
+    category-> {
+      title,
+      slug
+    },
+    publishedAt,
+    coverImage {
+      asset->{
+        _id,
+        url,
+        metadata { lqip, dimensions }
+      }
+    }
+  }
+`;

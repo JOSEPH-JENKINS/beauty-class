@@ -1,4 +1,9 @@
 <template>
+  <div class="section-header text-center brand">
+    <h1 data-splitting="lines" style="font-weight: 400">
+      <p>Trusted by</p>
+    </h1>
+  </div>
   <div class="brand-carousel" ref="carousel">
     <div class="track" :style="{ animationDuration: speed + 's' }">
       <div class="slide" v-for="(logo, index) in doubledLogos" :key="index">
@@ -44,7 +49,7 @@ const doubledLogos = [...props.logos, ...props.logos];
 }
 
 .slide img {
-  height: 40px;
+  height: 32px;
   object-fit: contain;
   /* filter: grayscale(100%); */
   opacity: 0.8;

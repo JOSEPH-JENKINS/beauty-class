@@ -41,6 +41,7 @@ const { data: artists } = useSanityQuery(allArtistsQuery);
 .artist-img {
   width: 100%;
   height: 261.5px;
+  border-radius: 12px;
   overflow: hidden;
 }
 

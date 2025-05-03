@@ -60,6 +60,6 @@ export const homepageQuery = groq`
         ctaLabel,
         ctaLink
       }
-    }
+    },
   }
 `;

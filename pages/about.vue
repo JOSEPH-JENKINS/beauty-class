@@ -17,17 +17,13 @@
       <div class="Hero-content BOTTOM-LEFT">
         <div class="Hero-content-wrapper TEXT__LEFT BUTTON__LEFT">
           <h1 data-splitting="lines" style="font-weight: 400">
-            <p style="font-size: 1.2rem">{{ data?.title }}</p>
+            <p>{{ data?.title }}</p>
           </h1>
         </div>
       </div>
     </section>
     <section class="About">
-      <div class="section-header">
-        <h1 data-splitting="lines" style="font-weight: 400">
-          <p class="text-indent">{{ data.content }}</p>
-        </h1>
-      </div>
+      <p class="text-indent">{{ data.content }}</p>
     </section>
   </div>
 </template>

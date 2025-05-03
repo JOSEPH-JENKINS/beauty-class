@@ -405,14 +405,13 @@ main {
 
 .Hero {
   position: relative;
-  height: 45svh !important;
+  height: 76svh;
   border-radius: 12px;
   overflow: hidden;
 }
 
 @media screen and (min-width: 760px) {
   .Hero {
-    height: 76svh !important;
     max-height: calc(100vh - 4.5vw);
   }
 }
@@ -1416,5 +1415,15 @@ nav a {
   .contact-section {
     margin-bottom: 1.25rem;
     padding: 4rem 1rem 2.5rem;
+  }
+}
+
+.section-header.brand {
+  margin-top: 1.25rem;
+}
+
+@media only screen and (min-width: 760px) {
+  .section-header.section-header.brand {
+    margin-top: 2.25vw;
   }
 }

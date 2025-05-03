@@ -24,7 +24,7 @@
         </div>
         <div class="event-info">
           <h1>{{ event.title }}</h1>
-          <p>{{ event.description }}</p>
+          <p>{{ event.excerpt }}</p>
           <p>{{ formatDateTime(event.date) }}</p>
           <p>{{ event.location }}</p>
         </div>

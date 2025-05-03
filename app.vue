@@ -1,6 +1,19 @@
 <script setup>
 import { siteDefaults } from "@/queries/siteDefaults";
+import { popupQuery } from "@/queries/popup";
 const { data: settings } = useSanityQuery(siteDefaults);
+const { data: popup } = useSanityQuery(popupQuery);
+import { ref } from "vue";
+
+const email = ref("");
+const subscribed = ref(false);
+
+function subscribe() {
+  subscribed.value = true;
+  email.value = "";
+}
+
+const showModal = ref(false);
 
 onMounted(() => {
   const toggle = document.querySelector(".js-mobile-menu-toggle");
@@ -17,21 +30,34 @@ onMounted(() => {
         .classList.remove("is-open");
     });
   });
+
+  const lastSeen = localStorage.getItem("lastModalSeen");
+  const now = Date.now();
+
+  // Show only if not seen in last 12 hours
+  if (!lastSeen || now - parseInt(lastSeen) > 12 * 60 * 60 * 1000) {
+    setTimeout(() => {
+      showModal.value = true;
+      localStorage.setItem("lastModalSeen", now.toString());
+    }, 2000); // Delay for animation
+  }
 });
 
-import { ref } from "vue";
-
-const email = ref("");
-const subscribed = ref(false);
-
-function subscribe() {
-  subscribed.value = true;
-  email.value = "";
+function closeModal() {
+  showModal.value = false;
 }
 </script>
 
 <template>
   <div class="main-container">
+    <ModalPopup
+      v-if="showModal && popup"
+      @close="closeModal"
+      :heading="popup.heading"
+      :cta-label="popup.ctaLabel"
+      :subtext="popup.subtext"
+      :image="popup.image.asset.url"
+    />
     <header class="header transparent">
       <nav>
         <div class="nav-left-container">
@@ -84,10 +110,6 @@ function subscribe() {
                     </h3>
 
                     <h3 class="Mobile-menu-content-container-section-title">
-                      <NuxtLink class="link" to="/founder">FOUNDER</NuxtLink>
-                    </h3>
-
-                    <h3 class="Mobile-menu-content-container-section-title">
                       <NuxtLink class="link" to="/contact">CONTACT</NuxtLink>
                     </h3>
                   </div>
@@ -102,7 +124,6 @@ function subscribe() {
         <div class="nav-right-container">
           <NuxtLink to="/past-events" class="u-showMd">past events</NuxtLink>
           <NuxtLink to="/blog" class="u-showMd">blog</NuxtLink>
-          <NuxtLink to="/founder" class="u-showMd">founder</NuxtLink>
           <NuxtLink to="/contact" class="u-showMd margin-right-0"
             >contact</NuxtLink
           >
@@ -118,9 +139,9 @@ function subscribe() {
     </main>
 
     <footer class="Footer" id="footer">
-      <div class="Footer-logo">
+      <!-- <div class="Footer-logo">
         <img :src="settings?.logo?.asset?.url" alt="Site Logo" />
-      </div>
+      </div> -->
       <div class="Footer-content-container">
         <div class="Footer-newsletter">
           <p v-if="!subscribed">{{ settings?.footerText }}</p>
@@ -210,14 +231,6 @@ function subscribe() {
                       class="FooterMenu-itemLink u-animate-underline"
                     >
                       Blog
-                    </NuxtLink>
-                  </li>
-                  <li>
-                    <NuxtLink
-                      to="/founder"
-                      class="FooterMenu-itemLink u-animate-underline"
-                    >
-                      Founder
                     </NuxtLink>
                   </li>
                 </ul>

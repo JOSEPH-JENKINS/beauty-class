@@ -6,6 +6,7 @@
       :logos="brandsSection.logos"
       :speed="25"
     />
+    <FeaturedPosts v-if="postsData" :content="postsData" />
     <TestimonialSection
       v-if="testimonialSection"
       :content="testimonialSection"
@@ -17,8 +18,10 @@
 
 <script setup>
 import { homepageQuery } from "@/queries/homepage";
+import { featuredPostsQuery } from "@/queries/blog";
 
 const { data } = useSanityQuery(homepageQuery);
+const { data: postsData } = useSanityQuery(featuredPostsQuery);
 
 // Extract hero section
 const heroSection = computed(() => {
