@@ -1,10 +1,5 @@
 <template>
   <section class="testimonial-section">
-    <div class="section-header text-center">
-      <h1 data-splitting="lines" style="font-weight: 400">
-        <p>Featured Posts</p>
-      </h1>
-    </div>
     <div class="collection-slider">
       <div class="custom-cursor-wrapper">
         <div class="swiper swiper-pointer-events">

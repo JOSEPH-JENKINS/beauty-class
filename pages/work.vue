@@ -81,12 +81,12 @@ function closeModal() {
 }
 
 .artist-info h2 {
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 
 .artist-info p {
-  font-size: 0.8rem;
+  font-size: 1rem;
   line-height: 1.4;
 }
 </style>

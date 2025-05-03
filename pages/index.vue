@@ -1,18 +1,18 @@
 <template>
   <div>
     <HeroSection v-if="heroSection" :content="heroSection" />
+    <FeaturedPosts v-if="postsData" :content="postsData" />
+    <SoftCtaSection v-if="softCtaSection" :content="softCtaSection" />
     <BrandLogoCarousel
       v-if="brandsSection"
       :logos="brandsSection.logos"
       :speed="25"
     />
-    <FeaturedPosts v-if="postsData" :content="postsData" />
     <TestimonialSection
       v-if="testimonialSection"
       :content="testimonialSection"
     />
     <EventModal v-if="modalSection" :content="modalSection" />
-    <SoftCtaSection v-if="softCtaSection" :content="softCtaSection" />
   </div>
 </template>
 

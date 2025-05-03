@@ -3,42 +3,20 @@
     <div class="post-container">
       <div class="post-title">
         <h1>{{ post.title }}</h1>
-        <p
-          style="
-            color: #67645e;
-            text-transform: uppercase;
-            font-weight: 700;
-            font-size: 13px;
-          "
-        >
+        <p class="blog-deet">
           <span v-if="isPastEvent">HAPPENED on</span>
           {{ formatDateTime(post.date) }}
         </p>
-        <p
-          style="
-            color: #67645e;
-            text-transform: uppercase;
-            font-weight: 700;
-            font-size: 13px;
-          "
-        >
+        <p class="blog-deet">
           {{ post.location }}
         </p>
-        <p
-          style="
-            color: #67645e;
-            text-transform: uppercase;
-            font-weight: 700;
-            font-size: 13px;
-          "
-          v-if="!isPastEvent"
-        >
-          ${{ post.price }}
-        </p>
-        <div class="Button-container" v-if="!isPastEvent">
-          <button class="Button Button__dark" @click="startCheckout()">
-            book a spot
-          </button>
+        <div class="price-flex">
+          <h2 v-if="!isPastEvent">Price: ${{ post.price }}</h2>
+          <div class="Button-container" v-if="!isPastEvent">
+            <button class="Button Button__dark" @click="startCheckout()">
+              book a spot
+            </button>
+          </div>
         </div>
       </div>
       <div class="post-image">
@@ -47,10 +25,13 @@
       <div class="post-content">
         <p>{{ post.description }}</p>
       </div>
-      <div class="Button-container" v-if="!isPastEvent">
-        <button class="Button Button__dark" @click="startCheckout()">
-          book a spot
-        </button>
+      <div class="price-flex">
+        <h2 v-if="!isPastEvent">Price: ${{ post.price }}</h2>
+        <div class="Button-container" v-if="!isPastEvent">
+          <button class="Button Button__dark" @click="startCheckout()">
+            book a spot
+          </button>
+        </div>
       </div>
     </div>
   </section>

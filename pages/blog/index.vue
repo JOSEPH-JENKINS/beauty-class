@@ -1,8 +1,9 @@
 <template>
+  <HeroSection v-if="heroSection" :content="heroSection" />
   <section class="blog">
     <div class="Blog-container">
       <div class="Blog-container-filters">
-        <p class="u-bold u-pSize u-pSize__Medium u-noMargin">FILTER BY:</p>
+        <p class="u-bold u-pSize u-pSize__Medium u-noMargin">filter by:</p>
         <div class="Blog-container-filters-list">
           <div class="Button-container">
             <button
@@ -14,7 +15,7 @@
                   : 'Button Button__dark filter-btn'
               "
             >
-              ALL
+              <h1 class="margin-0">all</h1>
             </button>
           </div>
           <div
@@ -32,12 +33,15 @@
               "
               tabindex="0"
             >
-              {{ cat.title }}
+              <h1 class="margin-0">{{ cat.title }}</h1>
             </button>
           </div>
         </div>
       </div>
       <div class="Blog-container-articles">
+        <div v-if="filteredPosts.length === 0">
+          <h1>no posts up just yet</h1>
+        </div>
         <article
           v-for="(post, index) in filteredPosts"
           :key="post._id"
@@ -104,18 +108,23 @@
             </div>
           </div>
           <div class="BlogListItem-link">
-            <div class="BlogListItem-link">
-              <p class="BlogListItem-content category u-pSize u-pSize__Small">
+            <div class="BlogListItem-link margin-bottom">
+              <h2 class="BlogListItem-content category u-pSize u-pSize__Small">
                 {{ post.category.title }}
-              </p>
-              <p class="BlogListItem-title u-bold u-pSize u-pSize__Medium">
-                <NuxtLink :to="`/blog/${post.slug.current}`">{{
-                  post.title
-                }}</NuxtLink>
-              </p>
+              </h2>
+              <h1 class="BlogListItem-title u-bold u-pSize u-pSize__Medium">
+                {{ post.title }}
+              </h1>
               <p class="BlogListItem-content u-pSize u-pSize__Small">
                 {{ post.excerpt }}
               </p>
+            </div>
+            <div class="Button-container">
+              <NuxtLink
+                class="Button Button__dark"
+                :to="`/blog/${post.slug.current}`"
+                >read more</NuxtLink
+              >
             </div>
           </div>
         </article>
@@ -127,16 +136,24 @@
 <script setup>
 import { allPostsQuery } from "@/queries/blog";
 import { allCategoriesQuery } from "~/queries/category";
+import { homepageQuery } from "@/queries/homepage";
 
 const selectedCategory = ref(null);
 
 const { data: posts } = useSanityQuery(allPostsQuery);
+const { data: homepage } = useSanityQuery(homepageQuery);
 const { data: categories } = useSanityQuery(allCategoriesQuery);
 
 const filteredPosts = computed(() => {
   if (!selectedCategory.value) return posts.value;
   return posts.value.filter(
     (post) => post.category.slug.current === selectedCategory.value
+  );
+});
+
+const heroSection = computed(() => {
+  return homepage.value?.pageBuilder?.find(
+    (section) => section._type === "heroSection"
   );
 });
 </script>

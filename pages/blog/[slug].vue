@@ -3,24 +3,10 @@
     <div class="post-container">
       <div class="post-title">
         <h1>{{ post.title }}</h1>
-        <p
-          style="
-            color: #67645e;
-            text-transform: uppercase;
-            font-weight: 700;
-            font-size: 13px;
-          "
-        >
+        <p class="blog-deet">
           {{ post.excerpt }}
         </p>
-        <p
-          style="
-            color: #67645e;
-            text-transform: uppercase;
-            font-weight: 700;
-            font-size: 13px;
-          "
-        >
+        <p class="blog-deet">
           {{ formatDateTime(post.publishedAt) }}
         </p>
       </div>
@@ -28,7 +14,7 @@
         <img :src="post.coverImage.asset.url" :alt="post.title" />
       </div>
       <div class="post-content">
-        <p>{{ post.body }}</p>
+        <PortableText :value="post.body" />
       </div>
     </div>
   </section>
@@ -37,6 +23,7 @@
 <script setup>
 import { useRoute } from "vue-router";
 import { blogPostQuery } from "@/queries/blogPost";
+import { PortableText } from "@portabletext/vue";
 
 const route = useRoute();
 const slug = route.params.slug;

@@ -41,7 +41,7 @@
         </div>
         <div class="Button-container">
           <button
-            class="Button u-pSize uppercase Button__dark Button__large Button__fullWidth js-form-submit"
+            class="Button u-pSize Button__dark Button__large Button__fullWidth js-form-submit"
             type="submit"
           >
             Submit

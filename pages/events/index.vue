@@ -14,7 +14,7 @@
     </section>
     <div class="Blog-container">
       <div class="Blog-container-filters">
-        <p class="u-bold u-pSize u-pSize__Medium u-noMargin">FILTER BY:</p>
+        <p class="u-bold u-pSize u-pSize__Medium u-noMargin">filter by:</p>
         <div class="Blog-container-filters-list">
           <div class="Button-container">
             <button
@@ -25,7 +25,7 @@
                   : 'Button Button__dark'
               "
             >
-              ALL
+              <h1 class="margin-0">all</h1>
             </button>
           </div>
           <div class="Button-container">
@@ -37,7 +37,7 @@
                   : 'Button Button__dark'
               "
             >
-              UPCOMING
+              <h1 class="margin-0">upcoming</h1>
             </button>
           </div>
           <div class="Button-container">
@@ -49,12 +49,23 @@
                   : 'Button Button__dark'
               "
             >
-              PAST
+              <h1 class="margin-0">past</h1>
             </button>
           </div>
         </div>
       </div>
       <div class="Blog-container-articles">
+        <div v-if="filteredEvents.length === 0">
+          <h1>no upcoming events to see.</h1>
+          <div class="Button-container">
+            <button
+              class="Button Button__dark"
+              @click="selectedFilter = 'past'"
+            >
+              see past events
+            </button>
+          </div>
+        </div>
         <article
           v-for="event in filteredEvents"
           :key="event._id"
@@ -158,7 +169,9 @@
       :key="event._id"
       class="testimonial-event-wrapper"
     >
-      <h3>{{ event.title }}</h3>
+      <NuxtLink :to="`/events/${event.slug.current}`"
+        ><h3>{{ event.title }}</h3></NuxtLink
+      >
       <div class="collection-slider">
         <div class="custom-cursor-wrapper">
           <div class="swiper swiper-pointer-events">

@@ -82,7 +82,7 @@
           <div class="Button-container">
             <NuxtLink
               class="Button Button__dark"
-              :to="content.ctaLink"
+              to="/events"
               :aria-label="content.ctaLabel"
               data-mode="default"
             >

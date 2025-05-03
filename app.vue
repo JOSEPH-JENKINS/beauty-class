@@ -100,6 +100,10 @@ function closeModal() {
                     </h3>
 
                     <h3 class="Mobile-menu-content-container-section-title">
+                      <NuxtLink class="link" to="/shop">shop</NuxtLink>
+                    </h3>
+
+                    <h3 class="Mobile-menu-content-container-section-title">
                       <NuxtLink class="link" to="/blog">BLOG</NuxtLink>
                     </h3>
 
@@ -116,6 +120,7 @@ function closeModal() {
           <img :src="settings?.logo?.asset?.url" alt="Site Logo" />
         </NuxtLink>
         <div class="nav-right-container">
+          <NuxtLink to="/shop" class="u-showMd">shop</NuxtLink>
           <NuxtLink to="/blog" class="u-showMd">blog</NuxtLink>
           <NuxtLink to="/contact" class="u-showMd margin-right-0"
             >contact</NuxtLink
@@ -208,6 +213,14 @@ function closeModal() {
                       class="FooterMenu-itemLink u-animate-underline"
                     >
                       Events
+                    </NuxtLink>
+                  </li>
+                  <li>
+                    <NuxtLink
+                      to="/shop"
+                      class="FooterMenu-itemLink u-animate-underline"
+                    >
+                      Shop
                     </NuxtLink>
                   </li>
                   <li>
