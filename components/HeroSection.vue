@@ -96,21 +96,11 @@
 </template>
 
 <script setup>
-import imageUrlBuilder from "@sanity/image-url";
-import { useSanity } from "#imports";
-
 const props = defineProps({
   content: {
     type: Object,
     required: true,
   },
-});
-
-const { config } = useSanity();
-
-const builder = imageUrlBuilder({
-  projectId: config.projectId,
-  dataset: config.dataset,
 });
 
 const videoBtnClick = () => {
