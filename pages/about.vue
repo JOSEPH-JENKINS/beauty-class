@@ -22,8 +22,24 @@
         </div>
       </div>
     </section>
+    <div class="NoteWithImage">
+      <h2 class="u-pSize u-pSize__Medium u-bold">
+        <p>A NOTE FROM OUR FOUNDER</p>
+      </h2>
+      <div class="u-pSize u-pSize__Large">
+        <p>
+          My journey towards healthier skin inspired me to develop products that
+          really work, in a way that's accessible to everyone. Rhode is
+          dedicated to making products based in science and great formulation,
+          simplifying many of the mysteries and complex narratives behind
+          efficacious skincare. I hope these will become your go-to essentials
+          that can live in your bathroom, be your favorite travel companion,
+          improve your skin over time, and keep your skin happy and hydrated.
+        </p>
+      </div>
+    </div>
     <section class="About">
-      <p class="text-indent">{{ data.content }}</p>
+      <p class="u-pSize u-pSize__Large">{{ data.content }}</p>
     </section>
   </div>
 </template>

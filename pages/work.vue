@@ -1,6 +1,30 @@
+<script setup>
+import { allArtistsQuery } from "@/queries/artist";
+import { ref } from "vue";
+import ArtistModal from "@/components/ArtistModal.vue";
+
+const { data: artists } = useSanityQuery(allArtistsQuery);
+const showModal = ref(false);
+const currentIndex = ref(0);
+
+function openModal(index) {
+  currentIndex.value = index;
+  showModal.value = true;
+}
+
+function closeModal() {
+  showModal.value = false;
+}
+</script>
+
 <template>
   <section class="Artists">
-    <div class="Artist" v-for="artist in artists" :key="artist._id">
+    <div
+      class="Artist"
+      v-for="(artist, i) in artists"
+      :key="artist._id"
+      @click="openModal(i)"
+    >
       <div class="artist-img">
         <img :src="artist.image.asset.url" :alt="artist.name" loading="lazy" />
       </div>
@@ -9,13 +33,17 @@
         <p>{{ artist.subheading }}</p>
       </div>
     </div>
+
+    <ArtistModal
+      v-if="showModal"
+      :artist="artists[currentIndex]"
+      :index="currentIndex"
+      :artists="artists"
+      @close="closeModal"
+      @update:index="(val) => (currentIndex = val)"
+    />
   </section>
 </template>
-
-<script setup>
-import { allArtistsQuery } from "@/queries/artist";
-const { data: artists } = useSanityQuery(allArtistsQuery);
-</script>
 
 <style scoped>
 .Artists {
@@ -53,12 +81,12 @@ const { data: artists } = useSanityQuery(allArtistsQuery);
 }
 
 .artist-info h2 {
-  font-size: 1.25rem;
+  font-size: 0.8rem;
   font-weight: 600;
 }
 
 .artist-info p {
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   line-height: 1.4;
 }
 </style>

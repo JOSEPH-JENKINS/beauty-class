@@ -29,7 +29,11 @@ export const allEventsWithTestimonialsQuery = groq`
     title,
     excerpt,
     description,
+    slug {
+      current
+    },
     date,
+    price,
     location,
     image {
       asset->{
@@ -68,6 +72,17 @@ export const singleEventQuery = `
         _id,
         url,
         metadata { lqip, dimensions }
+      }
+    },
+    testimonials[]->{
+      _id,
+      name,
+      quote,
+      role,
+      image {
+        asset->{
+          url
+        }
       }
     }
   }

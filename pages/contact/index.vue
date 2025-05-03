@@ -47,7 +47,6 @@
             Submit
           </button>
         </div>
-        <p v-if="messageSent">Your message has been sent!</p>
       </form>
     </div>
   </div>
@@ -55,6 +54,7 @@
 
 <script setup>
 import { contactQuery } from "@/queries/contact";
+const router = useRouter();
 
 const { data: contact } = useSanityQuery(contactQuery);
 
@@ -71,5 +71,7 @@ function sendMessage() {
   name.value = "";
   emailContact.value = "";
   message.value = "";
+
+  router.push("/contact/success");
 }
 </script>

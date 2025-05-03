@@ -14,27 +14,32 @@
               v-for="post in content"
               :key="post._id"
             >
-              <NuxtLink :to="`/blog/${post.slug.current}`">
-                <article class="content-card">
-                  <div class="card-content">
-                    <div class="card-image fixed-height">
-                      <img
-                        :src="post.coverImage.asset.url"
-                        :alt="post.excerpt"
-                        class="card-image"
-                      />
-                    </div>
-                    <div class="card-info">
-                      <div class="content-title-wrapper">
-                        <h2 class="u-noMargin">
-                          {{ post.title }}
-                        </h2>
-                        <p>{{ post.excerpt }}</p>
-                      </div>
+              <article class="content-card">
+                <div class="card-content">
+                  <div class="card-image fixed-height">
+                    <img
+                      :src="post.coverImage.asset.url"
+                      :alt="post.excerpt"
+                      class="card-image"
+                    />
+                  </div>
+                  <div class="card-info">
+                    <div class="content-title-wrapper">
+                      <h2 class="u-noMargin">
+                        {{ post.title }}
+                      </h2>
+                      <p>{{ post.excerpt }}</p>
                     </div>
                   </div>
-                </article>
-              </NuxtLink>
+                  <div class="Button-container">
+                    <NuxtLink
+                      class="Button Button__dark"
+                      :to="`/blog/${post.slug.current}`"
+                      >read more</NuxtLink
+                    >
+                  </div>
+                </div>
+              </article>
             </div>
           </div>
         </div>

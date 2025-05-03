@@ -7,110 +7,218 @@
       <div class="Hero-content BOTTOM-LEFT">
         <div class="Hero-content-wrapper TEXT__LEFT BUTTON__LEFT">
           <h1 data-splitting="lines" style="font-weight: 400">
-            <p>Available Events</p>
+            <p>All Events</p>
           </h1>
         </div>
       </div>
     </section>
-    <section class="Events">
-      <div v-for="event in currentEvents" class="Event" :key="event._id">
-        <div class="event-img">
-          <img
-            width="100"
-            height="100"
-            :src="event.image.asset.url"
-            :alt="event.title"
-          />
-        </div>
-        <div class="event-info">
-          <h1>{{ event.title }}</h1>
-          <p>{{ event.excerpt }}</p>
-          <p>{{ formatDateTime(event.date) }}</p>
-          <p>{{ event.location }}</p>
+    <div class="Blog-container">
+      <div class="Blog-container-filters">
+        <p class="u-bold u-pSize u-pSize__Medium u-noMargin">FILTER BY:</p>
+        <div class="Blog-container-filters-list">
           <div class="Button-container">
-            <NuxtLink
-              class="Button Button__dark"
-              :to="`/events/${event.slug.current}`"
+            <button
+              @click="selectedFilter = 'all'"
+              :class="
+                selectedFilter === 'all'
+                  ? 'Button Button__dark active'
+                  : 'Button Button__dark'
+              "
             >
-              learn more
-            </NuxtLink>
+              ALL
+            </button>
+          </div>
+          <div class="Button-container">
+            <button
+              @click="selectedFilter = 'upcoming'"
+              :class="
+                selectedFilter === 'upcoming'
+                  ? 'Button Button__dark active'
+                  : 'Button Button__dark'
+              "
+            >
+              UPCOMING
+            </button>
+          </div>
+          <div class="Button-container">
+            <button
+              @click="selectedFilter = 'past'"
+              :class="
+                selectedFilter === 'past'
+                  ? 'Button Button__dark active'
+                  : 'Button Button__dark'
+              "
+            >
+              PAST
+            </button>
           </div>
         </div>
       </div>
-    </section>
+      <div class="Blog-container-articles">
+        <article
+          v-for="event in filteredEvents"
+          :key="event._id"
+          class="BlogListItem"
+        >
+          <div class="Image-container">
+            <div class="Custom-wrapper">
+              <div class="image">
+                <span
+                  class="Image Image--desktop o-placeholder bg-full-height"
+                  style="
+                    box-sizing: border-box;
+                    display: block;
+                    overflow: hidden;
+                    background: none;
+                    opacity: 1;
+                    border: 0px;
+                    margin: 0px;
+                    padding: 0px;
+                    transform: translate3d(0px, 0px, 0px) scale(1.031, 1.03099);
+                  "
+                >
+                  <span
+                    style="
+                      box-sizing: border-box;
+                      display: block;
+                      width: initial;
+                      height: initial;
+                      background: none;
+                      opacity: 1;
+                      border: 0px;
+                      margin: 0px;
+
+                      padding-bottom: 56.25%;
+                    "
+                  ></span>
+                  <img
+                    class="ls-is-cached lazyloaded"
+                    :src="event.image.asset.url"
+                    decoding="async"
+                    data-nimg="responsive"
+                    sizes="100vw"
+                    :alt="event.title"
+                    loading="lazy"
+                    style="
+                      position: absolute;
+                      inset: 0px;
+                      box-sizing: border-box;
+                      padding: 0px;
+                      border: none;
+                      margin: auto;
+                      display: block;
+                      width: 0px;
+                      height: 0px;
+                      min-width: 100%;
+                      max-width: 100%;
+                      min-height: 100%;
+                      max-height: 100%;
+                      object-fit: cover;
+                      object-position: top center;
+                    "
+                /></span>
+              </div>
+            </div>
+          </div>
+          <div class="BlogListItem-link">
+            <div class="BlogListItem-link">
+              <h1
+                class="BlogListItem-title margin-bottom u-bold u-pSize u-pSize__Medium"
+              >
+                <NuxtLink :to="`/events/${event.slug.current}`">{{
+                  event.title
+                }}</NuxtLink>
+              </h1>
+              <p
+                class="BlogListItem-content margin-bottom u-pSize u-pSize__Small"
+              >
+                {{ event.excerpt }}
+              </p>
+              <div class="Button-container">
+                <NuxtLink
+                  class="Button Button__dark"
+                  :to="`/events/${event.slug.current}`"
+                  >read more</NuxtLink
+                >
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="EventTestimonials" v-if="testimonialEvents.length">
+    <div class="section-header text-center brand">
+      <h1 data-splitting="lines" style="font-weight: 400">
+        <p>what attendies said</p>
+      </h1>
+    </div>
+    <div
+      v-for="event in testimonialEvents"
+      :key="event._id"
+      class="testimonial-event-wrapper"
+    >
+      <h3>{{ event.title }}</h3>
+      <div class="collection-slider">
+        <div class="custom-cursor-wrapper">
+          <div class="swiper swiper-pointer-events">
+            <div class="swiper-wrapper">
+              <div
+                class="swiper-slide collection-slide"
+                v-for="testimonial in event.testimonials"
+                :key="testimonial._id"
+              >
+                <article class="content-card">
+                  <div class="card-content event">
+                    <div class="card-image fixed-height">
+                      <img
+                        :src="testimonial.image.asset.url"
+                        :alt="testimonial.quote"
+                        class="card-image"
+                      />
+                    </div>
+                    <div class="card-info">
+                      <div class="content-title-wrapper">
+                        <h2 class="u-noMargin">
+                          {{ testimonial.quote }}
+                        </h2>
+                        <p>{{ testimonial.name }}, {{ testimonial.role }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
 <script setup>
-import { allEventsQuery } from "@/queries/events";
+import { allEventsWithTestimonialsQuery } from "@/queries/events";
 import { computed } from "vue";
-import { useRouter } from "vue-router";
-import { useFetch } from "#app";
 
-const { data: events } = await useSanityQuery(allEventsQuery);
+const selectedFilter = ref("all");
+
+const { data: events } = useSanityQuery(allEventsWithTestimonialsQuery);
 const now = new Date();
-const router = useRouter();
-const route = useRoute();
 
-// Filter current events based on the date
-const currentEvents = computed(() =>
+const upcomingEvents = computed(() =>
   events.value.filter((ev) => new Date(ev.date) >= now)
 );
+const pastEvents = computed(() =>
+  events.value.filter((ev) => new Date(ev.date) < now)
+);
 
-// Format the event date into a human-readable string
-function formatDateTime(dateStr) {
-  const date = new Date(dateStr);
-  return date.toLocaleString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  });
-}
+const testimonialEvents = computed(() =>
+  events.value.filter((ev) => ev.testimonials?.length)
+);
 
-// Checkout function
-async function startCheckout(event) {
-  // Ensure price exists and is a valid number
-  const priceInCents = event.price
-    ? Math.round(parseFloat(event.price) * 100)
-    : 0;
-
-  // Log to verify the data
-  console.log("Event Data:", {
-    title: event.title,
-    price: priceInCents,
-    currency: "usd",
-    eventId: event._id,
-  });
-
-  try {
-    // Make the request to your server API to initiate Stripe Checkout
-    const result = await $fetch("/api/checkout", {
-      method: "POST",
-      body: {
-        title: event.title,
-        price: priceInCents,
-        currency: "usd", // USD currency
-        eventId: event._id, // Optional: track event
-      },
-    });
-
-    if (result) {
-      // Redirect to Stripe Checkout if URL is returned
-      window.location.href = result.url;
-    } else {
-      console.error("No URL returned from the checkout API.");
-    }
-  } catch (err) {
-    console.error("API Request failed:", err);
-  }
-}
-
-onMounted(() => {
-  if (route.query.paymentSuccess === "true") {
-    alert("Thank you for your purchase!");
-  }
+const filteredEvents = computed(() => {
+  if (selectedFilter.value === "upcoming") return upcomingEvents.value;
+  if (selectedFilter.value === "past") return pastEvents.value;
+  return events.value;
 });
 </script>

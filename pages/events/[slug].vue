@@ -11,6 +11,7 @@
             font-size: 13px;
           "
         >
+          <span v-if="isPastEvent">HAPPENED on</span>
           {{ formatDateTime(post.date) }}
         </p>
         <p
@@ -30,10 +31,11 @@
             font-weight: 700;
             font-size: 13px;
           "
+          v-if="!isPastEvent"
         >
           ${{ post.price }}
         </p>
-        <div class="Button-container">
+        <div class="Button-container" v-if="!isPastEvent">
           <button class="Button Button__dark" @click="startCheckout()">
             book a spot
           </button>
@@ -45,10 +47,53 @@
       <div class="post-content">
         <p>{{ post.description }}</p>
       </div>
-      <div class="Button-container">
+      <div class="Button-container" v-if="!isPastEvent">
         <button class="Button Button__dark" @click="startCheckout()">
           book a spot
         </button>
+      </div>
+    </div>
+  </section>
+  <section
+    class="EventTestimonials"
+    v-if="isPastEvent && post.testimonials?.length"
+  >
+    <div class="section-header text-center brand">
+      <h1 data-splitting="lines" style="font-weight: 400">
+        <p>what attendies said</p>
+      </h1>
+    </div>
+    <div class="collection-slider">
+      <div class="custom-cursor-wrapper">
+        <div class="swiper swiper-pointer-events">
+          <div class="swiper-wrapper">
+            <div
+              class="swiper-slide collection-slide"
+              v-for="testimonial in post.testimonials"
+              :key="testimonial._id"
+            >
+              <article class="content-card">
+                <div class="card-content event">
+                  <div class="card-image fixed-height">
+                    <img
+                      :src="testimonial.image.asset.url"
+                      :alt="testimonial.quote"
+                      class="card-image"
+                    />
+                  </div>
+                  <div class="card-info">
+                    <div class="content-title-wrapper">
+                      <h2 class="u-noMargin">
+                        {{ testimonial.quote }}
+                      </h2>
+                      <p>{{ testimonial.name }}, {{ testimonial.role }}</p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -63,6 +108,9 @@ const slug = route.params.slug;
 
 // Fetch the post data from Sanity
 const { data: post } = useSanityQuery(singleEventQuery, { slug });
+
+const now = new Date();
+const isPastEvent = computed(() => new Date(post.value.date) < now);
 
 function formatDateTime(dateStr) {
   const date = new Date(dateStr);
