@@ -21,8 +21,8 @@
               @click="selectedFilter = 'all'"
               :class="
                 selectedFilter === 'all'
-                  ? 'Button Button__dark active'
-                  : 'Button Button__dark'
+                  ? 'Button filter Button__dark active'
+                  : 'Button filter Button__dark'
               "
             >
               <h1 class="margin-0">all</h1>
@@ -33,8 +33,8 @@
               @click="selectedFilter = 'upcoming'"
               :class="
                 selectedFilter === 'upcoming'
-                  ? 'Button Button__dark active'
-                  : 'Button Button__dark'
+                  ? 'Button filter Button__dark active'
+                  : 'Button filter Button__dark'
               "
             >
               <h1 class="margin-0">upcoming</h1>
@@ -45,8 +45,8 @@
               @click="selectedFilter = 'past'"
               :class="
                 selectedFilter === 'past'
-                  ? 'Button Button__dark active'
-                  : 'Button Button__dark'
+                  ? 'Button filter Button__dark active'
+                  : 'Button filter Button__dark'
               "
             >
               <h1 class="margin-0">past</h1>
@@ -59,7 +59,7 @@
           <h1>no upcoming events to see.</h1>
           <div class="Button-container">
             <button
-              class="Button Button__dark"
+              class="Button filter Button__dark"
               @click="selectedFilter = 'past'"
             >
               see past events
@@ -133,6 +133,12 @@
           </div>
           <div class="BlogListItem-link">
             <div class="BlogListItem-link">
+              <h2
+                class="BlogListItem-content category u-pSize u-pSize__Small"
+                :class="getEventCategory(event.date).toLowerCase()"
+              >
+                {{ getEventCategory(event.date) }}
+              </h2>
               <h1
                 class="BlogListItem-title margin-bottom u-bold u-pSize u-pSize__Medium"
               >
@@ -147,7 +153,7 @@
               </p>
               <div class="Button-container">
                 <NuxtLink
-                  class="Button Button__dark"
+                  class="Button filter Button__dark"
                   :to="`/events/${event.slug.current}`"
                   >read more</NuxtLink
                 >
@@ -234,4 +240,8 @@ const filteredEvents = computed(() => {
   if (selectedFilter.value === "past") return pastEvents.value;
   return events.value;
 });
+
+function getEventCategory(eventDate) {
+  return new Date(eventDate) >= new Date() ? "Upcoming" : "Past";
+}
 </script>

@@ -1,21 +1,28 @@
 <template>
   <div class="modal-overlay" @click.self="close">
     <div class="modal-content">
-      <button class="close" @click="close">×</button>
-      <div class="modal-image">
-        <img :src="artist.image.asset.url" :alt="artist.name" />
-      </div>
-      <div class="modal-details">
-        <div class="modal-info">
-          <h2>{{ artist.name }}</h2>
-          <p>{{ artist.subheading }}</p>
+      <button class="close" @click="close">CLOSE</button>
+
+      <div class="image-nav-wrapper">
+        <button class="nav-button left" @click="prev" :disabled="index === 0">
+          PREV
+        </button>
+
+        <div class="modal-image">
+          <img :src="artist.image.asset.url" :alt="artist.name" />
+          <div class="modal-details">
+            <h2>{{ artist.name }}</h2>
+            <p>{{ artist.subheading }}</p>
+          </div>
         </div>
-        <div class="nav-buttons">
-          <button @click="prev" :disabled="index === 0">PREV</button>
-          <button @click="next" :disabled="index === artists.length - 1">
-            NEXT
-          </button>
-        </div>
+
+        <button
+          class="nav-button right"
+          @click="next"
+          :disabled="index === artists.length - 1"
+        >
+          NEXT
+        </button>
       </div>
     </div>
   </div>
@@ -49,77 +56,88 @@ function prev() {
 <style scoped>
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   z-index: 9999;
   background: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .modal-content {
-  display: grid;
   background: #fff;
-  padding: 1rem;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-  gap: 1rem;
-  height: 90vh;
-  position: relative;
-  z-index: 9999;
-  width: 70vw;
+  padding: 2rem;
+  width: 85vw;
+  max-width: 1000px;
   border-radius: 12px;
-}
-.modal-image {
-  width: auto;
-  height: 100%;
   position: relative;
-  border-radius: 6px;
-  overflow: hidden;
-}
-.modal-image img {
-  width: auto;
-  height: 100%;
-  border-radius: 6px;
-}
-@media screen and (min-width: 760px) {
-  .modal-content {
-    grid-template-columns: 1fr 1fr;
-    width: 85vw;
-  }
-}
-.nav-buttons {
   display: flex;
-  justify-content: space-between;
-  margin-top: 1rem;
-  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
 }
-.close {
-  position: absolute;
-  right: 1rem;
-  top: 1rem;
-  font-size: 1.3rem;
-  background: #a3a09b;
-  color: #fff;
-  padding: 5px 1rem;
-  line-height: 100%;
+
+.image-nav-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.modal-image {
+  max-height: 60vh;
+  max-width: 60vw;
+  /* overflow: hidden; */
+  border-radius: 6px;
+  position: relative;
+}
+
+.modal-image img {
+  display: block;
+  height: 100%;
+  max-height: 60vh;
+  width: auto;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.nav-button {
+  background: none;
+  border: none;
+  font-size: 100%;
   cursor: pointer;
-  z-index: 999;
+  color: #333;
+}
+
+.nav-button:hover,
+.close:hover {
+  color: #d683b6;
+}
+
+.nav-button:disabled {
+  color: #bbb;
+  cursor: not-allowed;
 }
 
 .modal-details {
-  display: flex;
-  flex-flow: column;
-  height: 100%;
-  justify-content: center;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  transform: translateX(110%);
+  z-index: 2;
 }
-.nav-buttons button {
-  color: #67645e;
+
+.modal-details h2 {
+  margin: 0;
+}
+
+.close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 100%;
+  background: none;
+  border: none;
   cursor: pointer;
-}
-.nav-buttons button:hover {
-  color: #d683b6;
 }
 </style>

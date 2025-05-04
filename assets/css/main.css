@@ -75,14 +75,14 @@ body {
 
 .header nav {
   position: relative;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
+  border-radius: 12px;
   display: flex;
   padding: 1.25rem min(2rem, 3vw);
   transition: all 0.7s cubic-bezier(0.76, 0, 0.24, 1);
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  background: #fff;
 }
 #skip-to-content {
   transition: none;
@@ -145,13 +145,13 @@ h3 {
   .u-pSize,
   p,
   a {
-    font-size: max(0.8rem, 1.125vw);
+    /* font-size: max(0.8rem, 1.125vw); */
   }
 }
 .u-pSize,
 p,
 a {
-  font-size: max(0.825rem + 0.2vw, 0.925vw);
+  /* font-size: max(0.825rem + 0.2vw, 0.925vw); */
   line-height: 150%;
   letter-spacing: -0.02em;
 }
@@ -602,7 +602,7 @@ video {
 }
 
 h1 {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   line-height: 1.4;
   margin-top: 0;
   margin-bottom: 0.5rem;
@@ -629,6 +629,7 @@ h6 {
   letter-spacing: -0.06rem;
   text-transform: lowercase;
   line-height: 1.2;
+  font-size: 1.2em;
 }
 
 .Hero-content .Button-container a {
@@ -648,7 +649,7 @@ h6 {
   --base-color: #d683b6;
   --label-color: #fff;
   --base-spacing: 0.5rem 1rem;
-  font-size: max(0.875rem + 0.2vw, 0.925vw) !important;
+  /* font-size: max(0.875rem + 0.2vw, 0.925vw) !important; */
   font-weight: 400;
   white-space: nowrap;
   text-transform: lowercase;
@@ -658,7 +659,7 @@ h6 {
   /* text-transform: uppercase; */
   padding: var(--base-spacing);
   border-radius: 12px;
-  color: var(--base-color);
+  color: var(--label-color);
   /* box-shadow: inset 0 0 0 1px #fff; */
   text-decoration: none;
   border: none;
@@ -680,7 +681,7 @@ h6 {
 
 .Button__dark {
   --bas-color: #d683b6;
-  color: var(--bas-color);
+  color: #fff;
   box-shadow: inset 0 0 0 1px var(--base-color);
 }
 
@@ -852,6 +853,32 @@ h6 {
   gap: 0.6rem;
 }
 
+@media screen and (min-width: 760px) {
+  .swiper-wrapper {
+    flex-flow: row nowrap;
+    gap: 30px; /* even spacing between cards */
+  }
+
+  .collection-slide {
+    flex: 0 0 calc((100% - 60px) / 3); /* 3 slides, 30px between each = 2 gaps */
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 759px) {
+  .swiper-wrapper {
+    flex-flow: row nowrap;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+
+  .collection-slide {
+    flex: 0 0 80%;
+    scroll-snap-align: start;
+  }
+}
+
 .u-hSize--Small,
 .u-hSize--Medium {
   font-size: min(2.5rem, 12vw);
@@ -906,7 +933,7 @@ h6 {
 }
 
 .soft-cta-title h1 {
-  font-size: calc(1.5rem + 0.2vw);
+  /* font-size: calc(1.5rem + 0.2vw); */
   text-align: center;
 }
 
@@ -916,16 +943,16 @@ h6 {
 }
 
 @media only screen and (min-width: 760px) {
-  .soft-cta-title h1 {
+  /* .soft-cta-title h1 {
     font-size: 2.5vw;
-  }
+  } */
   .soft-cta-container {
     padding: 1rem 4.5rem;
   }
 }
 
 .section-header h1 {
-  font-size: min(11rem, 22vw);
+  /* font-size: min(11rem, 22vw); */
   line-height: 120%;
   margin: 0;
 }
@@ -933,7 +960,7 @@ h6 {
 .section-header p {
   margin: 0 0 1.2rem;
   align-items: flex-end;
-  font-size: calc(1.5rem + 0.2vw);
+  /* font-size: calc(1.5rem + 0.2vw); */
   line-height: 120%;
   margin-bottom: max(0.75rem, 0.75vw);
   letter-spacing: -0.06em;
@@ -999,12 +1026,19 @@ h6 {
   }
 }
 
+.Button.filter {
+  color: #000;
+}
+
+.Button.filter:hover {
+  color: #fff;
+}
+
 .Blog-container {
   padding: 1rem;
-  background: #f1f0ed;
+  background: #dcd9d9;
   margin-bottom: 2.5rem;
   border-radius: 12px;
-  margin-top: 2.5rem;
 }
 
 @media only screen and (min-width: 760px) {
@@ -1270,10 +1304,19 @@ textarea:focus {
   height: auto;
 }
 
+.Form_multi .Input {
+  border-radius: 12px;
+}
+
+.Form_multi .Footer-newsletter-submit {
+  border-radius: 12px;
+}
+
 .Form .Input {
   width: 100%;
   height: 100%;
-  border-radius: 12px;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
   padding: 1rem;
   box-shadow: none;
   border: none;

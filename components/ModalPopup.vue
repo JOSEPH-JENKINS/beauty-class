@@ -5,7 +5,7 @@
     @click.self="$emit('close')"
   >
     <div class="modal-content">
-      <button class="modal-close" @click.self="$emit('close')">×</button>
+      <button class="modal-close" @click.self="$emit('close')">CLOSE</button>
       <div class="image-container">
         <img v-if="image" :src="image" alt="Modal Image" />
       </div>
@@ -19,7 +19,7 @@
         <div class="Footer-newsletter">
           <p v-if="subscribed">Thank you for subscribing!</p>
           <form
-            class="Form Form__single-field"
+            class="Form Form_multi"
             id="klaviyo"
             action=""
             novalidate="novalidate"
@@ -127,7 +127,6 @@ function subscribe() {
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   gap: 1rem;
-  height: 50vh;
   position: relative;
   width: 70vw;
   border-radius: 12px;
@@ -148,13 +147,15 @@ function subscribe() {
   position: absolute;
   right: 1rem;
   top: 1rem;
-  font-size: 1.3rem;
-  background: #a3a09b;
-  color: #fff;
-  padding: 5px 1rem;
+  font-size: 100%;
+  color: #000;
   line-height: 100%;
   cursor: pointer;
   z-index: 999;
+}
+
+.modal-close:hover {
+  color: #d683b6;
 }
 
 .image-container {

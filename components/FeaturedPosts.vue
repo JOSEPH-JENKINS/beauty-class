@@ -28,7 +28,7 @@
                   </div>
                   <div class="Button-container">
                     <NuxtLink
-                      class="Button Button__dark"
+                      class="Button filter Button__dark"
                       :to="`/blog/${post.slug.current}`"
                       >read more</NuxtLink
                     >
