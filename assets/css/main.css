@@ -763,7 +763,7 @@ h6 {
 
 .card-image {
   width: 100%;
-  height: 431.667px;
+  height: 100%;
   object-fit: cover;
   border-radius: 12px;
   overflow: hidden;
@@ -1310,6 +1310,7 @@ textarea:focus {
 
 .Form_multi .Footer-newsletter-submit {
   border-radius: 12px;
+  border: 1px solid #d683b6;
 }
 
 .Form .Input {
@@ -1592,10 +1593,6 @@ nav a {
   color: #666;
 }
 
-.Button {
-  margin-top: 0.5rem;
-}
-
 @media only screen and (min-width: 821px) {
   .u-hSize--Medium {
     font-size: 4vw;
@@ -1624,4 +1621,8 @@ nav a {
 
 .product-info > * {
   margin-bottom: 0.5rem;
+}
+
+.border-bottom-0 {
+  border-bottom: none;
 }

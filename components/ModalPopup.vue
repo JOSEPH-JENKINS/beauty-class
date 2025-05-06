@@ -16,7 +16,7 @@
           </h1>
         </div>
         <p>{{ subtext }}</p>
-        <div class="Footer-newsletter">
+        <div class="Footer-newsletter border-bottom-0">
           <p v-if="subscribed">Thank you for subscribing!</p>
           <form
             class="Form Form_multi"
@@ -128,7 +128,7 @@ function subscribe() {
   grid-template-rows: 1fr;
   gap: 1rem;
   position: relative;
-  width: 70vw;
+  width: 85vw;
   border-radius: 12px;
 }
 
