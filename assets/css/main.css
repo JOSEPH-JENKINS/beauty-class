@@ -1535,95 +1535,71 @@ nav a {
   font-weight: 600;
 }
 
-@media screen and (min-width: 760px) {
+.Collection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+@media screen and (min-width: 768px) {
   .Collection {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 2.5rem;
-    grid-auto-rows: 1fr;
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
 .Product-card {
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  height: 100%;
-  max-height: 95vh;
-  min-height: 27.5rem;
-  outline: none;
-  padding: 1rem;
   background: #f1f0ed;
-}
-
-@media only screen and (max-width: 760px) {
-  .Product-card {
-    height: 16rem;
-  }
-}
-
-@media screen and (min-width: 760px) {
-  .Section {
-    min-height: 50vw;
-  }
-}
-
-@media only screen and (min-width: 760px) {
-  .Product-card {
-    min-height: 0;
-  }
-}
-
-.Product-card .image-container {
   border-radius: 12px;
   overflow: hidden;
-  height: 100%;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
 }
 
-.Product-card .image-container::after {
-  content: "";
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
+.image-container {
+  border-radius: 12px;
+  overflow: hidden;
   width: 100%;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0) 60%,
-    rgba(255, 255, 255, 1) 100%
-  );
+  aspect-ratio: 1 / 1;
+  background: white;
 }
 
-.Product-card .image-container img {
-  width: auto;
+.image-container img {
+  width: 100%;
   height: 100%;
-}
-
-.padding-top {
-  padding-top: 3rem;
+  object-fit: cover;
 }
 
 .Product-info {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 2rem;
-  width: 100%;
-  height: 100%;
+  padding-top: 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.padding-top {
+  padding-top: 1rem;
+}
+
+.Product-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.Product-price {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.Button {
+  margin-top: 0.5rem;
 }
 
 @media only screen and (min-width: 821px) {
   .u-hSize--Medium {
     font-size: 4vw;
   }
-}
-
-.Product-title {
-  letter-spacing: -0.25rem;
 }
 
 .product {

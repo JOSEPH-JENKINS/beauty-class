@@ -8,7 +8,7 @@
       <h2>${{ product.price }}</h2>
       <PortableText :value="product.description" />
       <button
-        class="Button u-pSize Button__dark Button__large Button__fullWidth js-form-submit"
+        class="Button filter u-pSize Button__dark Button__large Button__fullWidth js-form-submit"
         style="margin-top: 3rem"
         @click="startCheckout()"
       >
