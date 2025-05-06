@@ -175,16 +175,13 @@
       :key="event._id"
       class="testimonial-event-wrapper"
     >
-      <NuxtLink :to="`/events/${event.slug.current}`"
-        ><h3>{{ event.title }}</h3></NuxtLink
-      >
       <div class="collection-slider">
         <div class="custom-cursor-wrapper">
           <div class="swiper swiper-pointer-events">
             <div class="swiper-wrapper">
               <div
                 class="swiper-slide collection-slide"
-                v-for="testimonial in event.testimonials"
+                v-for="testimonial in flattenedTestimonials"
                 :key="testimonial._id"
               >
                 <article class="content-card">
@@ -240,6 +237,12 @@ const filteredEvents = computed(() => {
   if (selectedFilter.value === "past") return pastEvents.value;
   return events.value;
 });
+
+const flattenedTestimonials = computed(() =>
+  events.value
+    .filter((ev) => ev.testimonials?.length)
+    .flatMap((ev) => ev.testimonials)
+);
 
 function getEventCategory(eventDate) {
   return new Date(eventDate) >= new Date() ? "Upcoming" : "Past";
