@@ -1401,6 +1401,7 @@ nav a {
   border-radius: 0.75rem;
   justify-content: center;
   align-items: center;
+  margin-top: 1.25em;
   margin-bottom: 2.25vw;
   padding: 5rem 0 2.5rem;
   display: flex;

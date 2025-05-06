@@ -3,7 +3,7 @@
     <div class="contact-wrapper">
       <h1 class="contact-title">{{ contact.heading }}</h1>
       <div class="contact-description">
-        <p>{{ contact.description }}</p>
+        <PortableText :value="contact.body" />
       </div>
       <form action="post" class="contact-form" @submit.prevent="sendMessage">
         <div class="contact-input-wrapper js-input-wrapper">
@@ -41,10 +41,10 @@
         </div>
         <div class="Button-container">
           <button
-            class="Button u-pSize Button__dark Button__large Button__fullWidth js-form-submit"
+            class="Button filter u-pSize Button__dark Button__large Button__fullWidth js-form-submit"
             type="submit"
           >
-            Submit
+            <h1 class="margin-0">Submit</h1>
           </button>
         </div>
       </form>
@@ -54,6 +54,7 @@
 
 <script setup>
 import { contactQuery } from "@/queries/contact";
+import { PortableText } from "@portabletext/vue";
 const router = useRouter();
 
 const { data: contact } = useSanityQuery(contactQuery);
