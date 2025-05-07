@@ -18,31 +18,37 @@ function closeModal() {
 </script>
 
 <template>
-  <section class="Artists">
-    <div
-      class="Artist"
-      v-for="(artist, i) in artists"
-      :key="artist._id"
-      @click="openModal(i)"
-    >
-      <div class="artist-img">
-        <img :src="artist.image.asset.url" :alt="artist.name" loading="lazy" />
+  <div style="min-height: 76svh">
+    <section class="Artists">
+      <div
+        class="Artist"
+        v-for="(artist, i) in artists"
+        :key="artist._id"
+        @click="openModal(i)"
+      >
+        <div class="artist-img">
+          <img
+            :src="artist.image.asset.url"
+            :alt="artist.name"
+            loading="lazy"
+          />
+        </div>
+        <div class="artist-info">
+          <h2>{{ artist.name }}</h2>
+          <p>{{ artist.subheading }}</p>
+        </div>
       </div>
-      <div class="artist-info">
-        <h2>{{ artist.name }}</h2>
-        <p>{{ artist.subheading }}</p>
-      </div>
-    </div>
 
-    <ArtistModal
-      v-if="showModal"
-      :artist="artists[currentIndex]"
-      :index="currentIndex"
-      :artists="artists"
-      @close="closeModal"
-      @update:index="(val) => (currentIndex = val)"
-    />
-  </section>
+      <ArtistModal
+        v-if="showModal"
+        :artist="artists[currentIndex]"
+        :index="currentIndex"
+        :artists="artists"
+        @close="closeModal"
+        @update:index="(val) => (currentIndex = val)"
+      />
+    </section>
+  </div>
 </template>
 
 <style scoped>
@@ -51,7 +57,6 @@ function closeModal() {
   gap: 2rem 1rem;
   grid-template-columns: repeat(2, 1fr);
   padding: 1.5rem 1rem;
-  min-height: 76svh;
 }
 
 @media (min-width: 1024px) {
@@ -82,7 +87,7 @@ function closeModal() {
 }
 
 .artist-info h2 {
-  font-size: 100%;
+  font-size: 1.15em;
   font-weight: 600;
 }
 
