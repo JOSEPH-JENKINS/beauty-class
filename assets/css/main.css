@@ -223,7 +223,7 @@ svg:not(:root) {
   font-weight: 700;
   line-height: 120%;
   letter-spacing: -0.02em;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 .header .Logo {
   width: 100%;
@@ -1266,7 +1266,7 @@ textarea {
   background-color: #fff;
   box-shadow: none;
   font-family: "DM Sans", sans-serif;
-  font-size: 1rem;
+  font-size: 100%;
   font-weight: 400;
   color: #67645e;
   transition: border-color 0.25s ease-in-out;
@@ -1314,6 +1314,7 @@ textarea:focus {
 
 .Form_multi .Input {
   border-radius: 12px;
+  border: 1px solid #67645e !important;
 }
 
 .Form_multi .Footer-newsletter-submit {

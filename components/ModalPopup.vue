@@ -123,7 +123,7 @@ function subscribe() {
 .modal-content {
   display: grid;
   background: #fff;
-  padding: 1rem;
+  padding: 2rem 1rem;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   gap: 1rem;
