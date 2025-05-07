@@ -299,6 +299,9 @@ img {
     border-right: 1px solid #84827e;
   }
 }
+.Footer-newsletter.modal {
+  padding: 0;
+}
 @media only screen and (min-width: 1080px) {
   .Footer-content {
     flex-flow: row-reverse;
@@ -763,8 +766,9 @@ h6 {
 
 .card-image {
   width: 100%;
-  height: 285px;
+  height: 385px;
   object-fit: cover;
+  object-position: center;
   border-radius: 12px;
   overflow: hidden;
 }
@@ -1039,6 +1043,10 @@ h6 {
   background: #dcd9d9;
   margin-bottom: 2.5rem;
   border-radius: 12px;
+}
+
+.blog {
+  margin-top: 2.25vw;
 }
 
 @media only screen and (min-width: 760px) {
@@ -1418,7 +1426,7 @@ nav a {
 .contact-title {
   color: #67645e;
   margin: 0 0 1.3125rem;
-  font-size: clamp(1.5rem, 3.05556vw, 2.75rem);
+  font-size: clamp(1.3rem, 3.05556vw, 1.75rem);
   letter-spacing: -0.09rem;
   font-weight: 700;
   line-height: normal;
@@ -1426,7 +1434,11 @@ nav a {
 
 .contact-description p {
   color: #67645e;
-  font-size: 1rem;
+  font-size: 100%;
+}
+
+.h-Size {
+  font-size: clamp(1.3rem, 3.05556vw, 1.75rem);
 }
 
 .contact-form {
@@ -1536,6 +1548,10 @@ nav a {
   font-weight: 600;
 }
 
+.lowercase {
+  text-transform: lowercase;
+}
+
 .Collection {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1583,13 +1599,13 @@ nav a {
 }
 
 .Product-title {
-  font-size: 1rem;
+  font-size: 100%;
   font-weight: 600;
   margin: 0;
 }
 
 .Product-price {
-  font-size: 0.9rem;
+  font-size: 100%;
   color: #666;
 }
 

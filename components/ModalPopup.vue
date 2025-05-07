@@ -16,7 +16,7 @@
           </h1>
         </div>
         <p>{{ subtext }}</p>
-        <div class="Footer-newsletter border-bottom-0">
+        <div class="Footer-newsletter modal border-bottom-0">
           <p v-if="subscribed">Thank you for subscribing!</p>
           <form
             class="Form Form_multi"
@@ -45,7 +45,7 @@
                 data-form-id=""
                 data-mode="default"
               >
-                SUBSCRIBE
+                <h1 class="margin-0">subscribe</h1>
               </button>
             </div>
           </form>

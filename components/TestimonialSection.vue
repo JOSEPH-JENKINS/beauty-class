@@ -23,7 +23,9 @@
                       <h2 class="u-noMargin">
                         {{ testimonial.quote }}
                       </h2>
-                      <p>{{ testimonial.name }}, {{ testimonial.role }}</p>
+                      <p class="lowercase">
+                        {{ testimonial.name }}, {{ testimonial.role }}
+                      </p>
                     </div>
                   </div>
                 </div>

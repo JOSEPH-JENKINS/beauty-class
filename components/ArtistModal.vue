@@ -143,6 +143,10 @@ function onTouchEnd(e) {
   cursor: pointer;
 }
 
+.close:hover {
+  color: #d683b6;
+}
+
 /* Desktop */
 .desktop-wrapper {
   display: none;
@@ -193,15 +197,11 @@ function onTouchEnd(e) {
   font-size: 100%;
   cursor: pointer;
   color: #333;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  background-color: #eee;
   transition: background 0.2s;
 }
 
 .nav-button:hover:not(:disabled) {
-  background-color: #d683b6;
-  color: white;
+  color: #d683b6;
 }
 
 .nav-button:disabled {
