@@ -141,6 +141,7 @@ function onTouchEnd(e) {
   background: none;
   border: none;
   cursor: pointer;
+  color: #333 !important;
 }
 
 .close:hover {
