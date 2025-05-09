@@ -4,7 +4,7 @@
       <img :src="product.image.asset.url" :alt="product.title" />
     </div>
     <div class="product-info">
-      <h1>{{ product.title }}</h1>
+      <h1 style="font-size: 1rem">{{ product.title }}</h1>
       <h2>${{ product.price }}</h2>
       <PortableText :value="product.description" />
       <button
