@@ -5,12 +5,14 @@
       @touchstart="onTouchStart"
       @touchend="onTouchEnd"
     >
-      <button class="close" @click="close">CLOSE</button>
+      <button class="close" @click="close">
+        <h1>close</h1>
+      </button>
 
       <!-- Desktop Layout -->
       <div class="desktop-wrapper">
         <button class="nav-button" @click="prev" :disabled="index === 0">
-          PREV
+          <h1>prev</h1>
         </button>
 
         <div class="image-info-wrapper">
@@ -30,7 +32,7 @@
           @click="next"
           :disabled="index === artists.length - 1"
         >
-          NEXT
+          <h1>next</h1>
         </button>
       </div>
 
@@ -198,7 +200,7 @@ function onTouchEnd(e) {
   font-size: 100%;
   cursor: pointer;
   color: #333;
-  transition: background 0.2s;
+  /* transition: color 0.2s; */
 }
 
 .nav-button:hover:not(:disabled) {
@@ -206,9 +208,9 @@ function onTouchEnd(e) {
 }
 
 .nav-button:disabled {
-  color: #bbb;
+  /* color: #bbb; */
   cursor: not-allowed;
-  background-color: #f5f5f5;
+  /* background-color: #f5f5f5; */
 }
 
 /* Responsive Overrides */

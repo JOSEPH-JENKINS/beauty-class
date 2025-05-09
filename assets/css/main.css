@@ -1498,11 +1498,11 @@ nav a {
   margin-top: calc(1.25rem * 2);
 }
 
-@media only screen and (min-width: 760px) {
+/* @media only screen and (min-width: 760px) {
   .section-header.section-header.brand {
-    margin-top: 2.25vw;
-  }
-}
+    margin-top: 2.;
+  } 
+} */
 
 .NoteWithImage {
   background: #f1f0ed;
@@ -1600,7 +1600,7 @@ nav a {
 }
 
 .Product-title {
-  font-size: 100%;
+  font-size: 1rem;
   font-weight: 600;
   margin: 0;
 }
@@ -1642,4 +1642,8 @@ nav a {
 
 .border-bottom-0 {
   border-bottom: none;
+}
+
+.buy-button {
+  margin-top: 1rem;
 }

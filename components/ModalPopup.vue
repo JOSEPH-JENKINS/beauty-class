@@ -5,7 +5,9 @@
     @click.self="$emit('close')"
   >
     <div class="modal-content">
-      <button class="modal-close" @click.self="$emit('close')">CLOSE</button>
+      <button class="modal-close" @click.self="$emit('close')">
+        <h1>close</h1>
+      </button>
       <div class="image-container">
         <img v-if="image" :src="image" alt="Modal Image" />
       </div>
