@@ -122,7 +122,7 @@ function onTouchEnd(e) {
 
 .modal-content {
   background: #fff;
-  padding: 2rem;
+  padding: 2.35rem 2rem 1rem;
   width: 100%;
   max-width: 1000px;
   max-height: 90vh;

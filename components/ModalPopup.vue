@@ -5,7 +5,7 @@
     @click.self="$emit('close')"
   >
     <div class="modal-content">
-      <button class="modal-close" @click.self="$emit('close')">
+      <button class="modal-close" @click="close">
         <h1>close</h1>
       </button>
       <div class="image-container">
@@ -88,9 +88,14 @@ onMounted(() => {
   });
 });
 
+const emit = defineEmits(["close"]);
+
+function close() {
+  emit("close");
+}
+
 import { useRouter } from "vue-router";
 
-const emit = defineEmits(["close"]);
 const router = useRouter();
 
 function handleCTA() {
@@ -125,7 +130,7 @@ function subscribe() {
 .modal-content {
   display: grid;
   background: #fff;
-  padding: 2rem 1rem;
+  padding: 2.35rem 1rem 1rem;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   gap: 1rem;
