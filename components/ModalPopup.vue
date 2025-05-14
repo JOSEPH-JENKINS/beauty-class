@@ -11,7 +11,7 @@
       <div class="image-container">
         <img v-if="image" :src="image" alt="Modal Image" />
       </div>
-      <div class="content">
+      <div class="content padded">
         <div class="section-header">
           <h1 data-splitting="lines" style="font-weight: 400">
             <p>{{ heading }}</p>
