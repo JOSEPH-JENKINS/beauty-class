@@ -292,6 +292,9 @@ img {
   border-bottom: 1px solid #84827e;
   max-width: 100%;
 }
+.content.padded {
+  padding: 0 1rem;
+}
 @media only screen and (min-width: 1080px) {
   .Footer-newsletter {
     padding: 2.5rem;
