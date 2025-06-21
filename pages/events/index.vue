@@ -94,17 +94,15 @@
                       display: block;
                       width: initial;
                       height: initial;
-                      background: none;
                       opacity: 1;
                       border: 0px;
                       margin: 0px;
-
                       padding-bottom: 56.25%;
                     "
                   ></span>
                   <img
                     class="ls-is-cached lazyloaded"
-                    :src="event.image.asset.url"
+                    :src="event.image?.asset?.url || '/placeholder-image.jpg'"
                     decoding="async"
                     data-nimg="responsive"
                     sizes="100vw"
@@ -127,7 +125,8 @@
                       object-fit: cover;
                       object-position: center;
                     "
-                /></span>
+                  />
+                </span>
               </div>
             </div>
           </div>
@@ -188,7 +187,10 @@
                   <div class="card-content event">
                     <div class="card-image fixed-height">
                       <img
-                        :src="testimonial.image.asset.url"
+                        :src="
+                          testimonial.image?.asset?.url ||
+                          '/placeholder-image.jpg'
+                        "
                         :alt="testimonial.quote"
                         class="card-image"
                       />

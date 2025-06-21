@@ -12,7 +12,7 @@
           </div>
           <NuxtLink
             :to="`/shop/${product.slug.current}`"
-            class="Button filter u-pSize Button__dark Button__large Button__fullWidth js-form-submit"
+            class="Button buy-button filter u-pSize Button__dark Button__large Button__fullWidth js-form-submit"
           >
             View
           </NuxtLink>

@@ -13,7 +13,10 @@
         <div class="price-flex">
           <h2 v-if="!isPastEvent">Price: ${{ post.price }}</h2>
           <div class="Button-container" v-if="!isPastEvent">
-            <button class="Button Button__dark" @click="startCheckout()">
+            <button
+              class="Button Button__dark Button__event-post"
+              @click="startCheckout()"
+            >
               book a spot
             </button>
           </div>
@@ -28,7 +31,10 @@
       <div class="price-flex">
         <h2 v-if="!isPastEvent">Price: ${{ post.price }}</h2>
         <div class="Button-container" v-if="!isPastEvent">
-          <button class="Button Button__dark" @click="startCheckout()">
+          <button
+            class="Button Button__dark Button__event-post"
+            @click="startCheckout()"
+          >
             book a spot
           </button>
         </div>

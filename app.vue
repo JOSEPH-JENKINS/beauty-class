@@ -62,7 +62,7 @@ function closeModal() {
       <nav>
         <div class="nav-left-container">
           <NuxtLink to="/about" class="u-showMd">about</NuxtLink>
-          <NuxtLink to="/work" class="u-showMd">work</NuxtLink>
+          <NuxtLink to="/blog" class="u-showMd">journal</NuxtLink>
           <NuxtLink to="/events" class="u-showMd">events</NuxtLink>
 
           <div class="Mobile-menu u-hideMd">
@@ -121,7 +121,7 @@ function closeModal() {
         </NuxtLink>
         <div class="nav-right-container">
           <NuxtLink to="/shop" class="u-showMd">shop</NuxtLink>
-          <NuxtLink to="/blog" class="u-showMd">blog</NuxtLink>
+          <NuxtLink to="/work" class="u-showMd">work</NuxtLink>
           <NuxtLink to="/contact" class="u-showMd margin-right-0"
             >contact</NuxtLink
           >

@@ -6,7 +6,7 @@
     <BrandLogoCarousel
       v-if="brandsSection"
       :logos="brandsSection.logos"
-      :speed="25"
+      :speed="20"
     />
     <TestimonialSection
       v-if="testimonialSection"
