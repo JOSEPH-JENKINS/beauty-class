@@ -1,56 +1,39 @@
 <template>
   <div>
-    <HeroSection v-if="heroSection" :content="heroSection" />
+    <HeroSection v-if="sections.heroSection" :content="sections.heroSection" />
     <FeaturedPosts v-if="postsData" :content="postsData" />
-    <SoftCtaSection v-if="softCtaSection" :content="softCtaSection" />
+    <SoftCtaSection
+      v-if="sections.softCtaSection"
+      :content="sections.softCtaSection"
+    />
     <BrandLogoCarousel
-      v-if="brandsSection"
-      :logos="brandsSection.logos"
+      v-if="sections.brandsSection"
+      :logos="sections.brandsSection.logos"
       :speed="20"
     />
     <TestimonialSection
-      v-if="testimonialSection"
-      :content="testimonialSection"
+      v-if="sections.testimonialSection"
+      :content="sections.testimonialSection"
     />
-    <EventModal v-if="modalSection" :content="modalSection" />
+    <EventModal v-if="sections.modalSection" :content="sections.modalSection" />
   </div>
 </template>
 
 <script setup>
 import { homepageQuery } from "@/queries/homepage";
 import { featuredPostsQuery } from "@/queries/blog";
+import { computed } from "vue";
 
 const { data } = useSanityQuery(homepageQuery);
 const { data: postsData } = useSanityQuery(featuredPostsQuery);
 
-// Extract hero section
-const heroSection = computed(() => {
-  return data.value?.pageBuilder?.find(
-    (section) => section._type === "heroSection"
-  );
-});
-
-const testimonialSection = computed(() => {
-  return data.value?.pageBuilder?.find(
-    (section) => section._type === "testimonialSection"
-  );
-});
-
-const softCtaSection = computed(() => {
-  return data.value?.pageBuilder?.find(
-    (section) => section._type === "softCtaSection"
-  );
-});
-
-const brandsSection = computed(() => {
-  return data.value?.pageBuilder?.find(
-    (section) => section._type === "brandsSection"
-  );
-});
-
-const modalSection = computed(() => {
-  return data.value?.pageBuilder?.find(
-    (section) => section._type === "modalSection"
-  );
+// Process the pageBuilder array into a structured object once.
+// This is more efficient and scalable.
+const sections = computed(() => {
+  if (!data.value?.pageBuilder) return {};
+  return data.value.pageBuilder.reduce((acc, section) => {
+    acc[section._type] = section;
+    return acc;
+  }, {});
 });
 </script>

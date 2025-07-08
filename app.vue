@@ -3,44 +3,77 @@ import { siteDefaults } from "@/queries/siteDefaults";
 import { popupQuery } from "@/queries/popup";
 const { data: settings } = useSanityQuery(siteDefaults);
 const { data: popup } = useSanityQuery(popupQuery);
-import { ref } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
+
+// --- Constants for configuration ---
+const MODAL_SEEN_KEY = "lastModalSeen";
+const MODAL_COOLDOWN_PERIOD = 12 * 60 * 60 * 1000; // 12 hours in milliseconds
+const MODAL_SHOW_DELAY = 2000; // 2 seconds
+
+// --- State Management ---
 
 const email = ref("");
 const subscribed = ref(false);
+const showModal = ref(false);
+
+// --- Template Refs ---
+const mobileMenuWrapper = ref(null);
+const headerRef = ref(null);
+
+// --- Scroll State ---
+const lastScrollY = ref(0);
+
+// --- Logic ---
 
 function subscribe() {
   subscribed.value = true;
   email.value = "";
+  // In a real-world scenario, this would post to an API endpoint.
+  // e.g., await $fetch('/api/subscribe', { method: 'POST', body: { email: email.value } });
 }
 
-const showModal = ref(false);
+function toggleMobileMenu() {
+  mobileMenuWrapper.value?.classList.toggle("is-open");
+}
+
+function closeMobileMenu() {
+  mobileMenuWrapper.value?.classList.remove("is-open");
+}
+
+function handleScroll() {
+  if (!headerRef.value) return;
+
+  const currentScrollY = window.scrollY;
+  if (
+    currentScrollY > lastScrollY.value &&
+    currentScrollY > headerRef.value.offsetHeight
+  ) {
+    // Scrolling down and past the header
+    headerRef.value.classList.add("header--hidden");
+  } else {
+    // Scrolling up
+    headerRef.value.classList.remove("header--hidden");
+  }
+  lastScrollY.value = currentScrollY;
+}
 
 onMounted(() => {
-  const toggle = document.querySelector(".js-mobile-menu-toggle");
-  const menuWrapper = document.querySelector(".Mobile-menu-wrapper");
-
-  toggle?.addEventListener("click", () => {
-    menuWrapper.classList.toggle("is-open");
-  });
-
-  document.querySelectorAll("nav a").forEach((link) => {
-    link.addEventListener("click", () => {
-      document
-        .querySelector(".Mobile-menu-wrapper")
-        .classList.remove("is-open");
-    });
-  });
-
-  const lastSeen = localStorage.getItem("lastModalSeen");
+  const lastSeen = localStorage.getItem(MODAL_SEEN_KEY);
   const now = Date.now();
 
   // Show only if not seen in last 12 hours
-  if (!lastSeen || now - parseInt(lastSeen) > 12 * 60 * 60 * 1000) {
+  if (!lastSeen || now - parseInt(lastSeen) > MODAL_COOLDOWN_PERIOD) {
     setTimeout(() => {
       showModal.value = true;
-      localStorage.setItem("lastModalSeen", now.toString());
-    }, 2000); // Delay for animation
+      localStorage.setItem(MODAL_SEEN_KEY, now.toString());
+    }, MODAL_SHOW_DELAY);
   }
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("scroll", handleScroll);
 });
 
 function closeModal() {
@@ -58,7 +91,7 @@ function closeModal() {
       :subtext="popup.subtext"
       :image="popup.image.asset.url"
     />
-    <header class="header transparent">
+    <header class="header transparent" ref="headerRef">
       <nav>
         <div class="nav-left-container">
           <NuxtLink to="/about" class="u-showMd">about</NuxtLink>
@@ -67,9 +100,10 @@ function closeModal() {
 
           <div class="Mobile-menu u-hideMd">
             <div
-              class="Mobile-menu-toggle js-mobile-menu-toggle"
+              class="Mobile-menu-toggle"
               tabindex="2"
               aria-label="Toggle mobile navigation"
+              @click="toggleMobileMenu"
             >
               <svg
                 width="25"
@@ -83,32 +117,53 @@ function closeModal() {
                 <rect width="22" height="2" rx="1" fill="#84827E"></rect>
               </svg>
             </div>
-            <div class="Mobile-menu-wrapper">
+            <div class="Mobile-menu-wrapper" ref="mobileMenuWrapper">
               <div class="Mobile-menu-container">
                 <div class="Mobile-menu-content-container">
                   <div class="Mobile-menu-content-container-section">
                     <h3 class="Mobile-menu-content-container-section-title">
-                      <NuxtLink class="link" to="/about">ABOUT</NuxtLink>
+                      <NuxtLink
+                        class="link"
+                        to="/about"
+                        @click="closeMobileMenu"
+                        >ABOUT</NuxtLink
+                      >
                     </h3>
 
                     <h3 class="Mobile-menu-content-container-section-title">
-                      <NuxtLink class="link" to="/work">WORK</NuxtLink>
+                      <NuxtLink class="link" to="/work" @click="closeMobileMenu"
+                        >WORK</NuxtLink
+                      >
                     </h3>
 
                     <h3 class="Mobile-menu-content-container-section-title">
-                      <NuxtLink class="link" to="/events">EVENTS</NuxtLink>
+                      <NuxtLink
+                        class="link"
+                        to="/events"
+                        @click="closeMobileMenu"
+                        >EVENTS</NuxtLink
+                      >
                     </h3>
 
                     <h3 class="Mobile-menu-content-container-section-title">
-                      <NuxtLink class="link" to="/shop">shop</NuxtLink>
+                      <NuxtLink class="link" to="/shop" @click="closeMobileMenu"
+                        >shop</NuxtLink
+                      >
                     </h3>
 
                     <h3 class="Mobile-menu-content-container-section-title">
-                      <NuxtLink class="link" to="/blog">BLOG</NuxtLink>
+                      <NuxtLink class="link" to="/blog" @click="closeMobileMenu"
+                        >BLOG</NuxtLink
+                      >
                     </h3>
 
                     <h3 class="Mobile-menu-content-container-section-title">
-                      <NuxtLink class="link" to="/contact">CONTACT</NuxtLink>
+                      <NuxtLink
+                        class="link"
+                        to="/contact"
+                        @click="closeMobileMenu"
+                        >CONTACT</NuxtLink
+                      >
                     </h3>
                   </div>
                 </div>
@@ -266,3 +321,20 @@ function closeModal() {
     </footer>
   </div>
 </template>
+
+<style>
+.header {
+  /* This makes the header stick to the top of the viewport */
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* Ensure header is on top */
+  /* Add transition for smooth hiding/showing */
+  transition: transform 0.3s ease-in-out;
+  will-change: transform;
+}
+
+.header--hidden {
+  transform: translateY(-100%);
+}
+</style>
