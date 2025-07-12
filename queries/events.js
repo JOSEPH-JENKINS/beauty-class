@@ -55,7 +55,7 @@ export const allEventsWithTestimonialsQuery = groq`
   }
 `;
 
-export const singleEventQuery = `
+export const singleEventQuery = groq`
   *[_type == "event" && slug.current == $slug][0] {
     _id,
     title,
@@ -67,7 +67,7 @@ export const singleEventQuery = `
     date,
     location,
     price,
-    eventbriteLink,
+    eventType,
     image {
       asset->{
         _id,

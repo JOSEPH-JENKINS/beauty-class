@@ -1,43 +1,39 @@
 <template>
-  <section class="Post">
+  <section class="Post" v-if="post">
     <div class="post-container">
-      <div class="post-title">
-        <h1>{{ post.title }}</h1>
-        <p class="blog-deet">
-          <span v-if="isPastEvent">HAPPENED on</span>
-          {{ formatDateTime(post.date) }}
-        </p>
-        <p class="blog-deet">
-          {{ post.location }}
-        </p>
-        <div class="price-flex">
-          <h2 v-if="!isPastEvent">Price: ${{ post.price }}</h2>
-          <div class="Button-container" v-if="!isPastEvent">
-            <button
-              class="Button Button__dark Button__event-post"
-              @click="startCheckout()"
-            >
-              book a spot
-            </button>
+      <div class="post-header">
+        <div class="post-header-image">
+          <img
+            :src="post.image?.asset?.url || '/placeholder-image.jpg'"
+            :alt="post.title"
+          />
+        </div>
+        <div class="post-header-details">
+          <p v-if="post.eventType" class="post-category">
+            {{ post.eventType }}
+          </p>
+          <h1>{{ post.title }}</h1>
+          <p class="post-date">
+            <span v-if="isPastEvent">HAPPENED on </span>
+            {{ formatDateTime(post.date) }}
+          </p>
+          <p class="post-location">{{ post.location }}</p>
+          <div class="booking-details" v-if="!isPastEvent">
+            <h2>Price: ${{ post.price }}</h2>
+            <div class="Button-container">
+              <button
+                class="Button Button__dark Button__event-post"
+                @click="startCheckout()"
+              >
+                book a spot
+              </button>
+            </div>
           </div>
         </div>
       </div>
-      <div class="post-image">
-        <img :src="post.image.asset.url" :alt="post.title" />
-      </div>
+
       <div class="post-content">
         <p>{{ post.description }}</p>
-      </div>
-      <div class="price-flex">
-        <h2 v-if="!isPastEvent">Price: ${{ post.price }}</h2>
-        <div class="Button-container" v-if="!isPastEvent">
-          <button
-            class="Button Button__dark Button__event-post"
-            @click="startCheckout()"
-          >
-            book a spot
-          </button>
-        </div>
       </div>
     </div>
   </section>
@@ -63,7 +59,10 @@
                 <div class="card-content event">
                   <div class="card-image fixed-height">
                     <img
-                      :src="testimonial.image.asset.url"
+                      :src="
+                        testimonial.image?.asset?.url ||
+                        '/placeholder-image.jpg'
+                      "
                       :alt="testimonial.quote"
                       class="card-image"
                     />
@@ -97,7 +96,9 @@ const slug = route.params.slug;
 const { data: post } = useSanityQuery(singleEventQuery, { slug });
 
 const now = new Date();
-const isPastEvent = computed(() => new Date(post.value.date) < now);
+const isPastEvent = computed(
+  () => post.value && new Date(post.value.date) < now
+);
 
 function formatDateTime(dateStr) {
   const date = new Date(dateStr);
@@ -148,3 +149,104 @@ async function startCheckout() {
   }
 }
 </script>
+
+<style scoped>
+.Post {
+  padding: 4rem 2rem;
+}
+
+.post-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.post-header {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+.post-header-image {
+  flex: 1;
+}
+
+.post-header-image img {
+  width: 100%;
+  height: auto;
+  max-height: 450px;
+  display: block;
+  border-radius: 8px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.post-header-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-category {
+  text-transform: uppercase;
+  color: #888;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+}
+
+.post-header-details h1 {
+  margin: 0 0 1rem 0;
+  font-size: 3rem;
+  line-height: 1.2;
+}
+
+.post-date,
+.post-location {
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.booking-details {
+  margin-top: 2rem;
+}
+
+.booking-details h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.post-content {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.post-content :deep(img) {
+  width: auto;
+  height: 100%;
+  max-height: 600px;
+  object-fit: cover;
+  margin: 1rem auto;
+  border-radius: 8px;
+  display: block;
+}
+
+.Button__event-post {
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .post-header {
+    flex-direction: column;
+  }
+  .post-content {
+    width: 100%;
+  }
+  .post-header-details h1 {
+    font-size: 2rem;
+  }
+}
+</style>
