@@ -23,7 +23,7 @@ export const homepageQuery = groq`
       _type == "testimonialSection" => {
         _type,
         title,
-        testimonials[]->{
+        testimonials[0..3]->{
           _id,
           name,
           quote,
@@ -37,11 +37,33 @@ export const homepageQuery = groq`
         }
       },
 
+      
+      _type == 'aboutSection' => {
+        _key,
+        _type,
+        heading,
+        excerpt,
+        ctaLabel,
+        image {
+          asset->{ url, metadata }
+        }
+      },
+
       _type == "softCtaSection" => {
         ctaLabel,
         ctaLink,
-        heading,
-        paragraph
+        paragraph,
+        logo {
+          asset->{
+            url
+          }
+        },
+        backgroundImage {
+          asset->{
+            url,
+            metadata { lqip, dimensions }
+          }
+        }
       },
       
       _type == "brandsSection" => {
@@ -50,6 +72,24 @@ export const homepageQuery = groq`
           asset->{
             url,
             metadata { dimensions }
+          }
+        }
+      },
+      _type == "instagramSection" => {
+        _type,
+        heading,
+        ctaLabel,
+        ctaLink,
+        posts[]{
+          postUrl,
+          image {
+            asset->{
+              url,
+              metadata {
+                lqip,
+                dimensions
+              }
+            }
           }
         }
       },

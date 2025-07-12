@@ -15,10 +15,8 @@ const MODAL_SHOW_DELAY = 2000; // 2 seconds
 const email = ref("");
 const subscribed = ref(false);
 const showModal = ref(false);
-
-// --- Template Refs ---
-const mobileMenuWrapper = ref(null);
-const headerRef = ref(null);
+const isMobileMenuOpen = ref(false);
+const isHeaderHidden = ref(false);
 
 // --- Scroll State ---
 const lastScrollY = ref(0);
@@ -33,26 +31,23 @@ function subscribe() {
 }
 
 function toggleMobileMenu() {
-  mobileMenuWrapper.value?.classList.toggle("is-open");
+  isMobileMenuOpen.value = !isMobileMenuOpen.value;
 }
 
 function closeMobileMenu() {
-  mobileMenuWrapper.value?.classList.remove("is-open");
+  isMobileMenuOpen.value = false;
 }
 
 function handleScroll() {
-  if (!headerRef.value) return;
-
   const currentScrollY = window.scrollY;
+  // A threshold could be added here, e.g. based on header height
   if (
     currentScrollY > lastScrollY.value &&
-    currentScrollY > headerRef.value.offsetHeight
+    currentScrollY > 200 // Hide after scrolling down 200px
   ) {
-    // Scrolling down and past the header
-    headerRef.value.classList.add("header--hidden");
+    isHeaderHidden.value = true;
   } else {
-    // Scrolling up
-    headerRef.value.classList.remove("header--hidden");
+    isHeaderHidden.value = false;
   }
   lastScrollY.value = currentScrollY;
 }
@@ -91,7 +86,10 @@ function closeModal() {
       :subtext="popup.subtext"
       :image="popup.image.asset.url"
     />
-    <header class="header transparent" ref="headerRef">
+    <header
+      class="header transparent"
+      :class="{ 'header--hidden': isHeaderHidden }"
+    >
       <nav>
         <div class="nav-left-container">
           <NuxtLink to="/about" class="u-showMd">about</NuxtLink>
@@ -117,7 +115,10 @@ function closeModal() {
                 <rect width="22" height="2" rx="1" fill="#84827E"></rect>
               </svg>
             </div>
-            <div class="Mobile-menu-wrapper" ref="mobileMenuWrapper">
+            <div
+              class="Mobile-menu-wrapper"
+              :class="{ 'is-open': isMobileMenuOpen }"
+            >
               <div class="Mobile-menu-container">
                 <div class="Mobile-menu-content-container">
                   <div class="Mobile-menu-content-container-section">
@@ -328,7 +329,6 @@ function closeModal() {
   position: sticky;
   top: 0;
   width: 100%;
-  z-index: 1000; /* Ensure header is on top */
   /* Add transition for smooth hiding/showing */
   transition: transform 0.3s ease-in-out;
   will-change: transform;
@@ -336,5 +336,14 @@ function closeModal() {
 
 .header--hidden {
   transform: translateY(-100%);
+}
+
+/* Uppercase navigation links */
+.nav-left-container .u-showMd,
+.nav-right-container .u-showMd,
+.nav-right-container .u-hideMd,
+.Mobile-menu-content-container-section-title .link,
+.FooterMenu-itemLink {
+  text-transform: uppercase;
 }
 </style>

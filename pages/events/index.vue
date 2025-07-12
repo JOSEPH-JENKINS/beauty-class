@@ -1,13 +1,83 @@
 <template>
-  <section class="Events">
-    <section class="Hero bg-black" style="height: 76svh">
-      <div class="soft-background">
-        <img src="/Rectangle.png" alt="BGradient" />
+  <section>
+    <section class="Hero" style="height: 76svh" v-if="heroSection">
+      <div class="Hero-background">
+        <video
+          ref="heroVideoRef"
+          autoplay="autoplay"
+          playsinline=""
+          loop="true"
+          muted=""
+          :src="heroSection.video.asset.url"
+          aria-hidden="true"
+          class="heroVideo"
+        ></video>
+        <div
+          class="video-play-pause"
+          data-desktop-alignment="right"
+          data-mobile-alignment="right"
+          @click="videoBtnClick()"
+        >
+          <button
+            type="button"
+            class="play"
+            :class="{ hidden: isVideoPlaying }"
+            aria-label="Play video"
+          >
+            <svg
+              width="31"
+              height="31"
+              viewBox="0 0 31 31"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                cx="15.5"
+                cy="15.5"
+                r="15"
+                fill="rgba(0,0,0,0)"
+                stroke="#ffffff"
+              ></circle>
+              <path
+                d="M22 16L11.5 22.0622L11.5 9.93782L22 16Z"
+                fill="#ffffff"
+              ></path>
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="pause"
+            :class="{ hidden: !isVideoPlaying }"
+            aria-label="Pause video"
+          >
+            <svg
+              width="31"
+              height="31"
+              viewBox="0 0 31 31"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                cx="15.5"
+                cy="15.5"
+                r="15"
+                fill="rgba(0,0,0,0)"
+                stroke="#ffffff"
+              ></circle>
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M14 10H11V21H14V10ZM20 10H17V21H20V10Z"
+                fill="#ffffff"
+              ></path>
+            </svg>
+          </button>
+        </div>
       </div>
       <div class="Hero-content BOTTOM-LEFT">
         <div class="Hero-content-wrapper TEXT__LEFT BUTTON__LEFT">
           <h1 data-splitting="lines" style="font-weight: 400">
-            <p>All Events</p>
+            <p>class in session</p>
           </h1>
         </div>
       </div>
@@ -18,235 +88,207 @@
         <div class="Blog-container-filters-list">
           <div class="Button-container">
             <button
+              type="button"
               @click="selectedFilter = 'all'"
-              :class="
-                selectedFilter === 'all'
-                  ? 'Button filter Button__dark active'
-                  : 'Button filter Button__dark'
-              "
+              :class="[
+                'Button',
+                'filter',
+                'filter-btn',
+                { active: selectedFilter === 'all' },
+              ]"
             >
               <h1 class="margin-0">all</h1>
             </button>
           </div>
           <div class="Button-container">
             <button
-              @click="selectedFilter = 'upcoming'"
-              :class="
-                selectedFilter === 'upcoming'
-                  ? 'Button filter Button__dark active'
-                  : 'Button filter Button__dark'
-              "
+              type="button"
+              @click="selectedFilter = 'online'"
+              :class="[
+                'Button',
+                'filter',
+                'filter-btn',
+                { active: selectedFilter === 'online' },
+              ]"
             >
-              <h1 class="margin-0">upcoming</h1>
+              <h1 class="margin-0">online</h1>
             </button>
           </div>
           <div class="Button-container">
             <button
-              @click="selectedFilter = 'past'"
-              :class="
-                selectedFilter === 'past'
-                  ? 'Button filter Button__dark active'
-                  : 'Button filter Button__dark'
-              "
+              type="button"
+              @click="selectedFilter = 'in-person'"
+              :class="[
+                'Button',
+                'filter',
+                'filter-btn',
+                { active: selectedFilter === 'in-person' },
+              ]"
             >
-              <h1 class="margin-0">past</h1>
+              <h1 class="margin-0">in-person</h1>
             </button>
           </div>
         </div>
       </div>
       <div class="Blog-container-articles">
         <div v-if="filteredEvents.length === 0">
-          <h1>no upcoming events to see.</h1>
-          <div class="Button-container">
-            <button
-              class="Button filter Button__dark"
-              @click="selectedFilter = 'past'"
-            >
-              see past events
-            </button>
-          </div>
+          <h1>No events to see just yet.</h1>
         </div>
         <article
           v-for="event in filteredEvents"
           :key="event._id"
-          class="BlogListItem"
+          class="BlogListItem content-card"
         >
-          <div class="Image-container">
-            <div class="Custom-wrapper">
-              <div class="image">
-                <span
-                  class="Image Image--desktop o-placeholder bg-full-height"
-                  style="
-                    box-sizing: border-box;
-                    display: block;
-                    overflow: hidden;
-                    background: none;
-                    opacity: 1;
-                    border: 0px;
-                    margin: 0px;
-                    padding: 0px;
-                    transform: translate3d(0px, 0px, 0px) scale(1.031, 1.03099);
-                  "
-                >
-                  <span
-                    style="
-                      box-sizing: border-box;
-                      display: block;
-                      width: initial;
-                      height: initial;
-                      opacity: 1;
-                      border: 0px;
-                      margin: 0px;
-                      padding-bottom: 56.25%;
-                    "
-                  ></span>
-                  <img
-                    class="ls-is-cached lazyloaded"
-                    :src="event.image?.asset?.url || '/placeholder-image.jpg'"
-                    decoding="async"
-                    data-nimg="responsive"
-                    sizes="100vw"
-                    :alt="event.title"
-                    loading="lazy"
-                    style="
-                      position: absolute;
-                      inset: 0px;
-                      box-sizing: border-box;
-                      padding: 0px;
-                      border: none;
-                      margin: auto;
-                      display: block;
-                      width: 0px;
-                      height: 0px;
-                      min-width: 100%;
-                      max-width: 100%;
-                      min-height: 100%;
-                      max-height: 100%;
-                      object-fit: cover;
-                      object-position: center;
-                    "
-                  />
-                </span>
+          <div class="card-content">
+            <div class="card-image fixed-height">
+              <NuxtLink :to="`/events/${event.slug.current}`">
+                <img
+                  :src="event.image?.asset?.url || '/placeholder-image.jpg'"
+                  :alt="event.title"
+                  loading="lazy"
+                  class="card-image"
+                />
+              </NuxtLink>
+            </div>
+            <div class="card-info">
+              <div class="content-title-wrapper">
+                <p v-if="event.eventType" class="BlogListItem-content category">
+                  {{ event.eventType }}
+                </p>
+                <h3 class="u-noMargin">
+                  {{ event.title }}
+                </h3>
               </div>
             </div>
-          </div>
-          <div class="BlogListItem-link">
-            <div class="BlogListItem-link">
-              <h2
-                class="BlogListItem-content category u-pSize u-pSize__Small"
-                :class="getEventCategory(event.date).toLowerCase()"
+            <div class="Button-container">
+              <NuxtLink class="Button" :to="`/events/${event.slug.current}`"
+                >read more</NuxtLink
               >
-                {{ getEventCategory(event.date) }}
-              </h2>
-              <h1
-                class="BlogListItem-title margin-bottom u-bold u-pSize u-pSize__Medium"
-              >
-                <NuxtLink :to="`/events/${event.slug.current}`">{{
-                  event.title
-                }}</NuxtLink>
-              </h1>
-              <p
-                class="BlogListItem-content margin-bottom u-pSize u-pSize__Small"
-              >
-                {{ event.excerpt }}
-              </p>
-              <div class="Button-container">
-                <NuxtLink
-                  class="Button filter Button__dark"
-                  :to="`/events/${event.slug.current}`"
-                  >read more</NuxtLink
-                >
-              </div>
             </div>
           </div>
         </article>
       </div>
     </div>
   </section>
-  <section class="EventTestimonials" v-if="testimonialEvents.length">
-    <div class="section-header text-center brand">
-      <h1 data-splitting="lines" style="font-weight: 400">
-        <p>what attendies said</p>
-      </h1>
-    </div>
-    <div
-      v-for="event in testimonialEvents"
-      :key="event._id"
-      class="testimonial-event-wrapper"
-    >
+  <section class="instagram-section">
+    <div class="instagram-section__container">
+      <div class="instagram-section__header section-header">
+        <h1 class="u-hSize--Medium">class in photo</h1>
+        <NuxtLink to="/about" class="Button"> learn about us </NuxtLink>
+      </div>
       <div class="collection-slider">
-        <div class="custom-cursor-wrapper">
-          <div class="swiper swiper-pointer-events">
-            <div class="swiper-wrapper">
-              <div
-                class="swiper-slide collection-slide"
-                v-for="testimonial in flattenedTestimonials"
-                :key="testimonial._id"
+        <div class="swiper swiper-pointer-events">
+          <div class="swiper-wrapper">
+            <div
+              v-for="(post, index) in content.posts"
+              :key="index"
+              class="swiper-slide collection-slide"
+            >
+              <NuxtLink
+                :to="post.postUrl"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <article class="content-card">
-                  <div class="card-content event">
-                    <div class="card-image fixed-height">
-                      <img
-                        :src="
-                          testimonial.image?.asset?.url ||
-                          '/placeholder-image.jpg'
-                        "
-                        :alt="testimonial.quote"
-                        class="card-image"
-                      />
-                    </div>
-                    <div class="card-info">
-                      <div class="content-title-wrapper">
-                        <h2 class="u-noMargin">
-                          {{ testimonial.quote }}
-                        </h2>
-                        <p>{{ testimonial.name }}, {{ testimonial.role }}</p>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              </div>
+                <div class="instagram-post">
+                  <img
+                    :src="`${post.image.asset.url}?w=400&h=400&auto=format&fit=crop&q=75`"
+                    alt="Instagram post"
+                  />
+                </div>
+              </NuxtLink>
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
+  <section class="EventTestimonials" v-if="homepageTestimonials.testimonials">
+    <TestimonialSection :content="homepageTestimonials" />
+  </section>
 </template>
 
 <script setup>
 import { allEventsWithTestimonialsQuery } from "@/queries/events";
-import { computed } from "vue";
+import { homepageQuery } from "@/queries/homepage";
+import { computed, ref } from "vue";
 
 const selectedFilter = ref("all");
 
 const { data: events } = useSanityQuery(allEventsWithTestimonialsQuery);
-const now = new Date();
+const { data: homepage } = useSanityQuery(homepageQuery);
 
-const upcomingEvents = computed(() =>
-  events.value.filter((ev) => new Date(ev.date) >= now)
-);
-const pastEvents = computed(() =>
-  events.value.filter((ev) => new Date(ev.date) < now)
-);
+const heroVideoRef = ref(null);
+const isVideoPlaying = ref(true);
 
-const testimonialEvents = computed(() =>
-  events.value.filter((ev) => ev.testimonials?.length)
-);
-
-const filteredEvents = computed(() => {
-  if (selectedFilter.value === "upcoming") return upcomingEvents.value;
-  if (selectedFilter.value === "past") return pastEvents.value;
-  return events.value;
+const heroSection = computed(() => {
+  return homepage.value?.pageBuilder?.find(
+    (section) => section._type === "heroSection"
+  );
 });
 
-const flattenedTestimonials = computed(() =>
-  events.value
-    .filter((ev) => ev.testimonials?.length)
-    .flatMap((ev) => ev.testimonials)
-);
+const content = computed(() => {
+  return homepage.value?.pageBuilder?.find(
+    (section) => section._type === "instagramSection"
+  );
+});
 
-function getEventCategory(eventDate) {
-  return new Date(eventDate) >= new Date() ? "Upcoming" : "Past";
-}
+const filteredEvents = computed(() => {
+  if (!events.value) {
+    return [];
+  }
+
+  // If 'all' is selected, return all events.
+  if (selectedFilter.value === "all") {
+    return events.value;
+  }
+
+  // Otherwise, filter by the selected eventType.
+  return events.value.filter(
+    (event) => event && event.eventType === selectedFilter.value
+  );
+});
+
+const homepageTestimonials = computed(() => {
+  if (!homepage.value || !homepage.value.pageBuilder) {
+    return [];
+  }
+  const testimonialSection = homepage.value.pageBuilder.find(
+    (section) => section._type === "testimonialSection"
+  );
+  return testimonialSection;
+});
+
+const videoBtnClick = () => {
+  const video = heroVideoRef.value;
+  if (!video) return;
+
+  if (video.paused || video.ended) {
+    video.play();
+    isVideoPlaying.value = true;
+  } else {
+    video.pause();
+    isVideoPlaying.value = false;
+  }
+};
 </script>
+
+<style scoped>
+.instagram-section {
+  background-color: #f1f0ed; /* Site's grey color */
+  padding: 2.25vw 1rem;
+  margin-top: 2.25vw;
+  border-radius: 12px;
+}
+
+.instagram-section__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.instagram-section__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+</style>

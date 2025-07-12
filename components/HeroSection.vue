@@ -81,7 +81,7 @@
           </h1>
           <div class="Button-container">
             <NuxtLink
-              class="Button Button__dark"
+              class="Button Button__hero"
               to="/events"
               :aria-label="content.ctaLabel"
               data-mode="default"

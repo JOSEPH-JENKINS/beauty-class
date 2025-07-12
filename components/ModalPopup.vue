@@ -161,6 +161,10 @@ function subscribe() {
   z-index: 999;
 }
 
+.modal-close h1 {
+  text-transform: uppercase;
+}
+
 .modal-close:hover {
   color: #d683b6;
 }

@@ -1,5 +1,5 @@
 <template>
-  <section class="testimonial-section">
+  <section class="featured-section">
     <div class="collection-slider">
       <div class="custom-cursor-wrapper">
         <div class="swiper swiper-pointer-events">
@@ -20,10 +20,12 @@
                   </div>
                   <div class="card-info">
                     <div class="content-title-wrapper">
-                      <h2 class="u-noMargin">
+                      <p class="BlogListItem-content category">
+                        {{ post.category.title }}
+                      </p>
+                      <h3 class="u-noMargin">
                         {{ post.title }}
-                      </h2>
-                      <p>{{ post.excerpt }}</p>
+                      </h3>
                     </div>
                   </div>
                   <div class="Button-container">

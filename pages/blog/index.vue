@@ -3,6 +3,7 @@
     <section class="Hero" style="height: 76svh">
       <div class="Hero-background">
         <video
+          ref="heroVideoRef"
           autoplay="autoplay"
           playsinline=""
           loop="true"
@@ -12,12 +13,17 @@
           class="heroVideo"
         ></video>
         <div
-          class="video-play-pause js-video-toggle"
+          class="video-play-pause"
           data-desktop-alignment="right"
           data-mobile-alignment="right"
           @click="videoBtnClick()"
         >
-          <button type="button" class="play hidden" aria-label="Play video">
+          <button
+            type="button"
+            class="play"
+            :class="{ hidden: isVideoPlaying }"
+            aria-label="Play video"
+          >
             <svg
               width="31"
               height="31"
@@ -38,7 +44,12 @@
               ></path>
             </svg>
           </button>
-          <button type="button" class="pause" aria-label="Pause video">
+          <button
+            type="button"
+            class="pause"
+            :class="{ hidden: !isVideoPlaying }"
+            aria-label="Pause video"
+          >
             <svg
               width="31"
               height="31"
@@ -65,8 +76,14 @@
       </div>
       <div class="Hero-content BOTTOM-LEFT">
         <div class="Hero-content-wrapper TEXT__LEFT BUTTON__LEFT">
-          <h1 data-splitting="lines" style="font-weight: 400">
-            <p>we write, you read</p>
+          <h1
+            data-splitting="lines"
+            style="font-weight: 400"
+            v-if="heroSection"
+          >
+            <p>
+              {{ heroSection.heading }}
+            </p>
           </h1>
         </div>
       </div>
@@ -80,12 +97,13 @@
           <div class="Button-container">
             <button
               type="button"
+              :class="[
+                'Button',
+                'filter',
+                'filter-btn',
+                { active: selectedCategory === null },
+              ]"
               @click="selectedCategory = null"
-              :class="
-                selectedCategory === null
-                  ? 'Button filter Button__dark filter-btn active'
-                  : 'Button filter Button__dark filter-btn'
-              "
             >
               <h1 class="margin-0">all</h1>
             </button>
@@ -94,15 +112,16 @@
             class="Button-container"
             v-for="cat in categories"
             :key="cat.slug.current"
-            @click="selectedCategory = cat.slug.current"
           >
             <button
               type="button"
-              :class="
-                selectedCategory === cat.slug.current
-                  ? 'Button filter Button__dark filter-btn active'
-                  : 'Button filter Button__dark filter-btn'
-              "
+              :class="[
+                'Button',
+                'filter',
+                'filter-btn',
+                { active: selectedCategory === cat.slug.current },
+              ]"
+              @click="selectedCategory = cat.slug.current"
               tabindex="0"
             >
               <h1 class="margin-0">{{ cat.title }}</h1>
@@ -117,84 +136,31 @@
         <article
           v-for="(post, index) in filteredPosts"
           :key="post._id"
-          class="BlogListItem"
+          class="BlogListItem content-card"
         >
-          <div class="Image-container">
-            <div class="Custom-wrapper">
-              <div class="image">
-                <span
-                  class="Image Image--desktop o-placeholder bg-full-height"
-                  style="
-                    box-sizing: border-box;
-                    display: block;
-                    overflow: hidden;
-                    background: none;
-                    opacity: 1;
-                    border: 0px;
-                    margin: 0px;
-                    padding: 0px;
-                    transform: translate3d(0px, 0px, 0px) scale(1.031, 1.03099);
-                  "
-                >
-                  <span
-                    style="
-                      box-sizing: border-box;
-                      display: block;
-                      width: initial;
-                      height: initial;
-                      background: none;
-                      opacity: 1;
-                      border: 0px;
-                      margin: 0px;
-
-                      padding-bottom: 56.25%;
-                    "
-                  ></span>
-                  <img
-                    class="ls-is-cached lazyloaded"
-                    :src="post.coverImage.asset.url"
-                    decoding="async"
-                    data-nimg="responsive"
-                    sizes="100vw"
-                    :alt="post.title"
-                    loading="lazy"
-                    style="
-                      position: absolute;
-                      inset: 0px;
-                      box-sizing: border-box;
-                      padding: 0px;
-                      border: none;
-                      margin: auto;
-                      display: block;
-                      width: 0px;
-                      height: 0px;
-                      min-width: 100%;
-                      max-width: 100%;
-                      min-height: 100%;
-                      max-height: 100%;
-                      object-fit: cover;
-                      object-position: top center;
-                    "
-                /></span>
+          <div class="card-content">
+            <div class="card-image fixed-height">
+              <NuxtLink :to="`/blog/${post.slug.current}`">
+                <img
+                  :src="`${post.coverImage.asset.url}?w=800&auto=format&q=75`"
+                  :alt="post.title"
+                  loading="lazy"
+                  class="card-image"
+                />
+              </NuxtLink>
+            </div>
+            <div class="card-info">
+              <div class="content-title-wrapper">
+                <p class="BlogListItem-content category">
+                  {{ post.category.title }}
+                </p>
+                <h3 class="u-noMargin">
+                  {{ post.title }}
+                </h3>
               </div>
             </div>
-          </div>
-          <div class="BlogListItem-link">
-            <div class="BlogListItem-link margin-bottom">
-              <h2 class="BlogListItem-content category u-pSize u-pSize__Small">
-                {{ post.category.title }}
-              </h2>
-              <h1 class="BlogListItem-title u-bold u-pSize u-pSize__Medium">
-                {{ post.title }}
-              </h1>
-              <p class="BlogListItem-content u-pSize u-pSize__Small">
-                {{ post.excerpt }}
-              </p>
-            </div>
             <div class="Button-container">
-              <NuxtLink
-                class="Button filter Button__dark"
-                :to="`/blog/${post.slug.current}`"
+              <NuxtLink class="Button" :to="`/blog/${post.slug.current}`"
                 >read more</NuxtLink
               >
             </div>
@@ -211,6 +177,8 @@ import { allCategoriesQuery } from "~/queries/category";
 import { homepageQuery } from "@/queries/homepage";
 
 const selectedCategory = ref(null);
+const heroVideoRef = ref(null);
+const isVideoPlaying = ref(true); // Assuming autoplay works, initialize to true
 
 const { data: posts } = useSanityQuery(allPostsQuery);
 const { data: homepage } = useSanityQuery(homepageQuery);
@@ -230,20 +198,15 @@ const heroSection = computed(() => {
 });
 
 const videoBtnClick = () => {
-  const video = document.querySelector(".heroVideo");
-  const toggleBtn = document.querySelector(".js-video-toggle");
-  const playEl = toggleBtn.querySelector(".play");
-  const pauseEl = toggleBtn.querySelector(".pause");
+  const video = heroVideoRef.value;
+  if (!video) return;
 
-  console.log("click");
-  if (video.paused) {
+  if (video.paused || video.ended) {
     video.play();
-    playEl.classList.add("hidden");
-    pauseEl.classList.remove("hidden");
+    isVideoPlaying.value = true;
   } else {
     video.pause();
-    pauseEl.classList.add("hidden");
-    playEl.classList.remove("hidden");
+    isVideoPlaying.value = false;
   }
 };
 </script>

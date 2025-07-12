@@ -1,6 +1,6 @@
 import groq from "groq";
 
-export const blogPostQuery = `
+export const blogPostQuery = groq`
   *[_type == "post" && slug.current == $slug][0] {
     title,
     publishedAt,
@@ -8,8 +8,13 @@ export const blogPostQuery = `
     slug {
     current
     },
-    body,
-    category {
+    body[]{
+    ...,
+    asset->{
+      url
+    }
+    },
+    category-> {
     title
     },
     coverImage {

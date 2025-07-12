@@ -1,17 +1,31 @@
 <template>
   <div class="soft-cta-container">
     <div class="soft-background">
-      <img src="/Rectangle.png" alt="BGradient" />
+      <img
+        v-if="content.backgroundImage && content.backgroundImage.asset"
+        :src="`${content.backgroundImage.asset.url}?w=1200&auto=format&q=75`"
+        alt="Soft CTA background"
+        loading="lazy"
+      />
     </div>
     <div class="soft-cta-content">
-      <div class="soft-cta-title">
-        <h1>{{ content.heading }}</h1>
+      <div class="soft-cta-logo">
+        <img
+          v-if="content.logo?.asset?.url"
+          :src="content.logo.asset.url"
+          alt="CTA Section Logo"
+        />
       </div>
       <div class="soft-cta-paragraph">
         <p>{{ content.paragraph }}</p>
       </div>
       <div class="Button-container">
-        <NuxtLink class="Button Button__dark" to="/events" data-mode="default">
+        <!-- Using Button__hero for white text/border on a dark background -->
+        <NuxtLink
+          class="Button Button__hero"
+          :to="content.ctaLink"
+          data-mode="default"
+        >
           {{ content.ctaLabel }}
         </NuxtLink>
       </div>

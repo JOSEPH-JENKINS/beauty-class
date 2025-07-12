@@ -23,10 +23,10 @@
       </div>
     </section>
     <div class="NoteWithImage margin-bottom">
-      <h2 class="u-pSize u-pSize__Medium u-bold">
-        <p>A NOTE FROM OUR FOUNDER</p>
+      <h2 class="u-bold">
+        <p>about us</p>
       </h2>
-      <div class="u-pSize u-pSize__Large">
+      <div class="note-content">
         <p>
           {{ data.content }}
         </p>
@@ -40,3 +40,22 @@ import { aboutQuery } from "@/queries/about";
 
 const { data } = useSanityQuery(aboutQuery);
 </script>
+
+<style scoped>
+.NoteWithImage {
+  padding: 5rem; /* Increased top and bottom padding */
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.NoteWithImage h2 {
+  font-size: 2.5rem; /* Made heading bigger */
+  margin-bottom: 2rem;
+}
+
+.note-content {
+  font-size: 1.25rem; /* Made paragraph bigger */
+  line-height: 1.6;
+}
+</style>

@@ -1,10 +1,18 @@
 <template>
   <div>
     <HeroSection v-if="sections.heroSection" :content="sections.heroSection" />
+    <AboutSection
+      v-if="sections.aboutSection"
+      :content="sections.aboutSection"
+    />
     <FeaturedPosts v-if="postsData" :content="postsData" />
     <SoftCtaSection
       v-if="sections.softCtaSection"
       :content="sections.softCtaSection"
+    />
+    <InstagramSection
+      :content="sections.instagramSection"
+      v-if="sections.instagramSection"
     />
     <BrandLogoCarousel
       v-if="sections.brandsSection"
@@ -23,6 +31,7 @@
 import { homepageQuery } from "@/queries/homepage";
 import { featuredPostsQuery } from "@/queries/blog";
 import { computed } from "vue";
+import AboutSection from "~/components/AboutSection.vue";
 
 const { data } = useSanityQuery(homepageQuery);
 const { data: postsData } = useSanityQuery(featuredPostsQuery);

@@ -34,6 +34,7 @@ export const allEventsWithTestimonialsQuery = groq`
     },
     date,
     price,
+    eventType,
     location,
     image {
       asset->{
