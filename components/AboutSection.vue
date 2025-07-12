@@ -9,7 +9,10 @@
       />
     </div>
     <div class="about-section__content">
-      <h2 v-if="content.heading">{{ content.heading }}</h2>
+      <p class="category">features</p>
+      <h2 v-if="content.heading" style="margin-bottom: 1rem">
+        {{ content.heading }}
+      </h2>
       <p v-if="content.excerpt">{{ content.excerpt }}</p>
       <div class="Button-container" v-if="content.ctaLabel">
         <NuxtLink to="/about" class="Button">
@@ -28,3 +31,13 @@ defineProps({
   },
 });
 </script>
+
+<style scoped>
+.category {
+  text-transform: uppercase;
+  color: #888;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  letter-spacing: 0.1em;
+}
+</style>

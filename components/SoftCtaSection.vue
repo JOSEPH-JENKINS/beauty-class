@@ -41,3 +41,16 @@ defineProps({
   },
 });
 </script>
+
+<style scoped>
+.soft-cta-paragraph {
+  width: 85%;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .soft-cta-paragraph {
+    width: 50%;
+  }
+}
+</style>

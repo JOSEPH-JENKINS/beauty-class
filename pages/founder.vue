@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="Hero" style="height: 76svh">
+    <section class="Hero" style="height: 84svh">
       <div class="Hero-background">
         <span class="Image Image--desktop o-placeholder bg-full-height c-image">
           <span class="c-span"></span>

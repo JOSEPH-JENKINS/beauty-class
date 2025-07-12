@@ -15,18 +15,12 @@
               :key="index"
               class="swiper-slide collection-slide"
             >
-              <NuxtLink
-                :to="post.postUrl"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div class="instagram-post">
-                  <img
-                    :src="`${post.image.asset.url}?w=400&h=400&auto=format&fit=crop&q=75`"
-                    alt="Instagram post"
-                  />
-                </div>
-              </NuxtLink>
+              <div class="instagram-post">
+                <img
+                  :src="`${post.image.asset.url}?w=400&h=400&auto=format&fit=crop&q=75`"
+                  alt="Instagram post"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -53,7 +47,6 @@ defineProps({
 }
 
 .instagram-section__container {
-  max-width: 1200px;
   margin: 0 auto;
 }
 

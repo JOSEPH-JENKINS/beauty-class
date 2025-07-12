@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="Hero" style="height: 76svh">
+    <section class="Hero" style="height: 84svh">
       <div class="Hero-background">
         <video
           ref="heroVideoRef"
@@ -154,7 +154,7 @@
                 <p class="BlogListItem-content category">
                   {{ post.category.title }}
                 </p>
-                <h3 class="u-noMargin">
+                <h3 class="u-noMargin blog-title">
                   {{ post.title }}
                 </h3>
               </div>

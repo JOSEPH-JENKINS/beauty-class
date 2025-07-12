@@ -5,29 +5,21 @@ const { data: settings } = useSanityQuery(siteDefaults);
 const { data: popup } = useSanityQuery(popupQuery);
 import { ref, onMounted, onBeforeUnmount } from "vue";
 
-// --- Constants for configuration ---
 const MODAL_SEEN_KEY = "lastModalSeen";
-const MODAL_COOLDOWN_PERIOD = 12 * 60 * 60 * 1000; // 12 hours in milliseconds
-const MODAL_SHOW_DELAY = 2000; // 2 seconds
-
-// --- State Management ---
+const MODAL_COOLDOWN_PERIOD = 12 * 60 * 60 * 1000;
+const MODAL_SHOW_DELAY = 2000;
 
 const email = ref("");
 const subscribed = ref(false);
 const showModal = ref(false);
 const isMobileMenuOpen = ref(false);
 const isHeaderHidden = ref(false);
-
-// --- Scroll State ---
+const hasScrolled = ref(false);
 const lastScrollY = ref(0);
-
-// --- Logic ---
 
 function subscribe() {
   subscribed.value = true;
   email.value = "";
-  // In a real-world scenario, this would post to an API endpoint.
-  // e.g., await $fetch('/api/subscribe', { method: 'POST', body: { email: email.value } });
 }
 
 function toggleMobileMenu() {
@@ -40,15 +32,14 @@ function closeMobileMenu() {
 
 function handleScroll() {
   const currentScrollY = window.scrollY;
-  // A threshold could be added here, e.g. based on header height
-  if (
-    currentScrollY > lastScrollY.value &&
-    currentScrollY > 200 // Hide after scrolling down 200px
-  ) {
+  hasScrolled.value = currentScrollY > 10;
+
+  if (currentScrollY > lastScrollY.value && currentScrollY > 200) {
     isHeaderHidden.value = true;
   } else {
     isHeaderHidden.value = false;
   }
+
   lastScrollY.value = currentScrollY;
 }
 
@@ -56,7 +47,6 @@ onMounted(() => {
   const lastSeen = localStorage.getItem(MODAL_SEEN_KEY);
   const now = Date.now();
 
-  // Show only if not seen in last 12 hours
   if (!lastSeen || now - parseInt(lastSeen) > MODAL_COOLDOWN_PERIOD) {
     setTimeout(() => {
       showModal.value = true;
@@ -86,109 +76,133 @@ function closeModal() {
       :subtext="popup.subtext"
       :image="popup.image.asset.url"
     />
-    <header
-      class="header transparent"
-      :class="{ 'header--hidden': isHeaderHidden }"
-    >
-      <nav>
-        <div class="nav-left-container">
-          <NuxtLink to="/about" class="u-showMd">about</NuxtLink>
-          <NuxtLink to="/blog" class="u-showMd">journal</NuxtLink>
-          <NuxtLink to="/events" class="u-showMd">events</NuxtLink>
 
-          <div class="Mobile-menu u-hideMd">
-            <div
-              class="Mobile-menu-toggle"
-              tabindex="2"
-              aria-label="Toggle mobile navigation"
-              @click="toggleMobileMenu"
-            >
-              <svg
-                width="25"
-                height="18"
-                viewBox="0 0 22 14"
-                fill=""
-                xmlns="http://www.w3.org/2000/svg"
+    <main id="content">
+      <header
+        class="header transparent"
+        :class="{
+          'header--hidden': isHeaderHidden,
+          'header--scrolled': hasScrolled,
+        }"
+      >
+        <nav>
+          <div class="nav-left-container">
+            <NuxtLink to="/about" class="u-showMd">about</NuxtLink>
+            <NuxtLink to="/blog" class="u-showMd">journal</NuxtLink>
+            <NuxtLink to="/events" class="u-showMd">events</NuxtLink>
+
+            <div class="Mobile-menu u-hideMd">
+              <div
+                class="Mobile-menu-toggle"
+                tabindex="2"
+                aria-label="Toggle mobile navigation"
+                @click="toggleMobileMenu"
               >
-                <rect y="6" width="22" height="2" rx="1" fill="#84827E"></rect>
-                <rect y="12" width="22" height="2" rx="1" fill="#84827E"></rect>
-                <rect width="22" height="2" rx="1" fill="#84827E"></rect>
-              </svg>
-            </div>
-            <div
-              class="Mobile-menu-wrapper"
-              :class="{ 'is-open': isMobileMenuOpen }"
-            >
-              <div class="Mobile-menu-container">
-                <div class="Mobile-menu-content-container">
-                  <div class="Mobile-menu-content-container-section">
-                    <h3 class="Mobile-menu-content-container-section-title">
-                      <NuxtLink
-                        class="link"
-                        to="/about"
-                        @click="closeMobileMenu"
-                        >ABOUT</NuxtLink
-                      >
-                    </h3>
+                <svg
+                  width="25"
+                  height="18"
+                  viewBox="0 0 22 14"
+                  fill=""
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    y="6"
+                    width="22"
+                    height="2"
+                    rx="1"
+                    fill="#84827E"
+                  ></rect>
+                  <rect
+                    y="12"
+                    width="22"
+                    height="2"
+                    rx="1"
+                    fill="#84827E"
+                  ></rect>
+                  <rect width="22" height="2" rx="1" fill="#84827E"></rect>
+                </svg>
+              </div>
+              <div
+                class="Mobile-menu-wrapper"
+                :class="{ 'is-open': isMobileMenuOpen }"
+              >
+                <div class="Mobile-menu-container">
+                  <div class="Mobile-menu-content-container">
+                    <div class="Mobile-menu-content-container-section">
+                      <h3 class="Mobile-menu-content-container-section-title">
+                        <NuxtLink
+                          class="link"
+                          to="/about"
+                          @click="closeMobileMenu"
+                          >ABOUT</NuxtLink
+                        >
+                      </h3>
 
-                    <h3 class="Mobile-menu-content-container-section-title">
-                      <NuxtLink class="link" to="/work" @click="closeMobileMenu"
-                        >WORK</NuxtLink
-                      >
-                    </h3>
+                      <h3 class="Mobile-menu-content-container-section-title">
+                        <NuxtLink
+                          class="link"
+                          to="/work"
+                          @click="closeMobileMenu"
+                          >WORK</NuxtLink
+                        >
+                      </h3>
 
-                    <h3 class="Mobile-menu-content-container-section-title">
-                      <NuxtLink
-                        class="link"
-                        to="/events"
-                        @click="closeMobileMenu"
-                        >EVENTS</NuxtLink
-                      >
-                    </h3>
+                      <h3 class="Mobile-menu-content-container-section-title">
+                        <NuxtLink
+                          class="link"
+                          to="/events"
+                          @click="closeMobileMenu"
+                          >EVENTS</NuxtLink
+                        >
+                      </h3>
 
-                    <h3 class="Mobile-menu-content-container-section-title">
-                      <NuxtLink class="link" to="/shop" @click="closeMobileMenu"
-                        >shop</NuxtLink
-                      >
-                    </h3>
+                      <h3 class="Mobile-menu-content-container-section-title">
+                        <NuxtLink
+                          class="link"
+                          to="/shop"
+                          @click="closeMobileMenu"
+                          >shop</NuxtLink
+                        >
+                      </h3>
 
-                    <h3 class="Mobile-menu-content-container-section-title">
-                      <NuxtLink class="link" to="/blog" @click="closeMobileMenu"
-                        >BLOG</NuxtLink
-                      >
-                    </h3>
+                      <h3 class="Mobile-menu-content-container-section-title">
+                        <NuxtLink
+                          class="link"
+                          to="/blog"
+                          @click="closeMobileMenu"
+                          >BLOG</NuxtLink
+                        >
+                      </h3>
 
-                    <h3 class="Mobile-menu-content-container-section-title">
-                      <NuxtLink
-                        class="link"
-                        to="/contact"
-                        @click="closeMobileMenu"
-                        >CONTACT</NuxtLink
-                      >
-                    </h3>
+                      <h3 class="Mobile-menu-content-container-section-title">
+                        <NuxtLink
+                          class="link"
+                          to="/contact"
+                          @click="closeMobileMenu"
+                          >CONTACT</NuxtLink
+                        >
+                      </h3>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <NuxtLink to="/" class="Logo">
-          <img :src="settings?.logo?.asset?.url" alt="Site Logo" />
-        </NuxtLink>
-        <div class="nav-right-container">
-          <NuxtLink to="/shop" class="u-showMd">shop</NuxtLink>
-          <NuxtLink to="/work" class="u-showMd">work</NuxtLink>
-          <NuxtLink to="/contact" class="u-showMd margin-right-0"
-            >contact</NuxtLink
-          >
-          <NuxtLink to="/contact" class="u-hideMd" style="color: #67645e"
-            >contact</NuxtLink
-          >
-        </div>
-      </nav>
-    </header>
-
-    <main id="content">
+          <NuxtLink to="/" class="Logo">
+            <img :src="settings?.logo?.asset?.url" alt="Site Logo" />
+          </NuxtLink>
+          <div class="nav-right-container">
+            <NuxtLink to="/shop" class="u-showMd">shop</NuxtLink>
+            <NuxtLink to="/work" class="u-showMd">work</NuxtLink>
+            <NuxtLink to="/contact" class="u-showMd margin-right-0"
+              >contact</NuxtLink
+            >
+            <NuxtLink to="/contact" class="u-hideMd" style="color: #67645e"
+              >contact</NuxtLink
+            >
+          </div>
+        </nav>
+      </header>
       <NuxtPage />
     </main>
 
@@ -325,17 +339,23 @@ function closeModal() {
 
 <style>
 .header {
-  /* This makes the header stick to the top of the viewport */
-  position: sticky;
+  position: absolute;
   top: 0;
   width: 100%;
-  /* Add transition for smooth hiding/showing */
-  transition: transform 0.3s ease-in-out;
-  will-change: transform;
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
+  will-change: transform, background-color, box-shadow;
+  z-index: 1000;
 }
 
 .header--hidden {
   transform: translateY(-100%);
+}
+
+.header--scrolled {
+  position: fixed;
+  background-color: #f5f5f5; /* or #e6e6e6 for more contrast */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 /* Uppercase navigation links */

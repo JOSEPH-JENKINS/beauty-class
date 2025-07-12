@@ -26,6 +26,7 @@
                       <h3 class="u-noMargin">
                         {{ post.title }}
                       </h3>
+                      <p v-if="post.excerpt">{{ post.excerpt }}</p>
                     </div>
                   </div>
                   <div class="Button-container">

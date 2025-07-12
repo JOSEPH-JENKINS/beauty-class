@@ -1,5 +1,5 @@
 <template>
-  <div class="section-header text-center brand">
+  <div class="section-header text-center brand" style="margin-top: 4rem">
     <h1 data-splitting="lines" style="font-weight: 400">
       <p>Trusted by</p>
     </h1>
@@ -31,7 +31,7 @@ const doubledLogos = [...props.logos, ...props.logos];
   overflow: hidden;
   width: 100%;
   background: white;
-  margin: 2rem 0;
+  margin: 2rem 0 4rem;
 }
 
 .track {

@@ -47,7 +47,7 @@
                 data-form-id=""
                 data-mode="default"
               >
-                <h1 class="margin-0">subscribe</h1>
+                <h1 class="margin-0 uppercase">subscribe</h1>
               </button>
             </div>
           </form>

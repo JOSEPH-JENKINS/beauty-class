@@ -23,7 +23,7 @@ export const homepageQuery = groq`
       _type == "testimonialSection" => {
         _type,
         title,
-        testimonials[0..3]->{
+        testimonials[0..5]->{
           _id,
           name,
           quote,

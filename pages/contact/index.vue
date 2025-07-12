@@ -44,7 +44,7 @@
             class="Button filter u-pSize Button__dark Button__large Button__fullWidth js-form-submit"
             type="submit"
           >
-            <h1 class="margin-0">Submit</h1>
+            <h1 class="margin-0 uppercase">Submit</h1>
           </button>
         </div>
       </form>

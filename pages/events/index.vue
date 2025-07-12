@@ -1,6 +1,6 @@
 <template>
   <section>
-    <section class="Hero" style="height: 76svh" v-if="heroSection">
+    <section class="Hero" style="height: 84svh" v-if="heroSection">
       <div class="Hero-background">
         <video
           ref="heroVideoRef"
@@ -155,7 +155,7 @@
                 <p v-if="event.eventType" class="BlogListItem-content category">
                   {{ event.eventType }}
                 </p>
-                <h3 class="u-noMargin">
+                <h3 class="u-noMargin blog-title">
                   {{ event.title }}
                 </h3>
               </div>
@@ -281,7 +281,6 @@ const videoBtnClick = () => {
 }
 
 .instagram-section__container {
-  max-width: 1200px;
   margin: 0 auto;
 }
 
