@@ -43,7 +43,7 @@ const { data } = useSanityQuery(aboutQuery);
 
 <style scoped>
 .NoteWithImage {
-  padding: 5rem; /* Increased top and bottom padding */
+  padding: 0.5rem;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
@@ -57,5 +57,16 @@ const { data } = useSanityQuery(aboutQuery);
 .note-content {
   font-size: 1.25rem; /* Made paragraph bigger */
   line-height: 1.6;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .NoteWithImage {
+    padding: 5rem;
+  }
+  .note-content {
+    width: 60%;
+  }
 }
 </style>

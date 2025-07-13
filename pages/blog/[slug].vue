@@ -10,6 +10,7 @@
             {{ post.category.title }}
           </p>
           <h1>{{ post.title }}</h1>
+          <p class="post-date uppercase">By {{ post.writer }}</p>
           <p class="post-date uppercase">
             {{ formatDateTime(post.publishedAt) }}
           </p>
@@ -87,9 +88,8 @@ function formatDateTime(dateStr) {
 
 .post-header-image img {
   width: 100%;
-  height: auto;
-  max-height: 450px; /* Limit the height of the main image */
   display: block;
+  aspect-ratio: 1 / 1; /* Make it a square */
   border-radius: 8px;
   object-fit: cover;
   object-position: center; /* Center the image if it's cropped */
@@ -125,9 +125,8 @@ function formatDateTime(dateStr) {
 }
 
 .post-content :deep(img) {
-  width: auto;
-  height: 100%;
-  max-height: 600px;
+  width: 100%; /* Make it responsive */
+  aspect-ratio: 1 / 1; /* Make it a square */
   object-fit: cover;
   margin: 1rem auto;
   border-radius: 8px;

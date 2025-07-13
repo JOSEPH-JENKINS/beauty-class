@@ -82,7 +82,7 @@
           <div class="Button-container">
             <NuxtLink
               class="Button Button__hero"
-              to="/events"
+              :to="content?.ctaLink"
               :aria-label="content.ctaLabel"
               data-mode="default"
             >

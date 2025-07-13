@@ -1,17 +1,17 @@
-<template>
+<template v-if="blogpage && blogpage.video && blogpage.video.asset?.url">
   <div>
     <section class="Hero" style="height: 84svh">
       <div class="Hero-background">
         <video
-          ref="heroVideoRef"
           autoplay="autoplay"
           playsinline=""
           loop="true"
           muted=""
-          :src="heroSection.video.asset.url"
+          :src="blogpage.video.asset.url"
           aria-hidden="true"
           class="heroVideo"
         ></video>
+
         <div
           class="video-play-pause"
           data-desktop-alignment="right"
@@ -76,13 +76,9 @@
       </div>
       <div class="Hero-content BOTTOM-LEFT">
         <div class="Hero-content-wrapper TEXT__LEFT BUTTON__LEFT">
-          <h1
-            data-splitting="lines"
-            style="font-weight: 400"
-            v-if="heroSection"
-          >
+          <h1 data-splitting="lines" style="font-weight: 400" v-if="blogpage">
             <p>
-              {{ heroSection.heading }}
+              {{ blogpage.heading }}
             </p>
           </h1>
         </div>
@@ -157,6 +153,9 @@
                 <h3 class="u-noMargin blog-title">
                   {{ post.title }}
                 </h3>
+                <p>
+                  {{ post.excerpt }}
+                </p>
               </div>
             </div>
             <div class="Button-container">
@@ -172,28 +171,23 @@
 </template>
 
 <script setup>
-import { allPostsQuery } from "@/queries/blog";
+import { allPostsQuery, blogPageQuery } from "@/queries/blog";
 import { allCategoriesQuery } from "~/queries/category";
-import { homepageQuery } from "@/queries/homepage";
 
 const selectedCategory = ref(null);
 const heroVideoRef = ref(null);
 const isVideoPlaying = ref(true); // Assuming autoplay works, initialize to true
 
 const { data: posts } = useSanityQuery(allPostsQuery);
-const { data: homepage } = useSanityQuery(homepageQuery);
+const { data: blogpage } = useSanityQuery(blogPageQuery);
 const { data: categories } = useSanityQuery(allCategoriesQuery);
+
+console.log(blogpage.value);
 
 const filteredPosts = computed(() => {
   if (!selectedCategory.value) return posts.value;
   return posts.value.filter(
     (post) => post.category.slug.current === selectedCategory.value
-  );
-});
-
-const heroSection = computed(() => {
-  return homepage.value?.pageBuilder?.find(
-    (section) => section._type === "heroSection"
   );
 });
 

@@ -1,9 +1,10 @@
 <script setup>
 import { siteDefaults } from "@/queries/siteDefaults";
+import { useRoute } from "vue-router";
 import { popupQuery } from "@/queries/popup";
 const { data: settings } = useSanityQuery(siteDefaults);
 const { data: popup } = useSanityQuery(popupQuery);
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { ref, onMounted, onBeforeUnmount, computed } from "vue";
 
 const MODAL_SEEN_KEY = "lastModalSeen";
 const MODAL_COOLDOWN_PERIOD = 12 * 60 * 60 * 1000;
@@ -43,6 +44,10 @@ function handleScroll() {
   lastScrollY.value = currentScrollY;
 }
 
+const route = useRoute();
+
+const isHome = computed(() => route.path === "/");
+
 onMounted(() => {
   const lastSeen = localStorage.getItem(MODAL_SEEN_KEY);
   const now = Date.now();
@@ -81,8 +86,10 @@ function closeModal() {
       <header
         class="header transparent"
         :class="{
-          'header--hidden': isHeaderHidden,
-          'header--scrolled': hasScrolled,
+          'header--home': isHome,
+          'header--hidden': isHome && isHeaderHidden,
+          'header--scrolled': isHome && hasScrolled,
+          'header--default': !isHome,
         }"
       >
         <nav>
@@ -342,6 +349,10 @@ function closeModal() {
   position: absolute;
   top: 0;
   width: 100%;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  margin-bottom: -0.5rem;
+  left: 0;
   transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out,
     box-shadow 0.3s ease-in-out;
   will-change: transform, background-color, box-shadow;
@@ -353,9 +364,39 @@ function closeModal() {
 }
 
 .header--scrolled {
-  position: fixed;
-  background-color: #f5f5f5; /* or #e6e6e6 for more contrast */
+  padding: 10px 30px;
+  position: fixed; /* or #e6e6e6 for more contrast */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* homepage: transparent + sticky */
+.header--home {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
+  will-change: transform, background-color, box-shadow;
+  z-index: 1000;
+}
+
+.header--scrolled {
+  position: fixed;
+}
+
+/* non-homepage: dark background, static above main */
+.header--default {
+  position: relative;
+  background-color: #f1f0ed;
+  z-index: 1000;
+}
+
+.header--default nav a {
+  color: #333;
+}
+
+.header--scrolled nav {
+  background-color: #555;
 }
 
 /* Uppercase navigation links */

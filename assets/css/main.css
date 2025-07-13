@@ -77,12 +77,16 @@ body {
   position: relative;
   border-radius: 12px;
   display: flex;
-  padding: 1.25rem min(2rem, 3vw);
   transition: all 0.7s cubic-bezier(0.76, 0, 0.24, 1);
   justify-content: space-between;
   align-items: center;
+  border-radius: 12px;
+  padding: 1.25rem min(3rem, 3vw);
   width: 100%;
   background: transparent;
+}
+.header nav a {
+  color: #fff;
 }
 #skip-to-content {
   transition: none;
@@ -756,10 +760,6 @@ h6 {
   transition: transform 0.2s ease-in-out;
 }
 
-.testimonial-card:hover {
-  transform: scale(1.02);
-}
-
 .testimonial-card__quote {
   font-size: 1.5rem;
   line-height: 1.4;
@@ -909,16 +909,15 @@ h6 {
 .about-section {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
   align-items: center;
   background-color: #f1f0ed;
   margin-top: 2.25vw;
+  border-radius: 12px;
 }
 
 @media screen and (min-width: 768px) {
   .about-section {
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
   }
 }
 

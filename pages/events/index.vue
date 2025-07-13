@@ -2,82 +2,12 @@
   <section>
     <section class="Hero" style="height: 84svh" v-if="heroSection">
       <div class="Hero-background">
-        <video
-          ref="heroVideoRef"
-          autoplay="autoplay"
-          playsinline=""
-          loop="true"
-          muted=""
-          :src="heroSection.video.asset.url"
-          aria-hidden="true"
-          class="heroVideo"
-        ></video>
-        <div
-          class="video-play-pause"
-          data-desktop-alignment="right"
-          data-mobile-alignment="right"
-          @click="videoBtnClick()"
-        >
-          <button
-            type="button"
-            class="play"
-            :class="{ hidden: isVideoPlaying }"
-            aria-label="Play video"
-          >
-            <svg
-              width="31"
-              height="31"
-              viewBox="0 0 31 31"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle
-                cx="15.5"
-                cy="15.5"
-                r="15"
-                fill="rgba(0,0,0,0)"
-                stroke="#ffffff"
-              ></circle>
-              <path
-                d="M22 16L11.5 22.0622L11.5 9.93782L22 16Z"
-                fill="#ffffff"
-              ></path>
-            </svg>
-          </button>
-          <button
-            type="button"
-            class="pause"
-            :class="{ hidden: !isVideoPlaying }"
-            aria-label="Pause video"
-          >
-            <svg
-              width="31"
-              height="31"
-              viewBox="0 0 31 31"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle
-                cx="15.5"
-                cy="15.5"
-                r="15"
-                fill="rgba(0,0,0,0)"
-                stroke="#ffffff"
-              ></circle>
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M14 10H11V21H14V10ZM20 10H17V21H20V10Z"
-                fill="#ffffff"
-              ></path>
-            </svg>
-          </button>
-        </div>
+        <img :src="eventPage.image.asset.url" :alt="eventPage.heading" />
       </div>
       <div class="Hero-content BOTTOM-LEFT">
         <div class="Hero-content-wrapper TEXT__LEFT BUTTON__LEFT">
           <h1 data-splitting="lines" style="font-weight: 400">
-            <p>class in session</p>
+            <p>{{ eventPage.heading }}</p>
           </h1>
         </div>
       </div>
@@ -158,6 +88,9 @@
                 <h3 class="u-noMargin blog-title">
                   {{ event.title }}
                 </h3>
+                <p v-if="event.excerpt">
+                  {{ event.excerpt }}
+                </p>
               </div>
             </div>
             <div class="Button-container">
@@ -208,13 +141,17 @@
 </template>
 
 <script setup>
-import { allEventsWithTestimonialsQuery } from "@/queries/events";
+import {
+  allEventsWithTestimonialsQuery,
+  eventPageQuery,
+} from "@/queries/events";
 import { homepageQuery } from "@/queries/homepage";
 import { computed, ref } from "vue";
 
 const selectedFilter = ref("all");
 
 const { data: events } = useSanityQuery(allEventsWithTestimonialsQuery);
+const { data: eventPage } = useSanityQuery(eventPageQuery);
 const { data: homepage } = useSanityQuery(homepageQuery);
 
 const heroVideoRef = ref(null);

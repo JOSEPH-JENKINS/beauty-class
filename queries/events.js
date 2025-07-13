@@ -1,5 +1,19 @@
 import groq from "groq";
 
+export const eventPageQuery = groq`
+  *[_type == "eventPage"][0] {
+    _id,
+    heading,
+    image {
+      asset->{
+        _id,
+        url,
+        metadata { lqip, dimensions }
+      }
+    },
+  }
+`;
+
 export const allEventsQuery = groq`
   *[_type == "event"] | order(date asc) {
     _id,

@@ -10,64 +10,26 @@
             decoding="async"
             data-nimg="responsive"
             sizes="100vw"
-            :alt="shopPage.heading || 'Shop'"
+            :alt="shopPage.heroHeading || 'Shop'"
             loading="lazy"
         /></span>
       </div>
       <div class="Hero-content BOTTOM-LEFT">
         <div class="Hero-content-wrapper TEXT__LEFT BUTTON__LEFT">
           <h1 data-splitting="lines" style="font-weight: 400">
-            <p>{{ shopPage.heading }}</p>
+            <p>{{ shopPage.heroHeading }}</p>
           </h1>
         </div>
       </div>
     </section>
 
     <div class="Blog-container">
-      <div class="Blog-container-filters">
-        <p class="u-bold u-pSize u-pSize__Medium u-noMargin">filter by:</p>
-        <div class="Blog-container-filters-list">
-          <div class="Button-container">
-            <button
-              type="button"
-              @click="selectedFilter = 'all'"
-              :class="[
-                'Button',
-                'filter',
-                'filter-btn',
-                { active: selectedFilter === 'all' },
-              ]"
-            >
-              <h1 class="margin-0">all</h1>
-            </button>
-          </div>
-          <div
-            class="Button-container"
-            v-for="type in productTypes"
-            :key="type._id"
-          >
-            <button
-              type="button"
-              @click="selectedFilter = type.slug"
-              :class="[
-                'Button',
-                'filter',
-                'filter-btn',
-                { active: selectedFilter === type.slug },
-              ]"
-            >
-              <h1 class="margin-0">{{ type.title }}</h1>
-            </button>
-          </div>
-        </div>
-      </div>
-
       <div class="Blog-container-articles">
-        <div v-if="!filteredProducts || filteredProducts.length === 0">
+        <div v-if="!products || products.length === 0">
           <h1>No products to see just yet.</h1>
         </div>
         <article
-          v-for="product in filteredProducts"
+          v-for="product in products"
           :key="product._id"
           class="BlogListItem content-card"
         >
@@ -109,28 +71,9 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
-import {
-  allProductsQuery,
-  allProductTypesQuery,
-  shopPageQuery,
-} from "~/queries/shop";
+import { allProductsQuery, shopPageQuery } from "~/queries/shop";
 
 // Fetching data
 const { data: products } = useSanityQuery(allProductsQuery);
-const { data: productTypes } = useSanityQuery(allProductTypesQuery);
 const { data: shopPage } = useSanityQuery(shopPageQuery);
-
-// Filtering logic
-const selectedFilter = ref("all");
-
-const filteredProducts = computed(() => {
-  if (!products.value) return [];
-  if (selectedFilter.value === "all") {
-    return products.value;
-  }
-  return products.value.filter(
-    (product) => product.productType?.slug === selectedFilter.value
-  );
-});
 </script>

@@ -18,7 +18,7 @@ function closeModal() {
 </script>
 
 <template>
-  <div style="min-height: 84svh">
+  <div style="min-height: 84svh; padding-top: 6em">
     <section class="Artists">
       <div
         class="Artist"
