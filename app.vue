@@ -349,8 +349,8 @@ function closeModal() {
   position: absolute;
   top: 0;
   width: 100%;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
   margin-bottom: -0.5rem;
   left: 0;
   transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out,
@@ -364,9 +364,9 @@ function closeModal() {
 }
 
 .header--scrolled {
-  padding: 10px 30px;
+  padding: 10px 18px;
   position: fixed; /* or #e6e6e6 for more contrast */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(103, 100, 94, 0.05);
 }
 
 /* homepage: transparent + sticky */
@@ -387,18 +387,18 @@ function closeModal() {
 /* non-homepage: dark background, static above main */
 .header--default {
   position: relative;
-  background-color: #f1f0ed;
+  background-color: #f8f8f8;
   z-index: 1000;
 }
 
-.header--default nav a {
-  color: #333;
+.header--default nav a,
+.header--scrolled nav a {
+  color: #67645e;
 }
 
 .header--scrolled nav {
-  background-color: #555;
+  background-color: #f8f8f8;
 }
-
 /* Uppercase navigation links */
 .nav-left-container .u-showMd,
 .nav-right-container .u-showMd,

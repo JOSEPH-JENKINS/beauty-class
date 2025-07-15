@@ -3,7 +3,7 @@
     <div class="instagram-section__container">
       <div class="instagram-section__header section-header">
         <h1 class="u-hSize--Medium">{{ content.heading }}</h1>
-        <NuxtLink :to="content.ctaLink" class="Button">
+        <NuxtLink :to="content.ctaLink" class="Button desktop-cta">
           {{ content.ctaLabel }}
         </NuxtLink>
       </div>
@@ -25,6 +25,11 @@
           </div>
         </div>
       </div>
+      <div class="mobile-cta">
+        <NuxtLink :to="content.ctaLink" class="Button">
+          {{ content.ctaLabel }}
+        </NuxtLink>
+      </div>
     </div>
   </section>
 </template>
@@ -40,7 +45,7 @@ defineProps({
 
 <style scoped>
 .instagram-section {
-  background-color: #f1f0ed; /* Site's grey color */
+  background-color: #f8f8f8; /* Site's grey color */
   padding: 2.25vw 1rem;
   margin-top: 2.25vw;
   border-radius: 12px;
@@ -55,5 +60,21 @@ defineProps({
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
+}
+
+.mobile-cta {
+  display: none;
+  margin: 12px 0;
+  width: 100%;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .mobile-cta {
+    display: block;
+  }
+  .desktop-cta {
+    display: none;
+  }
 }
 </style>

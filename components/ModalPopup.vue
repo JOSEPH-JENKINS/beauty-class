@@ -121,7 +121,7 @@ function subscribe() {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.6);
-  z-index: 999;
+  z-index: 99999;
   display: flex;
   align-items: center;
   justify-content: center;
