@@ -18,7 +18,7 @@ function closeModal() {
 </script>
 
 <template>
-  <div style="min-height: 84svh; padding-top: 6em">
+  <div style="min-height: calc(84svh - (84svh * 1 / 4))">
     <section class="Artists">
       <div
         class="Artist"

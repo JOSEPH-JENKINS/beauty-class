@@ -1,6 +1,6 @@
 <template v-if="blogpage && blogpage.video && blogpage.video.asset?.url">
   <div>
-    <section class="Hero" style="height: 84svh">
+    <section class="Hero" style="height: calc(84svh - (84svh * 1/4))"">
       <div class="Hero-background">
         <video
           autoplay="autoplay"

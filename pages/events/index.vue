@@ -1,6 +1,10 @@
 <template>
   <section>
-    <section class="Hero" style="height: 84svh" v-if="heroSection">
+    <section
+      class="Hero"
+      style="height: calc(84svh - (84svh * 1 / 4))"
+      v-if="heroSection"
+    >
       <div class="Hero-background">
         <img :src="eventPage.image.asset.url" :alt="eventPage.heading" />
       </div>
@@ -170,18 +174,25 @@ const content = computed(() => {
 });
 
 const filteredEvents = computed(() => {
-  if (!events.value) {
-    return [];
-  }
+  if (!events.value) return [];
 
-  // If 'all' is selected, return all events.
+  const now = new Date();
+
+  // step 1: filter out past events
+  const upcomingEvents = events.value.filter((event) => {
+    if (!event?.date) return false;
+
+    const eventDate = new Date(event.date);
+    return eventDate >= now;
+  });
+
+  // step 2: filter by selected event type
   if (selectedFilter.value === "all") {
-    return events.value;
+    return upcomingEvents;
   }
 
-  // Otherwise, filter by the selected eventType.
-  return events.value.filter(
-    (event) => event && event.eventType === selectedFilter.value
+  return upcomingEvents.filter(
+    (event) => event?.eventType === selectedFilter.value
   );
 });
 

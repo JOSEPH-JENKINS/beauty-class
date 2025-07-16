@@ -18,9 +18,11 @@
             {{ formatDateTime(post.date) }}
           </p>
           <p class="post-location">{{ post.location }}</p>
-          <div class="booking-details" v-if="!isPastEvent">
-            <h2>Price: ${{ post.price }}</h2>
-            <div class="Button-container">
+          <div class="booking-details">
+            <h2 v-if="!isPastEvent && post.price > 0">
+              Price: ${{ post.price }}
+            </h2>
+            <div class="Button-container" v-if="!isPastEvent">
               <button
                 class="Button Button__dark Button__event-post"
                 @click="startCheckout()"
@@ -94,7 +96,6 @@ const slug = route.params.slug;
 
 // Fetch the post data from Sanity
 const { data: post } = useSanityQuery(singleEventQuery, { slug });
-
 const now = new Date();
 const isPastEvent = computed(
   () => post.value && new Date(post.value.date) < now

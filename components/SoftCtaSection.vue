@@ -48,6 +48,10 @@ defineProps({
   margin: 0 auto;
 }
 
+.soft-cta-paragraph p {
+  color: #fff;
+}
+
 @media (min-width: 768px) {
   .soft-cta-paragraph {
     width: 50%;

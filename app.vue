@@ -84,19 +84,32 @@ function closeModal() {
 
     <main id="content">
       <header
-        class="header transparent"
-        :class="{
-          'header--home': isHome,
-          'header--hidden': isHome && isHeaderHidden,
-          'header--scrolled': isHome && hasScrolled,
-          'header--default': !isHome,
-        }"
+        :class="[
+          'header',
+          {
+            transparent: isHome,
+            'header--home': isHome,
+            'header--scrolled': hasScrolled,
+            'header--hidden': isHeaderHidden,
+            'header--default': !isHome,
+          },
+        ]"
       >
         <nav>
           <div class="nav-left-container">
             <NuxtLink to="/about" class="u-showMd">about</NuxtLink>
             <NuxtLink to="/blog" class="u-showMd">journal</NuxtLink>
             <NuxtLink to="/events" class="u-showMd">events</NuxtLink>
+          </div>
+          <NuxtLink to="/" class="Logo">
+            <img :src="settings?.logo?.asset?.url" alt="Site Logo" />
+          </NuxtLink>
+          <div class="nav-right-container">
+            <NuxtLink to="/shop" class="u-showMd">shop</NuxtLink>
+            <NuxtLink to="/work" class="u-showMd">work</NuxtLink>
+            <NuxtLink to="/contact" class="u-showMd margin-right-0"
+              >contact</NuxtLink
+            >
 
             <div class="Mobile-menu u-hideMd">
               <div
@@ -194,19 +207,6 @@ function closeModal() {
                 </div>
               </div>
             </div>
-          </div>
-          <NuxtLink to="/" class="Logo">
-            <img :src="settings?.logo?.asset?.url" alt="Site Logo" />
-          </NuxtLink>
-          <div class="nav-right-container">
-            <NuxtLink to="/shop" class="u-showMd">shop</NuxtLink>
-            <NuxtLink to="/work" class="u-showMd">work</NuxtLink>
-            <NuxtLink to="/contact" class="u-showMd margin-right-0"
-              >contact</NuxtLink
-            >
-            <NuxtLink to="/contact" class="u-hideMd" style="color: #67645e"
-              >contact</NuxtLink
-            >
           </div>
         </nav>
       </header>
@@ -364,9 +364,13 @@ function closeModal() {
 }
 
 .header--scrolled {
-  padding: 10px 18px;
-  position: fixed; /* or #e6e6e6 for more contrast */
+  position: fixed !important;
   box-shadow: 0 2px 4px rgba(103, 100, 94, 0.05);
+}
+
+/* only apply background on non-homepage or when explicitly wanted */
+.header--scrolled:not(.header--home) {
+  background-color: #f8f8f8;
 }
 
 /* homepage: transparent + sticky */
@@ -380,13 +384,9 @@ function closeModal() {
   z-index: 1000;
 }
 
-.header--scrolled {
-  position: fixed;
-}
-
 /* non-homepage: dark background, static above main */
 .header--default {
-  position: relative;
+  position: fixed;
   background-color: #f8f8f8;
   z-index: 1000;
 }
@@ -396,6 +396,11 @@ function closeModal() {
   color: #67645e;
 }
 
+@media (max-width: 768px) {
+  .nav-left-container {
+    display: none !important;
+  }
+}
 .header--scrolled nav {
   background-color: #f8f8f8;
 }

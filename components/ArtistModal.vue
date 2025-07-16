@@ -6,7 +6,7 @@
       @touchend="onTouchEnd"
     >
       <button class="close" @click="close">
-        <h1>close</h1>
+        <h1 class="uppercase">close</h1>
       </button>
 
       <!-- Desktop Layout -->
