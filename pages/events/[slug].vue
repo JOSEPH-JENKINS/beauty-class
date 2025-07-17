@@ -23,10 +23,7 @@
               Price: ${{ post.price }}
             </h2>
             <div class="Button-container" v-if="!isPastEvent">
-              <button
-                class="Button Button__dark Button__event-post"
-                @click="startCheckout()"
-              >
+              <button class="Button" @click="startCheckout()">
                 book a spot
               </button>
             </div>
@@ -35,7 +32,10 @@
       </div>
 
       <div class="post-content">
-        <p>{{ post.description }}</p>
+        <PortableText
+          :value="post.description"
+          :components="portableTextComponents"
+        />
       </div>
     </div>
   </section>
@@ -90,6 +90,8 @@
 <script setup>
 import { useRoute } from "vue-router";
 import { singleEventQuery } from "@/queries/events";
+import { PortableText } from "@portabletext/vue";
+import { h, onMounted } from "vue";
 
 const route = useRoute();
 const slug = route.params.slug;
@@ -100,6 +102,68 @@ const now = new Date();
 const isPastEvent = computed(
   () => post.value && new Date(post.value.date) < now
 );
+
+function getInstagramCode(url) {
+  const match = url.match(/instagram\.com\/p\/([^/]+)/);
+  return match?.[1] || "";
+}
+
+function getYouTubeId(url) {
+  const match = url.match(/[?&]v=([^&]+)/) || url.match(/youtu\.be\/([^?]+)/);
+  return match?.[1] || "";
+}
+
+function getTikTokId(url) {
+  const match = url.match(/\/video\/(\d+)/);
+  return match?.[1] || "";
+}
+
+const portableTextComponents = {
+  types: {
+    image: ({ value }) => {
+      // The GROQ query for the post must expand image assets.
+      // See /queries/blogPost.js for the implementation.
+      if (!value?.asset?.url) {
+        return null;
+      }
+      return h("img", {
+        src: value.asset.url,
+        alt: value.alt || "Embedded blog image",
+      });
+    },
+    socialPost: ({ value }) => {
+      const { platform, url, caption } = value;
+
+      const platformName = platform?.toLowerCase();
+
+      const embedMap = {
+        instagram: (url) =>
+          `<iframe src="https://www.instagram.com/p/${getInstagramCode(
+            url
+          )}/embed" width="400" height="480" frameborder="0" scrolling="no" allowtransparency="true"></iframe>`,
+        twitter: (url) =>
+          `<blockquote class="twitter-tweet"><a href="${url}"></a></blockquote>`,
+        youtube: (url) =>
+          `<iframe width="560" height="315" src="https://www.youtube.com/embed/${getYouTubeId(
+            url
+          )}" frameborder="0" allowfullscreen></iframe>`,
+        tiktok: (url) =>
+          `<blockquote class="tiktok-embed" cite="${url}" data-video-id="${getTikTokId(
+            url
+          )}"><a href="${url}"></a></blockquote>`,
+        linkedin: (url) =>
+          `<a href="${url}" target="_blank" rel="noopener">View LinkedIn Post</a>`,
+      };
+
+      const embedHtml = embedMap[platformName]?.(url);
+
+      return h("div", {
+        class: "social-embed my-6",
+        innerHTML: embedHtml || `<a href="${url}" target="_blank">${url}</a>`,
+      });
+    },
+  },
+};
 
 function formatDateTime(dateStr) {
   const date = new Date(dateStr);
@@ -149,6 +213,20 @@ async function startCheckout() {
     console.error("API Request failed:", err);
   }
 }
+
+onMounted(() => {
+  if (window.twttr) {
+    window.twttr.widgets.load();
+  }
+
+  if (window.tiktokEmbedLoaded !== true) {
+    const script = document.createElement("script");
+    script.src = "https://www.tiktok.com/embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+    window.tiktokEmbedLoaded = true;
+  }
+});
 </script>
 
 <style scoped>

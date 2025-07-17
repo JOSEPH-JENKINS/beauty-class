@@ -136,7 +136,7 @@
         >
           <div class="card-content">
             <div class="card-image fixed-height">
-              <NuxtLink :to="`/blog/${post.slug.current}`">
+              <NuxtLink :to="`/journal/${post.slug.current}`">
                 <img
                   :src="`${post.coverImage.asset.url}?w=800&auto=format&q=75`"
                   :alt="post.title"
@@ -159,7 +159,7 @@
               </div>
             </div>
             <div class="Button-container">
-              <NuxtLink class="Button" :to="`/blog/${post.slug.current}`"
+              <NuxtLink class="Button" :to="`/journal/${post.slug.current}`"
                 >read more</NuxtLink
               >
             </div>

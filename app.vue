@@ -98,7 +98,7 @@ function closeModal() {
         <nav>
           <div class="nav-left-container">
             <NuxtLink to="/about" class="u-showMd">about</NuxtLink>
-            <NuxtLink to="/blog" class="u-showMd">journal</NuxtLink>
+            <NuxtLink to="/journal" class="u-showMd">journal</NuxtLink>
             <NuxtLink to="/events" class="u-showMd">events</NuxtLink>
           </div>
           <NuxtLink to="/" class="Logo">
@@ -188,9 +188,9 @@ function closeModal() {
                       <h3 class="Mobile-menu-content-container-section-title">
                         <NuxtLink
                           class="link"
-                          to="/blog"
+                          to="/journal"
                           @click="closeMobileMenu"
-                          >BLOG</NuxtLink
+                          >journal</NuxtLink
                         >
                       </h3>
 
@@ -302,10 +302,10 @@ function closeModal() {
                   </li>
                   <li>
                     <NuxtLink
-                      to="/blog"
+                      to="/journal"
                       class="FooterMenu-itemLink u-animate-underline"
                     >
-                      Blog
+                      journal
                     </NuxtLink>
                   </li>
                 </ul>
@@ -394,6 +394,10 @@ function closeModal() {
 .header--default nav a,
 .header--scrolled nav a {
   color: #67645e;
+}
+
+.header nav a {
+  font-size: 1rem;
 }
 
 @media (max-width: 768px) {

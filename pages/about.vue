@@ -14,17 +14,10 @@
             loading="lazy"
         /></span>
       </div>
-      <div class="Hero-content BOTTOM-LEFT">
-        <div class="Hero-content-wrapper TEXT__LEFT BUTTON__LEFT">
-          <h1 data-splitting="lines" style="font-weight: 400">
-            <p>{{ data?.title }}</p>
-          </h1>
-        </div>
-      </div>
     </section>
     <div class="NoteWithImage margin-bottom">
       <h2 class="u-bold">
-        <p>about us</p>
+        <p>{{ data?.title }}</p>
       </h2>
       <div class="note-content">
         <p>
