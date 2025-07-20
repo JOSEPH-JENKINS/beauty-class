@@ -1,29 +1,9 @@
 <template>
   <section>
-    <section class="Hero" style="height: 84svh" v-if="shopPage?.heroImage">
-      <div class="Hero-background">
-        <span class="Image Image--desktop o-placeholder bg-full-height c-image">
-          <span class="c-span"></span>
-          <img
-            class="ls-is-cached lazyloaded c-img"
-            :src="shopPage.heroImage.asset.url"
-            decoding="async"
-            data-nimg="responsive"
-            sizes="100vw"
-            :alt="shopPage.heroHeading || 'Shop'"
-            loading="lazy"
-        /></span>
-      </div>
-      <div class="Hero-content BOTTOM-LEFT">
-        <div class="Hero-content-wrapper TEXT__LEFT BUTTON__LEFT">
-          <h1 data-splitting="lines" style="font-weight: 400">
-            <p>{{ shopPage.heroHeading }}</p>
-          </h1>
-        </div>
-      </div>
-    </section>
-
-    <div class="Blog-container">
+    <div
+      class="Blog-container"
+      style="margin-top: calc(var(--section-spacing) + 1.5rem)"
+    >
       <div class="Blog-container-articles">
         <div v-if="!products || products.length === 0">
           <h1>No products to see just yet.</h1>

@@ -6,7 +6,7 @@
   >
     <div class="modal-content">
       <button class="modal-close" @click="close">
-        <h1>close</h1>
+        <p>close</p>
       </button>
       <div class="image-container">
         <img v-if="image" :src="image" alt="Modal Image" />
@@ -47,7 +47,7 @@
                 data-form-id=""
                 data-mode="default"
               >
-                <h1 class="margin-0 uppercase">subscribe</h1>
+                <p class="margin-0 uppercase">subscribe</p>
               </button>
             </div>
           </form>

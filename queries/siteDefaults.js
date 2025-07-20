@@ -10,6 +10,15 @@ export const siteDefaults = groq`
       }
     },
     footerText,
-    socialLinks
+    socialLinks,
+    design {
+      font,
+      customFont,
+      bodySize,
+      heroHeaderSize,
+      headerSize,
+      itemSpacing,
+      sectionSpacing
+    }
   }
 `;

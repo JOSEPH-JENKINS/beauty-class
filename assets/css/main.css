@@ -4,6 +4,15 @@
   box-sizing: border-box;
 }
 
+:root {
+  --font-family: "Inter", sans-serif;
+  --body-size: 16px;
+  --header-size: 32px;
+  --hero-header-size: 48px;
+  --item-spacing: 24px;
+  --section-spacing: 48px;
+}
+
 div,
 dl,
 dt,
@@ -29,7 +38,7 @@ td {
 
 p {
   color: #67645e;
-  font-size: 1rem;
+  font-size: var(--body-size);
 }
 
 button {
@@ -46,10 +55,10 @@ body {
   margin: 0;
   padding: 0;
   background: #fff;
-  font-family: "DM Sans", sans-serif;
+  font-family: var(--font-family);
   font-weight: 400;
   line-height: 1.5;
-  font-size: 12px;
+  font-size: var(--body-size);
   color: #67645e;
   -webkit-font-smoothing: antialiased;
 }
@@ -61,10 +70,13 @@ body {
   min-height: 100vh;
   padding: 1rem 1rem 0;
 }
+.Logo img {
+  transition: opacity 0.3s ease-in-out;
+}
 .header {
   position: sticky;
   z-index: 10;
-  width: 100%;
+  width: calc(100% - 2rem);
   transition: all 0.7s cubic-bezier(0.76, 0, 0.24, 1), color 0s, z-index 0s;
   top: 1rem;
   transform: translateY(0);
@@ -115,9 +127,10 @@ a {
 }
 .category {
   letter-spacing: 0.1em !important;
+  text-transform: uppercase;
 }
 h3 {
-  font-size: 1.25rem !important;
+  font-size: var(--header-size);
   line-height: 1.4;
   margin-top: 0;
   margin-bottom: 0.5rem;
@@ -231,7 +244,7 @@ svg:not(:root) {
 }
 .Mobile-menu-content-container-section-title .link {
   color: #67645e;
-  font-size: 1rem;
+  font-size: var(--body-size);
   font-weight: 700;
   line-height: 120%;
   letter-spacing: -0.02em;
@@ -303,7 +316,7 @@ img {
   padding: 1.75rem 1rem;
   border-bottom: 1px solid #84827e;
   max-width: 100%;
-  font-size: 1rem;
+  font-size: var(--body-size);
 }
 .content.padded {
   padding: 0 1rem;
@@ -331,7 +344,7 @@ p {
 .Footer-content {
   display: flex;
   flex-flow: column;
-  font-size: 1rem;
+  font-size: var(--body-size);
 }
 @media only screen and (min-width: 1080px) {
   .Footer-content {
@@ -609,7 +622,7 @@ video {
 }
 
 .Hero-content h1 {
-  font-size: min(11rem, 22vw);
+  font-size: var(--hero-header-size);
   line-height: 120%;
   margin: 0;
   color: #fff !important;
@@ -622,7 +635,7 @@ video {
 }
 
 h1 {
-  font-size: 1.2rem;
+  font-size: var(--header-size);
   line-height: 1.4;
   margin-top: 0;
   margin-bottom: 0.5rem;
@@ -632,16 +645,13 @@ h1 {
   margin-bottom: 0;
 }
 
-.weight-lighter {
-}
-
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: "DM Sans", sans-serif;
+  font-family: var(--font-family), sans-serif;
   font-style: normal;
   font-weight: 700;
   color: #67645e;
@@ -649,7 +659,7 @@ h6 {
   letter-spacing: -0.035em;
   text-transform: lowercase;
   line-height: 1.2;
-  font-size: 1.2em;
+  font-size: var(--header-size);
 }
 
 .Hero-content .Button-container a {
@@ -717,7 +727,7 @@ h6 {
 .Hero-content p {
   margin: 0 0 1.2rem;
   align-items: flex-end;
-  font-size: calc(1.8rem + 0.2vw);
+  font-size: var(--body-size);
   line-height: 120%;
   margin-bottom: max(0.75rem, 0.75vw);
   letter-spacing: -0.02em;
@@ -725,18 +735,28 @@ h6 {
 }
 
 @media only screen and (min-width: 760px) {
-  .Hero-content p {
+  .Hero-content p,
+  h1 {
     font-size: 2.5vw;
   }
+}
+
+.heroFontSize {
+  font-size: var(--hero-header-size);
+}
+
+.nav-button,
+.close {
+  font-weight: 600;
 }
 
 /* Testimonial Section */
 .testimonial-section {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: var(--item-spacing);
   align-items: start;
-  margin-bottom: 4rem;
+  margin-bottom: var(--section-spacing);
   /* margin-top: 2.25vw;
   padding: 2.25vw 0; */
 }
@@ -744,7 +764,6 @@ h6 {
 @media screen and (min-width: 760px) {
   .testimonial-section {
     grid-template-columns: 2fr 1fr;
-    gap: 2rem;
   }
 }
 
@@ -776,7 +795,7 @@ h6 {
 }
 
 .testimonial-card__quote {
-  font-size: 1.5rem;
+  /* font-size: var(--header-size); */
   line-height: 1.4;
   margin-bottom: 1rem;
 }
@@ -863,7 +882,7 @@ h6 {
   transition-property: transform;
   box-sizing: content-box;
   flex-flow: row nowrap;
-  gap: 24px;
+  gap: var(--item-spacing);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
 }
@@ -902,15 +921,15 @@ h6 {
 }
 
 .u-hSize--Medium {
-  font-size: min(1.8rem, 12vw);
+  font-size: var(--header-size);
   line-height: 120%;
 }
 
-@media only screen and (min-width: 821px) {
+/* @media only screen and (min-width: 821px) {
   .u-hSize--Medium {
     font-size: 4vw;
   }
-}
+} */
 
 .u-noMargin,
 .u-noMargin p {
@@ -965,7 +984,7 @@ h6 {
 }
 
 .about-section__content h2 {
-  font-size: calc(1.8rem + 0.2vw);
+  font-size: var(--hero-header-size);
   line-height: 120%;
   margin: 0;
 }
@@ -1127,15 +1146,11 @@ h6 {
   background-color: #d683b6;
 }
 
-.blog-title {
-  font-size: 2em;
-}
-
 .Blog-container {
   padding: 0;
   /* background: #dcd9d9; */
   margin-bottom: 2.5rem;
-  margin-top: 2.5rem;
+  margin-top: var(--section-spacing);
   border-radius: 8px;
 }
 
@@ -1151,7 +1166,7 @@ h6 {
 
 .Blog-container-articles {
   display: flex;
-  gap: 2.5rem;
+  gap: var(--item-spacing);
   flex-wrap: wrap;
 }
 
@@ -1197,11 +1212,6 @@ h6 {
   margin-bottom: 1rem;
 }
 
-.BlogListItem-content.category {
-  color: #67645e;
-  text-transform: uppercase;
-}
-
 @media screen and (min-width: 1024px) {
   .BlogListItem {
     width: calc(33.33% - 1.67rem); /* For three columns with gaps */
@@ -1228,10 +1238,12 @@ h6 {
 
 .Button.filter.active h1 {
   color: #fff;
+  font-size: var(--body-size);
 }
 
 .Button.filter h1 {
   color: #d683b6;
+  font-size: var(--body-size);
 }
 
 @media only screen and (max-width: 760px) {
@@ -1409,10 +1421,17 @@ textarea:focus {
   border: 0;
 }
 
+.margin-bottom {
+  margin-bottom: var(--section-spacing);
+}
+
+.margin-top {
+  margin-top: var(--section-spacing);
+}
+
 .Form__single-field .Input {
   border-radius: 8px 0 0 12px;
   margin-bottom: 0;
-  font-size: max(0.91rem + 0.2vw, 0.925vw);
   height: auto;
 }
 
@@ -1535,7 +1554,6 @@ nav a {
 .contact-title {
   color: #67645e;
   margin: 0 0 1.3125rem;
-  font-size: clamp(1.3rem, 3.05556vw, 1.75rem);
   letter-spacing: -0.09rem;
   font-weight: 700;
   line-height: normal;
@@ -1543,7 +1561,6 @@ nav a {
 
 .contact-description p {
   color: #67645e;
-  font-size: 0.95rem;
 }
 
 .h-Size {
@@ -1580,7 +1597,6 @@ nav a {
   height: fit-content;
   margin: 0;
   padding: 1.25rem;
-  font-size: 1rem;
   font-weight: 400;
   transition: outline 0.1s;
 }
@@ -1719,12 +1735,6 @@ nav a {
   color: #666;
 }
 
-@media only screen and (min-width: 821px) {
-  .u-hSize--Medium {
-    font-size: 4vw;
-  }
-}
-
 .product {
   padding: 1rem;
   height: 100%;
@@ -1775,4 +1785,10 @@ nav a {
 
 .post-content {
   font-size: 1.15rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-size: 22px !important;
+  }
 }

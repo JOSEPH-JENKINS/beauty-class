@@ -2,7 +2,7 @@
   <section class="instagram-section">
     <div class="instagram-section__container">
       <div class="instagram-section__header section-header">
-        <h1 class="u-hSize--Medium">{{ content.heading }}</h1>
+        <h1>{{ content.heading }}</h1>
         <NuxtLink :to="content.ctaLink" class="Button desktop-cta">
           {{ content.ctaLabel }}
         </NuxtLink>

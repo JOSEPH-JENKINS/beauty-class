@@ -69,6 +69,8 @@ onBeforeUnmount(() => {
 function closeModal() {
   showModal.value = false;
 }
+
+const showAltLogo = computed(() => hasScrolled.value || !isHome.value);
 </script>
 
 <template>
@@ -102,7 +104,14 @@ function closeModal() {
             <NuxtLink to="/events" class="u-showMd">events</NuxtLink>
           </div>
           <NuxtLink to="/" class="Logo">
-            <img :src="settings?.logo?.asset?.url" alt="Site Logo" />
+            <img
+              :src="
+                showAltLogo && settings?.logoAlt?.asset?.url
+                  ? settings.logoAlt.asset.url
+                  : settings?.logo?.asset?.url
+              "
+              alt="Site Logo"
+            />
           </NuxtLink>
           <div class="nav-right-container">
             <NuxtLink to="/shop" class="u-showMd">shop</NuxtLink>
@@ -329,10 +338,7 @@ function closeModal() {
                 <p class="u-bold">SUPPORT</p>
                 <ul class="Footer-navigation-list">
                   <li>
-                    <p>We're here M-F 9am - 5pm PST.</p>
-                  </li>
-                  <li>
-                    <p>Drop us a note anytime.</p>
+                    <p>{{ settings?.supportText }}</p>
                   </li>
                 </ul>
               </div>
@@ -347,10 +353,9 @@ function closeModal() {
 <style>
 .header {
   position: absolute;
-  top: 0;
+  /* top: 0; */
   width: 100%;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  border-radius: 8px;
   margin-bottom: -0.5rem;
   left: 0;
   transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out,
@@ -360,7 +365,7 @@ function closeModal() {
 }
 
 .header--hidden {
-  transform: translateY(-100%);
+  transform: translateY(-200%);
 }
 
 .header--scrolled {
@@ -394,10 +399,6 @@ function closeModal() {
 .header--default nav a,
 .header--scrolled nav a {
   color: #67645e;
-}
-
-.header nav a {
-  font-size: 1rem;
 }
 
 @media (max-width: 768px) {

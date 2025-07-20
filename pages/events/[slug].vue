@@ -9,14 +9,13 @@
           />
         </div>
         <div class="post-header-details">
-          <p v-if="post.eventType" class="post-category">
+          <p v-if="post.eventType" class="category">
             {{ post.eventType }}
           </p>
           <h1>{{ post.title }}</h1>
-          <p class="post-date">
-            <span v-if="isPastEvent">HAPPENED on </span>
-            {{ formatDateTime(post.date) }}
-          </p>
+          <!-- <p class="post-date uppercase" v-if="isPastEvent">
+            <span>HAPPENED on {{ formatDateTime(post.date) }}</span>
+          </p> -->
           <p class="post-location">{{ post.location }}</p>
           <div class="booking-details">
             <h2 v-if="!isPastEvent && post.price > 0">

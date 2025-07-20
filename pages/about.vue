@@ -16,9 +16,7 @@
       </div>
     </section>
     <div class="NoteWithImage margin-bottom">
-      <h2 class="u-bold">
-        <p>{{ data?.title }}</p>
-      </h2>
+      <h1 class="u-bold heroFontSize">{{ data?.title }}</h1>
       <div class="note-content">
         <p>
           {{ data.content }}
@@ -43,12 +41,10 @@ const { data } = useSanityQuery(aboutQuery);
 }
 
 .NoteWithImage h2 {
-  font-size: 2.5rem; /* Made heading bigger */
   margin-bottom: 2rem;
 }
 
 .note-content {
-  font-size: 1.25rem; /* Made paragraph bigger */
   line-height: 1.6;
   width: 100%;
   margin: 0 auto;

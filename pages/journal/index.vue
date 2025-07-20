@@ -1,4 +1,4 @@
-<template v-if="blogpage && blogpage.video && blogpage.video.asset?.url">
+<template>
   <div>
     <section class="Hero" style="height: calc(84svh - (84svh * 1/4))"">
       <div class="Hero-background">

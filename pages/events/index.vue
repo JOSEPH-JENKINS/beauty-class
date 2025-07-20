@@ -6,7 +6,7 @@
       v-if="heroSection"
     >
       <div class="Hero-background">
-        <img :src="eventPage.image.asset.url" :alt="eventPage.heading" />
+        <img :src="eventPage?.image?.asset?.url" :alt="eventPage?.heading" />
       </div>
       <div class="Hero-content BOTTOM-LEFT">
         <div class="Hero-content-wrapper TEXT__LEFT BUTTON__LEFT">
@@ -75,7 +75,7 @@
         >
           <div class="card-content">
             <div class="card-image fixed-height">
-              <NuxtLink :to="`/events/${event.slug.current}`">
+              <NuxtLink :to="`/events/${event?.slug?.current}`">
                 <img
                   :src="event.image?.asset?.url || '/placeholder-image.jpg'"
                   :alt="event.title"
@@ -98,7 +98,7 @@
               </div>
             </div>
             <div class="Button-container">
-              <NuxtLink class="Button" :to="`/events/${event.slug.current}`"
+              <NuxtLink class="Button" :to="`/events/${event?.slug?.current}`"
                 >read more</NuxtLink
               >
             </div>
@@ -110,7 +110,7 @@
   <section class="instagram-section">
     <div class="instagram-section__container">
       <div class="instagram-section__header section-header">
-        <h1 class="u-hSize--Medium">class in photo</h1>
+        <h1 class="heroFontSize">class in photo</h1>
         <NuxtLink to="/about" class="Button"> learn about us </NuxtLink>
       </div>
       <div class="collection-slider">
@@ -188,7 +188,7 @@ const filteredEvents = computed(() => {
 
   // step 2: filter by selected event type
   if (selectedFilter.value === "all") {
-    return upcomingEvents;
+    return events.value;
   }
 
   return upcomingEvents.filter(

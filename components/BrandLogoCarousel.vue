@@ -1,8 +1,9 @@
 <template>
-  <div class="section-header text-center brand" style="margin-top: 4rem">
-    <h1 data-splitting="lines" style="font-weight: 400">
-      <p>Trusted by</p>
-    </h1>
+  <div
+    class="section-header text-center brand"
+    style="margin-top: var(--section-spacing)"
+  >
+    <h1 data-splitting="lines">Trusted by</h1>
   </div>
   <div class="brand-carousel" ref="carousel">
     <div class="track" :style="{ animationDuration: speed + 's' }">

@@ -6,13 +6,13 @@
       @touchend="onTouchEnd"
     >
       <button class="close" @click="close">
-        <h1 class="uppercase">close</h1>
+        <p class="uppercase">close</p>
       </button>
 
       <!-- Desktop Layout -->
       <div class="desktop-wrapper">
         <button class="nav-button" @click="prev" :disabled="index === 0">
-          <h1>prev</h1>
+          <p>prev</p>
         </button>
 
         <div class="image-info-wrapper">
@@ -32,7 +32,7 @@
           @click="next"
           :disabled="index === artists.length - 1"
         >
-          <h1>next</h1>
+          <p>next</p>
         </button>
       </div>
 

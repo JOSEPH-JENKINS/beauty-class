@@ -129,12 +129,10 @@ async function startCheckout() {
 
 .product-header-details h1 {
   margin: 0 0 1rem 0;
-  font-size: 3rem;
   line-height: 1.2;
 }
 
 .product-header-details h2 {
-  font-size: 2rem;
   color: #555;
   margin-bottom: 1rem;
 }

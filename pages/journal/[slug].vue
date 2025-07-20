@@ -6,7 +6,7 @@
           <img :src="post.coverImage.asset.url" :alt="post.title" />
         </div>
         <div class="post-header-details text-center">
-          <p v-if="post.category" class="post-category">
+          <p v-if="post.category" class="category">
             {{ post.category.title }}
           </p>
           <h1>{{ post.title }}</h1>
@@ -161,17 +161,8 @@ onMounted(() => {
   flex-direction: column;
 }
 
-.post-category {
-  text-transform: uppercase;
-  color: #888;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  letter-spacing: 1px;
-}
-
 .post-header-details h1 {
   margin: 0 0 1rem 0;
-  font-size: 3rem;
   line-height: 1.2;
 }
 
