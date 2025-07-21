@@ -745,6 +745,10 @@ h6 {
   font-size: var(--hero-header-size);
 }
 
+.headerFontSize {
+  font-size: var(--header-size);
+}
+
 .nav-button,
 .close {
   font-weight: 600;

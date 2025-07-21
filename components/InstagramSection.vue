@@ -1,5 +1,8 @@
 <template>
-  <section class="instagram-section">
+  <section
+    class="instagram-section"
+    style="margin-bottom: var(--section-spacing)"
+  >
     <div class="instagram-section__container">
       <div class="instagram-section__header section-header">
         <h1>{{ content.heading }}</h1>

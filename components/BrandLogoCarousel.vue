@@ -1,4 +1,4 @@
-<template>
+<template style="margin-bottom: var(--section-spacing)">
   <div
     class="section-header text-center brand"
     style="margin-top: var(--section-spacing)"

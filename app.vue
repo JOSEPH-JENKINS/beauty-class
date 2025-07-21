@@ -69,8 +69,6 @@ onBeforeUnmount(() => {
 function closeModal() {
   showModal.value = false;
 }
-
-const showAltLogo = computed(() => hasScrolled.value || !isHome.value);
 </script>
 
 <template>
@@ -105,12 +103,17 @@ const showAltLogo = computed(() => hasScrolled.value || !isHome.value);
           </div>
           <NuxtLink to="/" class="Logo">
             <img
-              :src="
-                showAltLogo && settings?.logoAlt?.asset?.url
-                  ? settings.logoAlt.asset.url
-                  : settings?.logo?.asset?.url
-              "
+              v-if="settings?.logo?.asset?.url"
+              :src="settings.logo.asset.url"
               alt="Site Logo"
+              class="logo-default"
+            />
+
+            <img
+              v-if="settings?.logoAlt?.asset?.url"
+              :src="settings.logoAlt.asset.url"
+              alt="Alternate Logo"
+              class="logo-alt"
             />
           </NuxtLink>
           <div class="nav-right-container">
@@ -416,5 +419,28 @@ const showAltLogo = computed(() => hasScrolled.value || !isHome.value);
 .Mobile-menu-content-container-section-title .link,
 .FooterMenu-itemLink {
   text-transform: uppercase;
+}
+
+.logo-default {
+  display: block;
+}
+.logo-alt {
+  display: none;
+}
+
+/* when dark background class is active (or whatever logic you use) */
+.header--scrolled .logo-default {
+  display: none;
+}
+.header--scrolled .logo-alt {
+  display: block;
+}
+
+.header--default:not(.header--home) .logo-default {
+  display: none;
+}
+
+.header--default:not(.header--home) .logo-alt {
+  display: block;
 }
 </style>

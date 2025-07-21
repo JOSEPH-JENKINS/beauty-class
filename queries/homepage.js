@@ -41,13 +41,20 @@ export const homepageQuery = groq`
       _type == 'aboutSection' => {
         _key,
         _type,
-        heading,
-        excerpt,
-        ctaLabel,
-        image {
-          asset->{ url, metadata }
+        post->{
+          _id,
+          title,
+          slug,
+          excerpt,
+          coverImage {
+            asset->{ url, metadata }
+          },
+          category->{
+            title
+          }
         }
       },
+
 
       _type == "softCtaSection" => {
         ctaLabel,

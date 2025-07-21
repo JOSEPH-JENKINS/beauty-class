@@ -9,6 +9,12 @@ export const siteDefaults = groq`
         metadata { lqip, dimensions }
       }
     },
+    logoAlt {
+      asset->{
+        url,
+        metadata { lqip, dimensions }
+      }
+    },
     footerText,
     socialLinks,
     design {

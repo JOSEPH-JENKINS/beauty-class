@@ -5,7 +5,11 @@
       v-if="sections.aboutSection"
       :content="sections.aboutSection"
     />
-    <FeaturedPosts v-if="postsData" :content="postsData" />
+    <FeaturedPosts
+      v-if="postsData"
+      :content="postsData"
+      :aboutPostId="sections.aboutSection.post._id"
+    />
     <SoftCtaSection
       v-if="sections.softCtaSection"
       :content="sections.softCtaSection"

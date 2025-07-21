@@ -6,7 +6,7 @@
           <div class="swiper-wrapper">
             <div
               class="swiper-slide collection-slide"
-              v-for="post in content"
+              v-for="post in filteredPosts"
               :key="post._id"
             >
               <article class="content-card">
@@ -47,10 +47,24 @@
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   content: {
-    type: Object,
+    type: Array,
+    required: true,
+  },
+  aboutPostId: {
+    type: String,
     required: true,
   },
 });
+
+const filteredPosts = computed(() =>
+  props.content.filter((post) => post._id !== props.aboutPostId)
+);
 </script>
+
+<style>
+.featured-section {
+  margin-bottom: var(--section-spacing);
+}
+</style>

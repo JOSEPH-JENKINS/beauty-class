@@ -57,4 +57,7 @@ defineProps({
     width: 50%;
   }
 }
+.soft-cta-container {
+  margin-bottom: var(--section-spacing);
+}
 </style>

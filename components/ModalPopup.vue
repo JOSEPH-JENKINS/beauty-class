@@ -6,16 +6,16 @@
   >
     <div class="modal-content">
       <button class="modal-close" @click="close">
-        <p>close</p>
+        <p class="close">close</p>
       </button>
       <div class="image-container">
         <img v-if="image" :src="image" alt="Modal Image" />
       </div>
       <div class="content padded">
         <div class="section-header">
-          <h1 data-splitting="lines" style="font-weight: 400">
-            <p>{{ heading }}</p>
-          </h1>
+          <h2 data-splitting="lines" style="font-weight: 400">
+            {{ heading }}
+          </h2>
         </div>
         <p>{{ subtext }}</p>
         <div class="Footer-newsletter modal border-bottom-0">

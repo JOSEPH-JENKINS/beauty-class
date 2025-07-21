@@ -1,22 +1,22 @@
 <template>
-  <section class="about-section">
+  <section class="about-section" v-if="content?.post">
     <div class="about-section__image">
       <img
-        v-if="content.image && content.image.asset"
-        :src="`${content.image.asset.url}?w=800&auto=format&q=75`"
-        :alt="content.heading || 'About section image'"
+        v-if="content.post.coverImage?.asset?.url"
+        :src="`${content.post.coverImage.asset.url}?w=800&auto=format&q=75`"
+        :alt="content.post.title || 'Featured blog post image'"
         loading="lazy"
       />
     </div>
     <div class="about-section__content">
-      <p class="category">features</p>
-      <h2 v-if="content.heading" style="margin-bottom: 1rem">
-        {{ content.heading }}
+      <p class="category">{{ content.post.category.title }}</p>
+      <h2 style="margin-bottom: 1rem">
+        {{ content.post.title }}
       </h2>
-      <p v-if="content.excerpt">{{ content.excerpt }}</p>
-      <div class="Button-container" v-if="content.ctaLabel">
-        <NuxtLink to="/about" class="Button">
-          {{ content.ctaLabel }}
+      <p v-if="content.post.excerpt">{{ content.post.excerpt }}</p>
+      <div class="Button-container">
+        <NuxtLink :to="`/journal/${content.post.slug.current}`" class="Button">
+          read more
         </NuxtLink>
       </div>
     </div>
@@ -39,5 +39,9 @@ defineProps({
   font-weight: 500;
   margin-bottom: 1rem;
   letter-spacing: 0.1em;
+}
+
+.about-section {
+  margin-bottom: var(--section-spacing) !important;
 }
 </style>
