@@ -394,7 +394,10 @@ function closeModal() {
                 <p class="u-bold">SUPPORT</p>
                 <ul class="Footer-navigation-list">
                   <li>
-                    <p>{{ settings?.supportText }}</p>
+                    <PortableText
+                      :value="settings?.supportText"
+                      :components="portableTextComponents"
+                    />
                   </li>
                 </ul>
               </div>
