@@ -3,7 +3,11 @@ import { allArtistsQuery } from "@/queries/artist";
 import { ref } from "vue";
 import ArtistModal from "@/components/ArtistModal.vue";
 
-const { data: artists } = useSanityQuery(allArtistsQuery);
+const { data: artists } = await useAsyncData("artists", async () => {
+  const { data } = await useSanityQuery(allArtistsQuery);
+  return data.value; // unwraps the ref before returning
+});
+
 const showModal = ref(false);
 const currentIndex = ref(0);
 
@@ -15,6 +19,11 @@ function openModal(index) {
 function closeModal() {
   showModal.value = false;
 }
+
+definePageMeta({
+  prerender: true,
+  isr: 300,
+});
 </script>
 
 <template>

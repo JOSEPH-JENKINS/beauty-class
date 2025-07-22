@@ -8,7 +8,7 @@
     <FeaturedPosts
       v-if="postsData"
       :content="postsData"
-      :aboutPostId="sections.aboutSection.post._id"
+      :aboutPostId="sections?.aboutSection?.post?._id"
     />
     <SoftCtaSection
       v-if="sections.softCtaSection"
@@ -37,8 +37,20 @@ import { featuredPostsQuery } from "@/queries/blog";
 import { computed } from "vue";
 import AboutSection from "~/components/AboutSection.vue";
 
-const { data } = useSanityQuery(homepageQuery);
-const { data: postsData } = useSanityQuery(featuredPostsQuery);
+const route = useRoute();
+
+const { data } = await useAsyncData(`homepage-${route.fullPath}`, async () => {
+  const { data } = await useSanityQuery(homepageQuery);
+  return data.value; // unwraps the ref before returning
+});
+
+const { data: postsData } = await useAsyncData(
+  `postsData-${route.fullPath}`,
+  async () => {
+    const { data } = await useSanityQuery(featuredPostsQuery);
+    return data.value; // unwraps the ref before returning
+  }
+);
 
 // Process the pageBuilder array into a structured object once.
 // This is more efficient and scalable.
@@ -48,5 +60,10 @@ const sections = computed(() => {
     acc[section._type] = section;
     return acc;
   }, {});
+});
+
+definePageMeta({
+  prerender: true,
+  isr: 300,
 });
 </script>

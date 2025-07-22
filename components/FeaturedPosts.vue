@@ -59,7 +59,9 @@ const props = defineProps({
 });
 
 const filteredPosts = computed(() =>
-  props.content.filter((post) => post._id !== props.aboutPostId)
+  Array.isArray(props.content)
+    ? props.content.filter((post) => post._id !== props.aboutPostId)
+    : []
 );
 </script>
 

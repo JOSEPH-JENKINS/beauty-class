@@ -22,6 +22,9 @@
       </div>
     </div>
   </section>
+  <div v-else class="loading-state category uppercase">
+    Loading or post not found...
+  </div>
 </template>
 
 <script setup>
@@ -34,7 +37,15 @@ const route = useRoute();
 const slug = route.params.slug;
 
 // Fetch the post data from Sanity
-const { data: post } = useSanityQuery(blogPostQuery, { slug });
+const { data: post } = await useAsyncData(`post-${slug}`, async () => {
+  const { data } = await useSanityQuery(blogPostQuery, { slug });
+  return data.value; // unwraps the ref before returning
+});
+
+definePageMeta({
+  prerender: true,
+  isr: 300,
+});
 
 function getInstagramCode(url) {
   const match = url.match(/instagram\.com\/p\/([^/]+)/);
@@ -71,28 +82,40 @@ const portableTextComponents = {
 
       const embedMap = {
         instagram: (url) =>
-          `<iframe src="https://www.instagram.com/p/${getInstagramCode(
-            url
-          )}/embed" width="400" height="480" frameborder="0" scrolling="no" allowtransparency="true"></iframe>`,
+          getInstagramCode(url)
+            ? `<iframe src="https://www.instagram.com/p/${getInstagramCode(
+                url
+              )}/embed" width="400" height="480" frameborder="0" scrolling="no" allowtransparency="true"></iframe>`
+            : null,
         twitter: (url) =>
-          `<blockquote class="twitter-tweet"><a href="${url}"></a></blockquote>`,
+          url
+            ? `<blockquote class="twitter-tweet"><a href="${url}"></a></blockquote>`
+            : null,
         youtube: (url) =>
-          `<iframe width="560" height="315" src="https://www.youtube.com/embed/${getYouTubeId(
-            url
-          )}" frameborder="0" allowfullscreen></iframe>`,
+          getYouTubeId(url)
+            ? `<iframe width="560" height="315" src="https://www.youtube.com/embed/${getYouTubeId(
+                url
+              )}" frameborder="0" allowfullscreen></iframe>`
+            : null,
         tiktok: (url) =>
-          `<blockquote class="tiktok-embed" cite="${url}" data-video-id="${getTikTokId(
-            url
-          )}"><a href="${url}"></a></blockquote>`,
+          getTikTokId(url)
+            ? `<blockquote class="tiktok-embed" cite="${url}" data-video-id="${getTikTokId(
+                url
+              )}"><a href="${url}"></a></blockquote>`
+            : null,
         linkedin: (url) =>
-          `<a href="${url}" target="_blank" rel="noopener">View LinkedIn Post</a>`,
+          url
+            ? `<a href="${url}" target="_blank" rel="noopener">View LinkedIn Post</a>`
+            : null,
       };
 
       const embedHtml = embedMap[platformName]?.(url);
 
+      if (!embedHtml) return null; // 🔥 this avoids the empty space
+
       return h("div", {
         class: "social-embed my-6",
-        innerHTML: embedHtml || `<a href="${url}" target="_blank">${url}</a>`,
+        innerHTML: embedHtml,
       });
     },
   },

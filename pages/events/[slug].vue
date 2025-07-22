@@ -95,8 +95,16 @@ import { h, onMounted } from "vue";
 const route = useRoute();
 const slug = route.params.slug;
 
-// Fetch the post data from Sanity
-const { data: post } = useSanityQuery(singleEventQuery, { slug });
+definePageMeta({
+  prerender: true,
+  isr: 300,
+});
+
+const { data: post } = await useAsyncData(`event-${slug}`, async () => {
+  const { data } = await useSanityQuery(singleEventQuery, { slug });
+  return data.value; // unwraps the ref before returning
+});
+
 const now = new Date();
 const isPastEvent = computed(
   () => post.value && new Date(post.value.date) < now
@@ -230,7 +238,7 @@ onMounted(() => {
 
 <style scoped>
 .Post {
-  padding: 4rem 2rem;
+  padding: 6rem 2rem 2rem;
 }
 
 .post-container {

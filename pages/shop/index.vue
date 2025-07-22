@@ -52,8 +52,23 @@
 
 <script setup>
 import { allProductsQuery, shopPageQuery } from "~/queries/shop";
+const route = useRoute();
 
 // Fetching data
-const { data: products } = useSanityQuery(allProductsQuery);
-const { data: shopPage } = useSanityQuery(shopPageQuery);
+const { data: products } = await useAsyncData(
+  `products-${route.fullPath}`,
+  async () => {
+    const { data } = await useSanityQuery(allProductsQuery);
+    return data.value; // unwraps the ref before returning
+  }
+);
+
+const { data: shopPage } = await useAsyncData("shopPage", () =>
+  useSanityQuery(shopPageQuery).then((res) => res.data)
+);
+
+definePageMeta({
+  prerender: true,
+  isr: 300,
+});
 </script>

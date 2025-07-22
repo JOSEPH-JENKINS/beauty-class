@@ -37,7 +37,15 @@ const route = useRoute();
 const slug = route.params.slug;
 
 // Fetch the post data from Sanity
-const { data: product } = useSanityQuery(singleProductQuery, { slug });
+const { data: product } = await useAsyncData(`product-${slug}`, async () => {
+  const { data } = await useSanityQuery(singleProductQuery, { slug });
+  return data.value; // unwraps the ref before returning
+});
+
+definePageMeta({
+  prerender: true,
+  isr: 300,
+});
 
 const portableTextComponents = {
   types: {

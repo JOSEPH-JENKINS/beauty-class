@@ -56,8 +56,20 @@
 import { contactQuery } from "@/queries/contact";
 import { PortableText } from "@portabletext/vue";
 const router = useRouter();
+const route = useRoute();
 
-const { data: contact } = useSanityQuery(contactQuery);
+const { data: contact } = await useAsyncData(
+  `contact-${route.fullPath}`,
+  async () => {
+    const { data } = await useSanityQuery(contactQuery);
+    return data.value; // unwraps the ref before returning
+  }
+);
+
+definePageMeta({
+  prerender: true,
+  isr: 300,
+});
 
 import { ref } from "vue";
 

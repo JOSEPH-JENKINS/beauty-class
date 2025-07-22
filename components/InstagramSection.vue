@@ -19,10 +19,7 @@
               class="swiper-slide collection-slide"
             >
               <div class="instagram-post">
-                <img
-                  :src="`${post.image.asset.url}?w=400&h=400&auto=format&fit=crop&q=75`"
-                  alt="Instagram post"
-                />
+                <img :src="`${post.image.asset.url}`" alt="Instagram post" />
               </div>
             </div>
           </div>

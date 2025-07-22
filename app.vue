@@ -222,7 +222,7 @@ function closeModal() {
           </div>
         </nav>
       </header>
-      <NuxtPage />
+      <NuxtPage :key="$route.fullPath" />
     </main>
 
     <footer class="Footer" id="footer">
@@ -358,9 +358,9 @@ function closeModal() {
   position: absolute;
   /* top: 0; */
   width: 100%;
+  margin: 0 auto;
   border-radius: 8px;
   margin-bottom: -0.5rem;
-  left: 0;
   transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out,
     box-shadow 0.3s ease-in-out;
   will-change: transform, background-color, box-shadow;
@@ -373,19 +373,20 @@ function closeModal() {
 
 .header--scrolled {
   position: fixed !important;
+  width: calc(100% - 2rem);
+  margin: 0 auto;
   box-shadow: 0 2px 4px rgba(103, 100, 94, 0.05);
 }
 
 /* only apply background on non-homepage or when explicitly wanted */
 .header--scrolled:not(.header--home) {
-  background-color: #f8f8f8;
+  background-color: #fff;
 }
 
 /* homepage: transparent + sticky */
 .header--home {
   position: absolute;
   top: 0;
-  width: 100%;
   transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out,
     box-shadow 0.3s ease-in-out;
   will-change: transform, background-color, box-shadow;
@@ -395,7 +396,7 @@ function closeModal() {
 /* non-homepage: dark background, static above main */
 .header--default {
   position: fixed;
-  background-color: #f8f8f8;
+  background-color: #fff;
   z-index: 1000;
 }
 
@@ -410,7 +411,7 @@ function closeModal() {
   }
 }
 .header--scrolled nav {
-  background-color: #f8f8f8;
+  background-color: #fff;
 }
 /* Uppercase navigation links */
 .nav-left-container .u-showMd,
@@ -434,6 +435,11 @@ function closeModal() {
 }
 .header--scrolled .logo-alt {
   display: block;
+}
+
+.header--default:not(.header--home) {
+  width: calc(100% - 2rem);
+  margin: 0 auto;
 }
 
 .header--default:not(.header--home) .logo-default {

@@ -19,7 +19,7 @@
       <h1 class="u-bold heroFontSize">{{ data?.title }}</h1>
       <div class="note-content">
         <p>
-          {{ data.content }}
+          {{ data?.content }}
         </p>
       </div>
     </div>
@@ -28,8 +28,19 @@
 
 <script setup>
 import { aboutQuery } from "@/queries/about";
+const route = useRoute();
 
-const { data } = useSanityQuery(aboutQuery);
+const { data } = await useAsyncData(`about-${route.fullPath}`, async () => {
+  const { data } = await useSanityQuery(aboutQuery);
+  return data.value; // unwraps the ref before returning
+});
+
+definePageMeta({
+  prerender: true,
+  isr: 300,
+});
+
+console.log(data.value); // now this is a plain object, not a ref-of-a-ref
 </script>
 
 <style scoped>

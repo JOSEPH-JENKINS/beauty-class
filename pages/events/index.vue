@@ -127,10 +127,7 @@
                 rel="noopener noreferrer"
               >
                 <div class="instagram-post">
-                  <img
-                    :src="`${post.image.asset.url}?w=400&h=400&auto=format&fit=crop&q=75`"
-                    alt="Instagram post"
-                  />
+                  <img :src="`${post.image.asset.url}`" alt="Instagram post" />
                 </div>
               </NuxtLink>
             </div>
@@ -151,16 +148,45 @@ import {
 } from "@/queries/events";
 import { homepageQuery } from "@/queries/homepage";
 import { computed, ref } from "vue";
+const route = useRoute();
 
+definePageMeta({
+  isr: 300,
+  prerender: true,
+});
+// filters
 const selectedFilter = ref("all");
 
-const { data: events } = useSanityQuery(allEventsWithTestimonialsQuery);
-const { data: eventPage } = useSanityQuery(eventPageQuery);
-const { data: homepage } = useSanityQuery(homepageQuery);
+// ✅ wrap all Sanity queries in useAsyncData
+const { data: events } = await useAsyncData(
+  `events-${route.fullPath}}`,
+  async () => {
+    const { data } = await useSanityQuery(allEventsWithTestimonialsQuery);
+    return data.value; // unwraps the ref before returning
+  }
+);
 
+const { data: eventPage } = await useAsyncData(
+  `eventPage-${route.fullPath}`,
+  async () => {
+    const { data } = await useSanityQuery(eventPageQuery);
+    return data.value; // unwraps the ref before returning
+  }
+);
+
+const { data: homepage } = await useAsyncData(
+  `homepage-${route.fullPath}`,
+  async () => {
+    const { data } = await useSanityQuery(homepageQuery);
+    return data.value; // unwraps the ref before returning
+  }
+);
+
+// hero video logic
 const heroVideoRef = ref(null);
 const isVideoPlaying = ref(true);
 
+// homepage builder sections
 const heroSection = computed(() => {
   return homepage.value?.pageBuilder?.find(
     (section) => section._type === "heroSection"
@@ -173,39 +199,32 @@ const content = computed(() => {
   );
 });
 
+const homepageTestimonials = computed(() => {
+  if (!homepage.value || !homepage.value.pageBuilder) return [];
+  return homepage.value.pageBuilder.find(
+    (section) => section._type === "testimonialSection"
+  );
+});
+
+// event filtering
 const filteredEvents = computed(() => {
   if (!events.value) return [];
 
   const now = new Date();
 
-  // step 1: filter out past events
   const upcomingEvents = events.value.filter((event) => {
     if (!event?.date) return false;
-
-    const eventDate = new Date(event.date);
-    return eventDate >= now;
+    return new Date(event.date) >= now;
   });
 
-  // step 2: filter by selected event type
-  if (selectedFilter.value === "all") {
-    return events.value;
-  }
+  if (selectedFilter.value === "all") return events.value;
 
   return upcomingEvents.filter(
     (event) => event?.eventType === selectedFilter.value
   );
 });
 
-const homepageTestimonials = computed(() => {
-  if (!homepage.value || !homepage.value.pageBuilder) {
-    return [];
-  }
-  const testimonialSection = homepage.value.pageBuilder.find(
-    (section) => section._type === "testimonialSection"
-  );
-  return testimonialSection;
-});
-
+// video play/pause
 const videoBtnClick = () => {
   const video = heroVideoRef.value;
   if (!video) return;

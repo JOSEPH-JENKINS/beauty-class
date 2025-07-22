@@ -3,7 +3,7 @@
     <div class="soft-background">
       <img
         v-if="content.backgroundImage && content.backgroundImage.asset"
-        :src="`${content.backgroundImage.asset.url}?w=1200&auto=format&q=75`"
+        :src="`${content.backgroundImage.asset.url}`"
         alt="Soft CTA background"
         loading="lazy"
       />

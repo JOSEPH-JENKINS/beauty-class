@@ -1,6 +1,10 @@
 <template>
   <div>
-    <section class="Hero" style="height: calc(84svh - (84svh * 1/4))"">
+    <section
+      class="Hero"
+      style="height: calc(84svh - (84svh * 1 / 4))"
+      v-if="posts && posts.length"
+    >
       <div class="Hero-background">
         <video
           autoplay="autoplay"
@@ -138,7 +142,7 @@
             <div class="card-image fixed-height">
               <NuxtLink :to="`/journal/${post.slug.current}`">
                 <img
-                  :src="`${post.coverImage.asset.url}?w=800&auto=format&q=75`"
+                  :src="`${post.coverImage.asset.url}`"
                   :alt="post.title"
                   loading="lazy"
                   class="card-image"
@@ -173,19 +177,44 @@
 <script setup>
 import { allPostsQuery, blogPageQuery } from "@/queries/blog";
 import { allCategoriesQuery } from "~/queries/category";
+const route = useRoute();
 
 const selectedCategory = ref(null);
 const heroVideoRef = ref(null);
-const isVideoPlaying = ref(true); // Assuming autoplay works, initialize to true
+const isVideoPlaying = ref(true);
 
-const { data: posts } = useSanityQuery(allPostsQuery);
-const { data: blogpage } = useSanityQuery(blogPageQuery);
-const { data: categories } = useSanityQuery(allCategoriesQuery);
+// ✅ useAsyncData is required to await Sanity query on both SSR and client
+const { data: posts } = await useAsyncData(
+  `posts-${route.fullPath}`,
+  async () => {
+    const { data } = await useSanityQuery(allPostsQuery);
+    return data.value; // unwraps the ref before returning
+  }
+);
 
-console.log(blogpage.value);
+definePageMeta({
+  prerender: true,
+  isr: 300,
+});
+
+const { data: blogpage } = await useAsyncData(
+  `blogpage-${route.fullPath}`,
+  async () => {
+    const { data } = await useSanityQuery(blogPageQuery);
+    return data.value; // unwraps the ref before returning
+  }
+);
+
+const { data: categories } = await useAsyncData(
+  `categories-${route.fullPath}`,
+  async () => {
+    const { data } = await useSanityQuery(allCategoriesQuery);
+    return data.value; // unwraps the ref before returning
+  }
+);
 
 const filteredPosts = computed(() => {
-  if (!selectedCategory.value) return posts.value;
+  if (!selectedCategory.value) return posts.value || [];
   return posts.value.filter(
     (post) => post.category.slug.current === selectedCategory.value
   );

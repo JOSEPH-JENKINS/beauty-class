@@ -98,7 +98,7 @@ body {
   justify-content: space-between;
   align-items: center;
   border-radius: 8px;
-  padding: 1.25rem min(3rem, 3vw);
+  padding: 1.25rem 1.5rem;
   width: 100%;
   background: transparent;
 }
@@ -676,7 +676,7 @@ h6 {
 }
 
 .Button {
-  --base-color: #d683b6;
+  --base-color: #cda7be;
   --base-spacing: 0.5rem 2rem;
   /* font-size: max(0.875rem + 0.2vw, 0.925vw) !important; */
   font-weight: 400;
@@ -702,7 +702,7 @@ h6 {
 
 .Button:hover {
   text-decoration: none;
-  background: #d683b6;
+  background: #cda7be;
   color: #fff;
 }
 
@@ -805,7 +805,7 @@ h6 {
 }
 
 .testimonial-card__author {
-  color: #d683b6; /* Site's pink color */
+  color: #cda7be; /* Site's pink color */
   font-weight: 600;
   margin: 0;
   text-transform: lowercase;
@@ -1138,8 +1138,8 @@ h6 {
 }
 
 .Button.filter {
-  --base-color: #d683b6;
-  color: #d683b6;
+  --base-color: #cda7be;
+  color: #cda7be;
   background: transparent;
   box-shadow: inset 0 0 0 1px var(--base-color);
   text-decoration: none;
@@ -1147,7 +1147,7 @@ h6 {
 
 .Button.filter:hover {
   color: #fff;
-  background-color: #d683b6;
+  background-color: #cda7be;
 }
 
 .Blog-container {
@@ -1234,7 +1234,7 @@ h6 {
 }
 
 .Button.filter.active {
-  --base-color: #d683b6;
+  --base-color: #cda7be;
   background: var(--base-color);
   color: #fff;
   box-shadow: inset 0 0 0 1px var(--base-color);
@@ -1246,7 +1246,7 @@ h6 {
 }
 
 .Button.filter h1 {
-  color: #d683b6;
+  color: #cda7be;
   font-size: var(--body-size);
 }
 
@@ -1446,7 +1446,7 @@ textarea:focus {
 
 .Form_multi .Footer-newsletter-submit {
   border-radius: 8px;
-  border: 1px solid #d683b6;
+  border: 1px solid #cda7be;
 }
 
 .Form .Input {
@@ -1479,14 +1479,14 @@ textarea:focus {
 }
 
 .Button__white {
-  --base-color: #d683b6;
+  --base-color: #cda7be;
   color: var(--base-color);
   box-shadow: inset 0 0 0 1px var(--base-color);
   background: #fff;
 }
 
 .Button__white h1 {
-  color: #d683b6 !important;
+  color: #cda7be !important;
 }
 
 .Footer-newsletter-submit-container {
@@ -1774,7 +1774,7 @@ nav a {
 .social-embed {
   position: relative;
   width: 100%;
-  padding-bottom: 100%; /* 16:9 ratio */
+  padding-bottom: 56.25%; /* 16:9 ratio */
   height: 0;
   overflow: hidden;
 }
@@ -1782,8 +1782,6 @@ nav a {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
   border: none;
 }
 

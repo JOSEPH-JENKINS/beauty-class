@@ -12,6 +12,18 @@
 
 <script setup>
 import { contactQuery } from "@/queries/contact";
+const route = useRoute();
 
-const { data: contact } = useSanityQuery(contactQuery);
+definePageMeta({
+  prerender: true,
+  isr: 300,
+});
+
+const { data: contact } = await useAsyncData(
+  `contact-${route.fullPath}`,
+  async () => {
+    const { data } = await useSanityQuery(contactQuery);
+    return data.value; // unwraps the ref before returning
+  }
+);
 </script>
