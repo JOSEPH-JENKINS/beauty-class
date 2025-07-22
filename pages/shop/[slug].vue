@@ -42,10 +42,9 @@ const { data: product } = await useAsyncData(`product-${slug}`, async () => {
   return data.value; // unwraps the ref before returning
 });
 
-// definePageMeta({
-//   prerender: true,
-//   isr: 300,
-// });
+definePageMeta({
+  isr: 300,
+});
 
 const portableTextComponents = {
   types: {

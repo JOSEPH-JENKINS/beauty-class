@@ -42,10 +42,9 @@ const { data: post } = await useAsyncData(`post-${slug}`, async () => {
   return data.value; // unwraps the ref before returning
 });
 
-// definePageMeta({
-//   prerender: true,
-//   isr: 300,
-// });
+definePageMeta({
+  isr: 300,
+});
 
 function getInstagramCode(url) {
   const match = url.match(/instagram\.com\/p\/([^/]+)/);
