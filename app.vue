@@ -6,6 +6,59 @@ const { data: settings } = useSanityQuery(siteDefaults);
 const { data: popup } = useSanityQuery(popupQuery);
 import { ref, onMounted, onBeforeUnmount, computed } from "vue";
 
+useHead({
+  title: settings.value?.siteTitle || "Beauty Class UK",
+  meta: [
+    {
+      name: "description",
+      content:
+        settings.value?.siteDescription || "Default site description here.",
+    },
+    {
+      property: "og:title",
+      content: settings.value?.siteTitle || "Beauty Class UK",
+    },
+    {
+      property: "og:description",
+      content:
+        settings.value?.siteDescription || "Default site description here.",
+    },
+    {
+      property: "og:image",
+      content:
+        settings.value?.openGraphImage?.asset?.url || "/placeholder-image.jpg",
+    },
+    {
+      property: "og:type",
+      content: "website",
+    },
+    {
+      name: "twitter:card",
+      content: "summary_large_image",
+    },
+    {
+      name: "twitter:title",
+      content: settings.value?.siteTitle || "Beauty Class UK",
+    },
+    {
+      name: "twitter:description",
+      content:
+        settings.value?.siteDescription || "Default site description here.",
+    },
+    {
+      name: "twitter:image",
+      content:
+        settings.value?.openGraphImage?.asset?.url || "/placeholder-image.jpg",
+    },
+  ],
+  link: [
+    {
+      rel: "icon",
+      href: settings.value?.favicon?.asset?.url || "/favicon.ico",
+    },
+  ],
+});
+
 const MODAL_SEEN_KEY = "lastModalSeen";
 const MODAL_COOLDOWN_PERIOD = 12 * 60 * 60 * 1000;
 const MODAL_SHOW_DELAY = 2000;

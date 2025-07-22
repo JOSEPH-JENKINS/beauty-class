@@ -42,6 +42,41 @@ const { data: post } = await useAsyncData(`post-${slug}`, async () => {
   return data.value; // unwraps the ref before returning
 });
 
+useHead(() => {
+  const title = post.value?.title || "Journal Entry";
+  const description = post.value?.excerpt || "Read our latest journal post.";
+  const image = post.value?.coverImage?.asset?.url || "/placeholder-image.jpg";
+  const publishedTime = post.value?.publishedAt || null;
+  const slug = post.value?.slug?.current || "journal";
+
+  return {
+    title,
+    meta: [
+      { name: "description", content: description },
+
+      // Open Graph
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:image", content: image },
+      { property: "og:type", content: "article" },
+      {
+        property: "og:url",
+        content: `https://beauty-class.co.uk/journal/${slug}`,
+      },
+      publishedTime && {
+        property: "article:published_time",
+        content: new Date(publishedTime).toISOString(),
+      },
+
+      // Twitter
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
+      { name: "twitter:image", content: image },
+    ].filter(Boolean), // remove any null values like `publishedTime` if missing
+  };
+});
+
 definePageMeta({
   isr: 300,
 });

@@ -15,7 +15,14 @@ export const siteDefaults = groq`
         metadata { lqip, dimensions }
       }
     },
+    openGraphImage {
+      asset->{
+        url
+      }
+    },
     footerText,
+    siteDescription,
+    supportText,
     socialLinks,
     design {
       font,

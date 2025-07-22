@@ -182,6 +182,34 @@ const { data: homepage } = await useAsyncData(
   }
 );
 
+useHead(() => {
+  const title = eventPage.value?.heading || "Events";
+  const description =
+    eventPage.value?.description ||
+    "Explore upcoming online and in-person events.";
+  const image = eventPage.value?.image?.asset?.url || "/placeholder-image.jpg";
+
+  return {
+    title,
+    meta: [
+      { name: "description", content: description },
+
+      // Open Graph (Facebook, LinkedIn, etc.)
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:image", content: image },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://beauty-class.co.uk/events" },
+
+      // Twitter Card
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
+      { name: "twitter:image", content: image },
+    ],
+  };
+});
+
 // hero video logic
 const heroVideoRef = ref(null);
 const isVideoPlaying = ref(true);

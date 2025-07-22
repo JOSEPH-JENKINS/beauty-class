@@ -42,6 +42,26 @@ const { data: product } = await useAsyncData(`product-${slug}`, async () => {
   return data.value; // unwraps the ref before returning
 });
 
+useHead(() => {
+  const title = product.value?.title ?? "Product";
+  const description = `Check out ${title} — available now.`;
+  const image = product.value?.image?.asset?.url || "/placeholder-image.jpg";
+
+  return {
+    title,
+    meta: [
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:image", content: image },
+      { property: "twitter:card", content: "summary_large_image" },
+      { property: "twitter:title", content: title },
+      { property: "twitter:description", content: description },
+      { property: "twitter:image", content: image },
+    ],
+  };
+});
+
 definePageMeta({
   isr: 300,
 });

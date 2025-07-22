@@ -8,6 +8,49 @@ const { data: artists } = await useAsyncData("artists", async () => {
   return data.value; // unwraps the ref before returning
 });
 
+useHead({
+  title: "Our Work – Meet the Artists",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Explore our talented lineup of artists and their unique styles. Click on each artist to view their portfolio and creative journey.",
+    },
+    {
+      property: "og:title",
+      content: "Our Work – Meet the Artists",
+    },
+    {
+      property: "og:description",
+      content:
+        "Explore our talented lineup of artists and their unique styles. Click on each artist to view their portfolio and creative journey.",
+    },
+    {
+      property: "og:image",
+      content: "/placeholder-image.jpg", // replace with actual hosted image
+    },
+    {
+      name: "twitter:card",
+      content: "summary_large_image",
+    },
+    {
+      name: "twitter:title",
+      content: "Our Work – Meet the Artists",
+    },
+    {
+      name: "twitter:description",
+      content:
+        "Explore our talented lineup of artists and their unique styles. Click on each artist to view their portfolio and creative journey.",
+    },
+  ],
+  link: [
+    {
+      rel: "canonical",
+      href: "https://beauty-class.co.uk/work",
+    },
+  ],
+});
+
 const showModal = ref(false);
 const currentIndex = ref(0);
 

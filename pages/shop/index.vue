@@ -67,6 +67,54 @@ const { data: shopPage } = await useAsyncData("shopPage", () =>
   useSanityQuery(shopPageQuery).then((res) => res.data)
 );
 
+useHead({
+  title: shopPage.value?.title || "Shop",
+  meta: [
+    {
+      name: "description",
+      content:
+        shopPage.value?.description ||
+        "Browse our products and find the perfect fit for your car or lifestyle.",
+    },
+    {
+      property: "og:title",
+      content: shopPage.value?.title || "Shop",
+    },
+    {
+      property: "og:description",
+      content:
+        shopPage.value?.description ||
+        "Explore our curated product collection.",
+    },
+    {
+      property: "og:image",
+      content: shopPage.value?.ogImage?.asset?.url || "/placeholder-image.jpg",
+    },
+    {
+      property: "og:type",
+      content: "website",
+    },
+    {
+      name: "twitter:card",
+      content: "summary_large_image",
+    },
+    {
+      name: "twitter:title",
+      content: shopPage.value?.title || "Shop",
+    },
+    {
+      name: "twitter:description",
+      content:
+        shopPage.value?.description ||
+        "Explore our curated product collection.",
+    },
+    {
+      name: "twitter:image",
+      content: shopPage.value?.ogImage?.asset?.url || "/placeholder-image.jpg",
+    },
+  ],
+});
+
 definePageMeta({
   prerender: true,
   isr: 300,

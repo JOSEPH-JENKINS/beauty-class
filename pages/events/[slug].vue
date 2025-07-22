@@ -104,6 +104,33 @@ const { data: post } = await useAsyncData(`event-${slug}`, async () => {
   return data.value; // unwraps the ref before returning
 });
 
+useHead(() => {
+  const title = post.value?.title || "Event";
+  const description = post.value?.excerpt || "Join us for this exciting event.";
+  const image = post.value?.image?.asset?.url || "/placeholder-image.jpg";
+  const url = `https://beauty-class.co.uk/events/${slug}`;
+
+  return {
+    title,
+    meta: [
+      { name: "description", content: description },
+
+      // Open Graph
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:image", content: image },
+      { property: "og:type", content: "article" },
+      { property: "og:url", content: url },
+
+      // Twitter Card
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
+      { name: "twitter:image", content: image },
+    ],
+  };
+});
+
 const now = new Date();
 const isPastEvent = computed(
   () => post.value && new Date(post.value.date) < now

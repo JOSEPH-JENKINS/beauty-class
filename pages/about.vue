@@ -35,6 +35,57 @@ const { data } = await useAsyncData(`about-${route.fullPath}`, async () => {
   return data.value; // unwraps the ref before returning
 });
 
+useHead(() => {
+  const title = data?.title || "About Us";
+  const description =
+    typeof data?.content === "string"
+      ? data.content.slice(0, 160)
+      : "Learn more about our story.";
+  const ogImage = data?.image?.asset?.url || "/placeholder-image.jpg";
+
+  return {
+    title,
+    meta: [
+      {
+        name: "description",
+        content: description,
+      },
+      {
+        property: "og:title",
+        content: title,
+      },
+      {
+        property: "og:description",
+        content: description,
+      },
+      {
+        property: "og:image",
+        content: ogImage,
+      },
+      {
+        property: "og:type",
+        content: "website",
+      },
+      {
+        name: "twitter:card",
+        content: "summary_large_image",
+      },
+      {
+        name: "twitter:title",
+        content: title,
+      },
+      {
+        name: "twitter:description",
+        content: description,
+      },
+      {
+        name: "twitter:image",
+        content: ogImage,
+      },
+    ],
+  };
+});
+
 definePageMeta({
   prerender: true,
   isr: 300,

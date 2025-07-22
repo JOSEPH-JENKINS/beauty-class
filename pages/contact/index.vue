@@ -71,6 +71,35 @@ definePageMeta({
   isr: 300,
 });
 
+useHead(() => {
+  const title = contact.value?.heading || "Contact Us";
+  const description =
+    contact.value?.body?.[0]?.children?.[0]?.text ||
+    "Reach out and let’s get the conversation started.";
+  const image = "/placeholder-image.jpg"; // optional fallback, swap with your brand OG image
+  const url = "https://beauty-class.co.uk/contact"; // change to your real domain
+
+  return {
+    title,
+    meta: [
+      { name: "description", content: description },
+
+      // Open Graph
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:image", content: image },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: url },
+
+      // Twitter Card
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
+      { name: "twitter:image", content: image },
+    ],
+  };
+});
+
 import { ref } from "vue";
 
 const name = ref("");

@@ -213,6 +213,32 @@ const { data: categories } = await useAsyncData(
   }
 );
 
+useHead(() => {
+  const title = blogpage.value?.heading || "Journal";
+  const description =
+    "Explore our latest journal entries, stories, and updates.";
+  const image = blogpage.value?.video?.asset?.url || "/placeholder-image.jpg";
+
+  return {
+    title,
+    meta: [
+      { name: "description", content: description },
+
+      // Open Graph (Facebook, LinkedIn, etc.)
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:image", content: image },
+      { property: "og:type", content: "website" },
+
+      // Twitter Card
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
+      { name: "twitter:image", content: image },
+    ],
+  };
+});
+
 const filteredPosts = computed(() => {
   if (!selectedCategory.value) return posts.value || [];
   return posts.value.filter(
