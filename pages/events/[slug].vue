@@ -95,10 +95,10 @@ import { h, onMounted } from "vue";
 const route = useRoute();
 const slug = route.params.slug;
 
-definePageMeta({
-  prerender: true,
-  isr: 300,
-});
+// definePageMeta({
+//   prerender: true,
+//   isr: 300,
+// });
 
 const { data: post } = await useAsyncData(`event-${slug}`, async () => {
   const { data } = await useSanityQuery(singleEventQuery, { slug });
