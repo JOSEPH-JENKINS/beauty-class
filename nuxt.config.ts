@@ -41,6 +41,7 @@ export default defineNuxtConfig({
         "/contact",
         // add more static routes as needed
       ],
+      failOnError: false,
     },
   },
 });
