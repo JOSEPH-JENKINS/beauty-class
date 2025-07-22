@@ -1,5 +1,6 @@
 <script setup>
 import { siteDefaults } from "@/queries/siteDefaults";
+import { PortableText } from "@portabletext/vue";
 import { useRoute } from "vue-router";
 import { popupQuery } from "@/queries/popup";
 const { data: settings } = useSanityQuery(siteDefaults);
