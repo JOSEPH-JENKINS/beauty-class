@@ -6,7 +6,10 @@
       v-if="heroSection"
     >
       <div class="Hero-background">
-        <img :src="eventPage?.image?.asset?.url" :alt="eventPage?.heading" />
+        <img
+          :src="`${eventPage?.image?.asset?.url}?auto=format&q=90`"
+          :alt="eventPage?.heading"
+        />
       </div>
       <div class="Hero-content BOTTOM-LEFT">
         <div class="Hero-content-wrapper TEXT__LEFT BUTTON__LEFT">
@@ -77,7 +80,10 @@
             <div class="card-image fixed-height">
               <NuxtLink :to="`/events/${event?.slug?.current}`">
                 <img
-                  :src="event.image?.asset?.url || '/placeholder-image.jpg'"
+                  :src="
+                    `${event.image?.asset?.url}?auto=format&q=90` ||
+                    '/placeholder-image.jpg'
+                  "
                   :alt="event.title"
                   loading="lazy"
                   class="card-image"
@@ -127,7 +133,10 @@
                 rel="noopener noreferrer"
               >
                 <div class="instagram-post">
-                  <img :src="`${post.image.asset.url}`" alt="Instagram post" />
+                  <img
+                    :src="`${post.image.asset.url}?auto=format&q=90`"
+                    alt="Instagram post"
+                  />
                 </div>
               </NuxtLink>
             </div>

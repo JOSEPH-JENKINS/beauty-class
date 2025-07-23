@@ -13,8 +13,9 @@
                 <div class="card-content">
                   <div class="card-image fixed-height">
                     <img
-                      :src="post.coverImage.asset.url"
+                      :src="`${post.coverImage.asset.url}?auto=format&q=90`"
                       :alt="post.excerpt"
+                      loading="lazy"
                       class="card-image"
                     />
                   </div>

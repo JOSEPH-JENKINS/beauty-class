@@ -23,6 +23,12 @@ export const homepageQuery = groq`
       _type == "testimonialSection" => {
         _type,
         title,
+        mainImage {
+          asset->{
+            url,
+            metadata { lqip, dimensions }
+          }
+        },
         testimonials[0..5]->{
           _id,
           name,

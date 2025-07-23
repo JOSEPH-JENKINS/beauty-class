@@ -18,7 +18,7 @@
         <div class="image-info-wrapper">
           <img
             class="modal-image"
-            :src="artist.image.asset.url"
+            :src="`${artist.image.asset.url}?auto=format&q=90`"
             :alt="artist.name"
           />
           <div class="modal-details">
@@ -40,7 +40,7 @@
       <div class="mobile-wrapper">
         <img
           class="modal-image"
-          :src="artist.image.asset.url"
+          :src="`${artist.image.asset.url}?auto=format&q=90`"
           :alt="artist.name"
         />
         <div class="modal-details">

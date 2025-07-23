@@ -142,7 +142,10 @@
             <div class="card-image fixed-height">
               <NuxtLink :to="`/journal/${post.slug.current}`">
                 <img
-                  :src="`${post.coverImage.asset.url}`"
+                  :src="
+                    `${post.coverImage.asset.url}?auto=format&q=90` ||
+                    '/placeholder-image.jpg'
+                  "
                   :alt="post.title"
                   loading="lazy"
                   class="card-image"

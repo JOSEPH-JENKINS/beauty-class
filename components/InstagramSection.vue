@@ -19,7 +19,11 @@
               class="swiper-slide collection-slide"
             >
               <div class="instagram-post">
-                <img :src="`${post.image.asset.url}`" alt="Instagram post" />
+                <img
+                  :src="`${post.image.asset.url}?auto=format&q=90`"
+                  loading="lazy"
+                  alt="Instagram post"
+                />
               </div>
             </div>
           </div>

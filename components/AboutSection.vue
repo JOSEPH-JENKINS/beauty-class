@@ -3,7 +3,7 @@
     <div class="about-section__image">
       <img
         v-if="content.post.coverImage?.asset?.url"
-        :src="`${content.post.coverImage.asset.url}?w=800&auto=format&q=75`"
+        :src="`${content.post.coverImage.asset.url}?auto=format&q=90`"
         :alt="content.post.title || 'Featured blog post image'"
         loading="lazy"
       />

@@ -31,7 +31,9 @@ export const siteDefaults = groq`
       heroHeaderSize,
       headerSize,
       itemSpacing,
-      sectionSpacing
+      sectionSpacing,
+      topMargin,
+      sideMargin,
     }
   }
 `;

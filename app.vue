@@ -430,7 +430,7 @@ function closeModal() {
 
 .header--scrolled {
   position: fixed !important;
-  width: calc(100% - 2rem);
+  width: calc(100% - (var(--side-margin) * 2));
   margin: 0 auto;
   box-shadow: 0 2px 4px rgba(103, 100, 94, 0.05);
 }
@@ -495,7 +495,7 @@ function closeModal() {
 }
 
 .header--default:not(.header--home) {
-  width: calc(100% - 2rem);
+  width: calc(100% - (var(--side-margin) * 2));
   margin: 0 auto;
 }
 

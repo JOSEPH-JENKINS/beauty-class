@@ -63,7 +63,6 @@ const sections = computed(() => {
 });
 
 definePageMeta({
-  prerender: true,
   isr: 300,
 });
 </script>

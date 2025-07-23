@@ -3,7 +3,10 @@
     <div class="product-container">
       <div class="product-header">
         <div class="product-header-image">
-          <img :src="product.image.asset.url" :alt="product.title" />
+          <img
+            :src="`${product.image.asset.url}?auto=format&q=90`"
+            :alt="product.title"
+          />
         </div>
         <div class="product-header-details">
           <h1>{{ product.title }}</h1>

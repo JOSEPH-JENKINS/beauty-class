@@ -27,4 +27,6 @@ export default defineNuxtPlugin(async () => {
   apply("hero-header-size", design.heroHeaderSize);
   apply("item-spacing", design.itemSpacing);
   apply("section-spacing", design.sectionSpacing);
+  apply("top-margin", design.topMargin);
+  apply("side-margin", design.sideMargin);
 });

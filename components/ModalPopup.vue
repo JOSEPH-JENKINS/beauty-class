@@ -9,7 +9,11 @@
         <p class="close">close</p>
       </button>
       <div class="image-container">
-        <img v-if="image" :src="image" alt="Modal Image" />
+        <img
+          v-if="image"
+          :src="`${image}?auto=format&q=90`"
+          alt="Modal Image"
+        />
       </div>
       <div class="content padded">
         <div class="section-header">
@@ -80,6 +84,7 @@ defineProps({
 });
 
 import { ref, onMounted } from "vue";
+import { urlFor } from "~/composables/useImageBuilder";
 const isVisible = ref(false);
 
 onMounted(() => {

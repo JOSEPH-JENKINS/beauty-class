@@ -4,7 +4,10 @@
       <div class="post-header">
         <div class="post-header-image">
           <img
-            :src="post.image?.asset?.url || '/placeholder-image.jpg'"
+            :src="
+              `${post.image?.asset?.url}?auto=format&q=90` ||
+              '/placeholder-image.jpg'
+            "
             :alt="post.title"
           />
         </div>
@@ -61,7 +64,7 @@
                   <div class="card-image fixed-height">
                     <img
                       :src="
-                        testimonial.image?.asset?.url ||
+                        `${testimonial.image?.asset?.url}?auto=format&q=90` ||
                         '/placeholder-image.jpg'
                       "
                       :alt="testimonial.quote"

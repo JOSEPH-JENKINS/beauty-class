@@ -11,6 +11,8 @@
   --hero-header-size: 48px;
   --item-spacing: 24px;
   --section-spacing: 48px;
+  --top-margin: 16px;
+  --side-margin: 16px;
 }
 
 div,
@@ -68,7 +70,7 @@ body {
   justify-content: stretch;
   align-items: stretch;
   min-height: 100vh;
-  padding: 1rem 1rem 0;
+  padding: var(--top-margin) var(--side-margin) 0;
 }
 .Logo img {
   transition: opacity 0.3s ease-in-out;
@@ -76,7 +78,7 @@ body {
 .header {
   position: sticky;
   z-index: 10;
-  width: calc(100% - 2rem);
+  width: calc(100% - calc(var(--side-margin) * 2));
   transition: all 0.7s cubic-bezier(0.76, 0, 0.24, 1), color 0s, z-index 0s;
   top: 1rem;
   transform: translateY(0);
@@ -1772,16 +1774,18 @@ nav a {
 }
 
 .social-embed {
-  position: relative;
+  margin: 2rem 0;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 ratio */
-  height: 0;
+  max-width: 100%;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
 }
-.social-embed iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
+
+.social-embed iframe,
+.social-embed blockquote {
+  max-width: 100%;
+  min-height: 480px; /* ensures height is enough for Instagram/TikTok */
   border: none;
 }
 

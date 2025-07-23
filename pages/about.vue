@@ -6,7 +6,7 @@
           <span class="c-span"></span>
           <img
             class="ls-is-cached lazyloaded c-img"
-            :src="data.image.asset.url"
+            :src="urlFor(data.image.asset.url)"
             decoding="async"
             data-nimg="responsive"
             sizes="100vw"
@@ -27,6 +27,7 @@
 </template>
 
 <script setup>
+import { urlFor } from "~/composables/useImageBuilder";
 import { aboutQuery } from "@/queries/about";
 const route = useRoute();
 

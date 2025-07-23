@@ -3,7 +3,10 @@
     <div class="post-container">
       <div class="post-header">
         <div class="post-header-image">
-          <img :src="post.coverImage.asset.url" :alt="post.title" />
+          <img
+            :src="`${post.coverImage.asset.url}?auto=format&q=90`"
+            :alt="post.title"
+          />
         </div>
         <div class="post-header-details text-center">
           <p v-if="post.category" class="category">

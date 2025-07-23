@@ -80,7 +80,7 @@ definePageMeta({
       >
         <div class="artist-img">
           <img
-            :src="artist.image.asset.url"
+            :src="`${artist.image.asset.url}?auto=format&q=90`"
             :alt="artist.name"
             loading="lazy"
           />

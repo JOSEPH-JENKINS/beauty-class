@@ -17,7 +17,10 @@
             <div class="card-image fixed-height">
               <NuxtLink :to="`/shop/${product.slug}`">
                 <img
-                  :src="product.image?.asset?.url || '/placeholder-image.jpg'"
+                  :src="
+                    `${product.image?.asset?.url}?auto=format&q=90` ||
+                    '/placeholder-image.jpg'
+                  "
                   :alt="product.title"
                   class="card-image"
                   loading="lazy"
