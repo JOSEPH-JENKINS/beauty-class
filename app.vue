@@ -276,7 +276,9 @@ function closeModal() {
           </div>
         </nav>
       </header>
-      <NuxtPage :key="$route.fullPath" />
+      <div class="main-content">
+        <NuxtPage :key="$route.fullPath" />
+      </div>
     </main>
 
     <footer class="Footer" id="footer">
@@ -497,6 +499,10 @@ function closeModal() {
 .header--default:not(.header--home) {
   width: calc(100% - (var(--side-margin) * 2));
   margin: 0 auto;
+}
+
+.header--default:not(.header--home) ~ .main-content {
+  margin-top: 80px;
 }
 
 .header--default:not(.header--home) .logo-default {

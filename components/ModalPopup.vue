@@ -17,7 +17,10 @@
       </div>
       <div class="content padded">
         <div class="section-header">
-          <h2 data-splitting="lines" style="font-weight: 400">
+          <h2
+            data-splitting="lines"
+            style="font-weight: 400; margin-top: var(--item-spacing)"
+          >
             {{ heading }}
           </h2>
         </div>
@@ -140,7 +143,7 @@ function subscribe() {
   grid-template-rows: 1fr;
   gap: 1rem;
   position: relative;
-  width: 85vw;
+  width: 75vw;
   border-radius: 12px;
 }
 
@@ -151,7 +154,6 @@ function subscribe() {
 @media screen and (min-width: 760px) {
   .modal-content {
     grid-template-columns: 1fr 1fr;
-    width: 85vw;
   }
 }
 
