@@ -1,6 +1,5 @@
 <script setup>
 import { siteDefaults } from "@/queries/siteDefaults";
-import { PortableText } from "@portabletext/vue";
 import { useRoute } from "vue-router";
 import { popupQuery } from "@/queries/popup";
 const { data: settings } = useSanityQuery(siteDefaults);
@@ -62,7 +61,7 @@ useHead({
 
 const MODAL_SEEN_KEY = "lastModalSeen";
 const MODAL_COOLDOWN_PERIOD = 12 * 60 * 60 * 1000;
-const MODAL_SHOW_DELAY = 2000;
+const MODAL_SHOW_DELAY = 4000;
 
 const email = ref("");
 const subscribed = ref(false);
@@ -282,9 +281,6 @@ function closeModal() {
     </main>
 
     <footer class="Footer" id="footer">
-      <!-- <div class="Footer-logo">
-        <img :src="settings?.logo?.asset?.url" alt="Site Logo" />
-      </div> -->
       <div class="Footer-content-container">
         <div class="Footer-newsletter">
           <p v-if="!subscribed">{{ settings?.footerText }}</p>
@@ -334,51 +330,6 @@ function closeModal() {
           <div class="Footer-info">
             <nav>
               <div class="Footer-navigation-list">
-                <p class="u-bold">NAVIGATE</p>
-                <ul class="Footer-navigation-list">
-                  <li>
-                    <NuxtLink
-                      to="/about"
-                      class="FooterMenu-itemLink u-animate-underline"
-                    >
-                      About
-                    </NuxtLink>
-                  </li>
-                  <li>
-                    <NuxtLink
-                      to="/work"
-                      class="FooterMenu-itemLink u-animate-underline"
-                    >
-                      Work
-                    </NuxtLink>
-                  </li>
-                  <li>
-                    <NuxtLink
-                      to="/events"
-                      class="FooterMenu-itemLink u-animate-underline"
-                    >
-                      Events
-                    </NuxtLink>
-                  </li>
-                  <li>
-                    <NuxtLink
-                      to="/shop"
-                      class="FooterMenu-itemLink u-animate-underline"
-                    >
-                      Shop
-                    </NuxtLink>
-                  </li>
-                  <li>
-                    <NuxtLink
-                      to="/journal"
-                      class="FooterMenu-itemLink u-animate-underline"
-                    >
-                      journal
-                    </NuxtLink>
-                  </li>
-                </ul>
-              </div>
-              <div class="Footer-navigation-list">
                 <p class="u-bold">SOCIAL</p>
                 <ul class="Footer-navigation-list">
                   <li v-for="social in settings?.socialLinks" :key="social.url">
@@ -393,16 +344,8 @@ function closeModal() {
                   </li>
                 </ul>
               </div>
-              <div class="Footer-navigation-list">
-                <p class="u-bold">SUPPORT</p>
-                <ul class="Footer-navigation-list">
-                  <li>
-                    <PortableText
-                      :value="settings?.supportText"
-                      :components="portableTextComponents"
-                    />
-                  </li>
-                </ul>
+              <div class="Footer-logo">
+                <img :src="settings?.logoAlt?.asset?.url" alt="Site Logo" />
               </div>
             </nav>
           </div>
@@ -439,7 +382,7 @@ function closeModal() {
 
 /* only apply background on non-homepage or when explicitly wanted */
 .header--scrolled:not(.header--home) {
-  background-color: #fff;
+  background-color: var(--secondary-header-color);
 }
 
 /* homepage: transparent + sticky */
@@ -455,7 +398,7 @@ function closeModal() {
 /* non-homepage: dark background, static above main */
 .header--default {
   position: fixed;
-  background-color: #fff;
+  background-color: var(--secondary-header-color);
   z-index: 1000;
 }
 
@@ -470,7 +413,7 @@ function closeModal() {
   }
 }
 .header--scrolled nav {
-  background-color: #fff;
+  background-color: var(--secondary-header-color);
 }
 /* Uppercase navigation links */
 .nav-left-container .u-showMd,

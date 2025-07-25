@@ -64,8 +64,7 @@ function closeModal() {
 }
 
 definePageMeta({
-  prerender: true,
-  isr: 300,
+  isr: 60,
 });
 </script>
 

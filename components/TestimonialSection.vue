@@ -15,7 +15,7 @@
         :key="testimonial._id"
         class="testimonial-card"
       >
-        <h2 class="testimonial-card__quote">{{ testimonial.quote }}</h2>
+        <p class="testimonial-card__quote">"{{ testimonial.quote }}"</p>
         <p class="testimonial-card__author">
           {{ testimonial.name }}, {{ testimonial.role }}
         </p>

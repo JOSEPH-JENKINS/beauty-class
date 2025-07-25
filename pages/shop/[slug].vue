@@ -10,7 +10,7 @@
         </div>
         <div class="product-header-details">
           <h1>{{ product.title }}</h1>
-          <h2>${{ product.price }}</h2>
+          <h2>€{{ product.price }}</h2>
           <button
             class="Button filter u-pSize Button__dark Button__large js-form-submit"
             style="margin-top: 3rem"
@@ -66,7 +66,7 @@ useHead(() => {
 });
 
 definePageMeta({
-  isr: 300,
+  isr: 60,
 });
 
 const portableTextComponents = {
@@ -94,7 +94,7 @@ async function startCheckout() {
   console.log("Event Data:", {
     title: product.value.title,
     price: priceInCents,
-    currency: "usd",
+    currency: "eur",
     eventId: product.value._id,
   });
 
@@ -145,8 +145,7 @@ async function startCheckout() {
 
 .product-header-image img {
   width: 100%;
-  height: auto;
-  max-height: 450px;
+  aspect-ratio: 2/3;
   display: block;
   border-radius: 8px;
   object-fit: cover;

@@ -160,8 +160,7 @@ import { computed, ref } from "vue";
 const route = useRoute();
 
 definePageMeta({
-  isr: 300,
-  prerender: true,
+  isr: 60,
 });
 // filters
 const selectedFilter = ref("all");

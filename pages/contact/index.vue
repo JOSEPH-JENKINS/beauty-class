@@ -67,8 +67,7 @@ const { data: contact } = await useAsyncData(
 );
 
 definePageMeta({
-  prerender: true,
-  isr: 300,
+  isr: 60,
 });
 
 useHead(() => {

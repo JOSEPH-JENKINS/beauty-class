@@ -3,7 +3,7 @@
     class="section-header text-center brand"
     style="margin-top: var(--section-spacing)"
   >
-    <h1 data-splitting="lines">Trusted by</h1>
+    <p data-splitting="lines">Trusted by</p>
   </div>
   <div class="brand-carousel" ref="carousel">
     <div class="track" :style="{ animationDuration: speed + 's' }">

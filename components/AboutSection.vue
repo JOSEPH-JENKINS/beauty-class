@@ -33,14 +33,6 @@ defineProps({
 </script>
 
 <style scoped>
-.category {
-  text-transform: uppercase;
-  color: #888;
-  font-weight: 500;
-  margin-bottom: 1rem;
-  letter-spacing: 0.1em;
-}
-
 .about-section {
   margin-bottom: var(--section-spacing) !important;
 }

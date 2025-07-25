@@ -196,8 +196,7 @@ const { data: posts } = await useAsyncData(
 );
 
 definePageMeta({
-  prerender: true,
-  isr: 300,
+  isr: 60,
 });
 
 const { data: blogpage } = await useAsyncData(

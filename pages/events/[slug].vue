@@ -99,7 +99,7 @@ const route = useRoute();
 const slug = route.params.slug;
 
 definePageMeta({
-  isr: 300,
+  isr: 60,
 });
 
 const { data: post } = await useAsyncData(`event-${slug}`, async () => {

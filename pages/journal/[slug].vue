@@ -81,7 +81,7 @@ useHead(() => {
 });
 
 definePageMeta({
-  isr: 300,
+  isr: 60,
 });
 
 function getInstagramCode(url) {
@@ -209,7 +209,7 @@ onMounted(() => {
 .post-header-image img {
   width: 100%;
   display: block;
-  aspect-ratio: 1 / 1; /* Make it a square */
+  aspect-ratio: 2 / 3; /* Make it a square */
   border-radius: 8px;
   object-fit: cover;
   object-position: center; /* Center the image if it's cropped */

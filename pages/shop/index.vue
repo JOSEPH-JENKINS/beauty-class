@@ -38,7 +38,7 @@
                 <h3 class="BlogListItem-title u-noMargin blog-title">
                   {{ product.title }}
                 </h3>
-                <p class="Product-price">${{ product.price }}</p>
+                <p class="Product-price">€{{ product.price }}</p>
               </div>
             </div>
             <div class="Button-container" style="margin-top: 1rem">
@@ -119,7 +119,6 @@ useHead({
 });
 
 definePageMeta({
-  prerender: true,
-  isr: 300,
+  isr: 60,
 });
 </script>

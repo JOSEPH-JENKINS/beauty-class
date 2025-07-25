@@ -15,8 +15,7 @@ import { contactQuery } from "@/queries/contact";
 const route = useRoute();
 
 definePageMeta({
-  prerender: true,
-  isr: 300,
+  isr: 60,
 });
 
 const { data: contact } = await useAsyncData(

@@ -13,31 +13,17 @@ export default defineNuxtConfig({
     styleLang: "css",
     modules: ["navigation", "pagination", "autoplay"],
   },
-  runtimeConfig: {
-    sanity: {
-      token: process.env.SANITY_API_TOKEN,
-    },
-  },
+  // runtimeConfig: {
+  //   sanity: {
+  //     token: process.env.SANITY_API_TOKEN,
+  //   },
+  // },
   css: ["@/assets/css/main.css"],
-  routeRules: {
-    "/journal/**": { prerender: true },
-    "/events/**": { prerender: true },
-    "/shop/**": { prerender: true },
-    "/work": { prerender: true },
-    "/about": { prerender: true },
-    "/contact/**": { prerender: true },
-  },
   ssr: true,
   nitro: {
     prerender: {
       crawlLinks: true,
       routes: [
-        "/",
-        "/journal",
-        "/events",
-        "/about",
-        "/work",
-        "/shop",
         "/contact",
         // add more static routes as needed
       ],

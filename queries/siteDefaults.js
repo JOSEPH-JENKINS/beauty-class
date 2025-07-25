@@ -22,7 +22,6 @@ export const siteDefaults = groq`
     },
     footerText,
     siteDescription,
-    supportText,
     socialLinks,
     design {
       font,
@@ -34,6 +33,8 @@ export const siteDefaults = groq`
       sectionSpacing,
       topMargin,
       sideMargin,
+      buttonAccentColor,
+      secondaryHeaderColor,
     }
   }
 `;

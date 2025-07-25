@@ -18,9 +18,10 @@
     <div class="NoteWithImage margin-bottom">
       <h1 class="u-bold heroFontSize">{{ data?.title }}</h1>
       <div class="note-content">
-        <p>
-          {{ data?.content }}
-        </p>
+        <PortableText
+          :value="data?.content"
+          :components="portableTextComponents"
+        />
       </div>
     </div>
   </div>
@@ -29,6 +30,8 @@
 <script setup>
 import { urlFor } from "~/composables/useImageBuilder";
 import { aboutQuery } from "@/queries/about";
+import { PortableText } from "@portabletext/vue";
+import { h, onMounted } from "vue";
 const route = useRoute();
 
 const { data } = await useAsyncData(`about-${route.fullPath}`, async () => {
@@ -88,11 +91,24 @@ useHead(() => {
 });
 
 definePageMeta({
-  prerender: true,
-  isr: 300,
+  isr: 60,
 });
 
-console.log(data.value); // now this is a plain object, not a ref-of-a-ref
+const portableTextComponents = {
+  types: {
+    image: ({ value }) => {
+      // The GROQ query for the post must expand image assets.
+      // See /queries/blogPost.js for the implementation.
+      if (!value?.asset?.url) {
+        return null;
+      }
+      return h("img", {
+        src: value.asset.url,
+        alt: value.alt || "Embedded blog image",
+      });
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -111,6 +127,16 @@ console.log(data.value); // now this is a plain object, not a ref-of-a-ref
   line-height: 1.6;
   width: 100%;
   margin: 0 auto;
+  position: relative;
+}
+
+.note-content :deep(img) {
+  width: 100%; /* Make it responsive */
+  aspect-ratio: 1 / 1; /* Make it a square */
+  object-fit: cover;
+  margin: 1rem auto;
+  border-radius: 8px;
+  display: block;
 }
 
 @media (min-width: 768px) {

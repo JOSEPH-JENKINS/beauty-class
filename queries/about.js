@@ -2,7 +2,12 @@ import groq from "groq";
 
 export const aboutQuery = groq`
 *[_type == "aboutPage"][0]{
-    content,
+    content[]{
+    ...,
+    asset->{
+      url
+    }
+    },
     title,
     image {
         asset->{
