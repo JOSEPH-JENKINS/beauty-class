@@ -855,13 +855,13 @@ h6 {
 }
 
 .shop .card-image {
-  aspect-ratio: 3/2;
+  aspect-ratio: 2/3;
 }
 
 .card-image {
   width: 100%;
   flex: 1;
-  aspect-ratio: 4/3;
+  aspect-ratio: 3/4;
   object-fit: cover;
   object-position: center;
   border-radius: 8px;
