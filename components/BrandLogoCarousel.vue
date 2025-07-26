@@ -37,7 +37,8 @@ const doubledLogos = [...props.logos, ...props.logos];
 
 .track {
   display: flex;
-  width: max-content;
+  width: fit-content;
+  min-width: 100%;
   animation: scroll linear infinite;
 }
 
@@ -57,11 +58,14 @@ const doubledLogos = [...props.logos, ...props.logos];
 
 .slide img {
   height: 32px;
+  width: auto;
+  max-width: 100%;
   object-fit: contain;
-  /* filter: grayscale(100%); */
   opacity: 0.8;
 }
+</style>
 
+<style>
 @keyframes scroll {
   0% {
     transform: translateX(0%);

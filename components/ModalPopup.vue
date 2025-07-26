@@ -141,10 +141,9 @@ function subscribe() {
   padding: 2.35rem 1rem 1rem;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
-  gap: 1rem;
   position: relative;
-  width: 80vw;
-  border-radius: 12px;
+  width: 85vw;
+  border-radius: 8px;
 }
 
 .modal-content .Footer-newsletter {
@@ -155,6 +154,7 @@ function subscribe() {
   .modal-content {
     grid-template-columns: 1fr 1fr;
     width: 50vw;
+    gap: 1rem;
   }
 }
 
@@ -181,7 +181,7 @@ function subscribe() {
   width: 100%;
   height: 100%;
   position: relative;
-  border-radius: 6px;
+  border-radius: 4px;
   overflow: hidden;
 }
 

@@ -328,6 +328,10 @@ function closeModal() {
           <p class="u-pSize Footer-privacy-policy">
             By signing up, you agree to our Privacy Policy*
           </p>
+          <p class="u-pSize Footer-privacy-policy">
+            &copy; {{ new Date().getFullYear() }} Beauty Class UK. All rights
+            reserved.
+          </p>
         </div>
         <div class="Footer-content">
           <div class="Footer-info">
