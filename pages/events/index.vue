@@ -98,7 +98,9 @@
     <div class="instagram-section__container">
       <div class="instagram-section__header section-header">
         <h1 class="heroFontSize">class in photo</h1>
-        <NuxtLink to="/about" class="Button"> learn about us </NuxtLink>
+        <NuxtLink to="/about" class="Button desktop-cta">
+          learn about us
+        </NuxtLink>
       </div>
       <div class="collection-slider">
         <div class="swiper swiper-pointer-events">
@@ -123,6 +125,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="mobile-cta">
+        <NuxtLink to="/about" class="Button"> learn about us </NuxtLink>
       </div>
     </div>
   </section>
@@ -273,5 +278,21 @@ const videoBtnClick = () => {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
+}
+
+.mobile-cta {
+  display: none;
+  margin: 12px 0;
+  width: 100%;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .mobile-cta {
+    display: block;
+  }
+  .desktop-cta {
+    display: none;
+  }
 }
 </style>
