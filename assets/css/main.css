@@ -1638,7 +1638,7 @@ nav a {
 @media only screen and (max-width: 760px) {
   .contact-section {
     margin-bottom: 1.25rem;
-    padding: 4rem 1rem 2.5rem;
+    padding: 0rem 1rem 2.5rem;
   }
 }
 
