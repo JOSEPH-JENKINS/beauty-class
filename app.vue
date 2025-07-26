@@ -281,11 +281,11 @@ function closeModal() {
     </main>
 
     <footer class="Footer" id="footer">
-      <div class="Footer-logo">
-        <img :src="settings?.logoAlt?.asset?.url" alt="Site Logo" />
-      </div>
       <div class="Footer-content-container">
         <div class="Footer-newsletter">
+          <div class="Footer-logo">
+            <img :src="settings?.logoAlt?.asset?.url" alt="Site Logo" />
+          </div>
           <p v-if="!subscribed">{{ settings?.footerText }}</p>
           <p v-if="subscribed">Thank you for subscribing!</p>
           <form

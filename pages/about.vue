@@ -15,7 +15,7 @@
         /></span>
       </div>
     </section>
-    <div class="NoteWithImage margin-bottom">
+    <div class="NoteWithImage margin-top margin-bottom">
       <h1 class="u-bold heroFontSize">{{ data?.title }}</h1>
       <div class="note-content">
         <PortableText
@@ -24,7 +24,10 @@
         />
       </div>
     </div>
-    <section class="Hero" style="height: calc(84svh - (84svh * 1 / 4))">
+    <section
+      class="Hero margin-bottom"
+      style="height: calc(84svh - (84svh * 1 / 4))"
+    >
       <div class="Hero-background">
         <span class="Image Image--desktop o-placeholder bg-full-height c-image">
           <span class="c-span"></span>

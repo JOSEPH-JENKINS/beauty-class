@@ -133,7 +133,6 @@ a {
   background-color: transparent;
 }
 .category {
-  letter-spacing: 0.1em !important;
   text-transform: uppercase;
 }
 h3 {
@@ -332,6 +331,7 @@ img {
   .Footer-newsletter {
     padding: 2.5rem;
     border-bottom: none;
+    max-width: 50%;
     border-right: 1px solid #84827e;
   }
 }
@@ -759,28 +759,23 @@ h6 {
   font-weight: 600;
 }
 
+.heroVideo::-webkit-media-controls {
+  display: none !important;
+}
+
 /* Testimonial Section */
 .testimonial-section {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 2fr 1fr;
   gap: var(--item-spacing);
-  align-items: start;
+  align-items: stretch; /* ensures both columns stretch full height */
   margin-bottom: var(--section-spacing);
-  /* margin-top: 2.25vw;
-  padding: 2.25vw 0; */
-}
-
-@media screen and (min-width: 760px) {
-  .testimonial-section {
-    grid-template-columns: 2fr 1fr;
-  }
 }
 
 .testimonial-section__image-wrapper {
   border-radius: 8px;
   overflow: hidden;
-  aspect-ratio: 8 / 9;
-  top: 1rem;
+  height: 100%; /* stretch full height of grid cell */
 }
 
 .testimonial-section__image {
@@ -793,20 +788,16 @@ h6 {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-}
-
-.heroVideo::-webkit-media-controls {
-  display: none !important;
+  height: 100%; /* match image column height */
 }
 
 .testimonial-card {
-  background-color: #f8f8f8; /* Site's grey color */
+  background-color: #f8f8f8;
   border-radius: 8px;
   padding: 1.5rem;
-  min-height: 220px;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s ease-in-out;
+  justify-content: space-between;
 }
 
 .testimonial-card__quote {
@@ -817,10 +808,9 @@ h6 {
 }
 
 .testimonial-card__author {
-  color: var(--button-accent-color); /* Site's pink color */
+  color: var(--button-accent-color);
   font-weight: 600;
   margin: 0;
-  text-transform: lowercase;
 }
 
 .fade-enter-active,
@@ -1201,6 +1191,12 @@ h6 {
   }
 }
 
+@media screen and (min-width: 1024px) {
+  .BlogListItem.shop {
+    width: calc(25% - var(--item-spacing)); /* For three columns with gaps */
+  }
+}
+
 .BlogListItem .Image-container {
   overflow: hidden;
   aspect-ratio: 4 / 3;
@@ -1231,11 +1227,6 @@ h6 {
   margin-bottom: 1rem;
 }
 
-@media screen and (min-width: 1024px) {
-  .BlogListItem {
-    width: calc(25% - var(--item-spacing)); /* For three columns with gaps */
-  }
-}
 .Blog-container-filters {
   display: flex;
   gap: 0.75rem;
