@@ -33,7 +33,7 @@
                   <div class="Button-container">
                     <NuxtLink
                       class="Button filter Button__dark"
-                      :to="`/blog/${post.slug.current}`"
+                      :to="`/journal/${post.slug.current}`"
                       >read more</NuxtLink
                     >
                   </div>
