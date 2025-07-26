@@ -6,7 +6,7 @@
   >
     <div class="modal-content">
       <button class="modal-close" @click="close">
-        <p class="close">close</p>
+        <p class="close uppercase">close</p>
       </button>
       <div class="image-container">
         <img

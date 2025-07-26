@@ -749,8 +749,7 @@ h6 {
   font-size: var(--header-size);
 }
 
-.nav-button,
-.close {
+.nav-button {
   font-weight: 600;
 }
 
