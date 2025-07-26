@@ -35,7 +35,7 @@
                 {{ product.productType.title }}
               </p>
               <div class="content-title-wrapper">
-                <h3 class="BlogListItem-title u-noMargin blog-title">
+                <h3 class="BlogListItem-title blog-title">
                   {{ product.title }}
                 </h3>
                 <p class="Product-price">£{{ product.price }}</p>

@@ -455,8 +455,11 @@ function closeModal() {
 }
 
 @media (max-width: 768px) {
-  .header-scrolled {
+  .header--scrolled {
     width: calc(100% - (var(--mobile-side-margin) * 2));
+  }
+  .header--home .Mobile-menu-toggle svg rect {
+    fill: #84827e;
   }
   .header--default:not(.header--home) {
     width: calc(100% - (var(--mobile-side-margin) * 2));
@@ -465,7 +468,7 @@ function closeModal() {
 }
 
 .header--default:not(.header--home) ~ .main-content {
-  margin-top: 80px;
+  margin-top: 70px;
 }
 
 .header--default:not(.header--home) .logo-default {

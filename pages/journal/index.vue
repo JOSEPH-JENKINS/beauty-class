@@ -157,7 +157,7 @@
                 <p class="BlogListItem-content category">
                   {{ post.category.title }}
                 </p>
-                <h3 class="u-noMargin blog-title">
+                <h3 class="blog-title">
                   {{ post.title }}
                 </h3>
                 <p>

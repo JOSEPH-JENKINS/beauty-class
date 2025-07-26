@@ -6,13 +6,16 @@
 
 :root {
   --font-family: "Inter", sans-serif;
-  --body-size: 16px;
-  --header-size: 32px;
-  --hero-header-size: 48px;
-  --item-spacing: 24px;
-  --section-spacing: 48px;
-  --top-margin: 16px;
-  --side-margin: 16px;
+  --body-size: 14px;
+  --header-size: 26px;
+  --hero-header-size: 33px;
+  --item-spacing: 27px;
+  --section-spacing: 30px;
+  --top-margin: 30px;
+  --mobile-top-margin: 14px;
+  --side-margin: 40px;
+  --mobile-side-margin: 15px;
+  --button-accent-color: #cda7be;
 }
 
 div,
@@ -302,7 +305,12 @@ svg:not(:root) {
 }
 .Footer-logo {
   padding: 0 1rem 1.75rem;
-  border-bottom: 1px solid #84827e;
+}
+
+@media (max-width: 1080px) {
+  .Hero.home {
+    height: 69svh !important;
+  }
 }
 
 img {
@@ -772,6 +780,12 @@ h6 {
   margin-bottom: var(--section-spacing);
 }
 
+@media screen and (max-width: 760px) {
+  .testimonial-section {
+    grid-template-columns: 1fr;
+  }
+}
+
 .testimonial-section__image-wrapper {
   border-radius: 8px;
   overflow: hidden;
@@ -853,7 +867,7 @@ h6 {
   justify-content: space-between;
 }
 
-.shop .card-image {
+.card .shop .card-image {
   aspect-ratio: 4/5;
 }
 
@@ -1806,6 +1820,8 @@ nav a {
 .post-content h1,
 h2,
 h3,
-h4 {
+h4,
+.post-content img {
   margin-bottom: 20px;
+  margin-top: 20px;
 }

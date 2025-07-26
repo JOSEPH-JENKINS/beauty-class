@@ -49,7 +49,7 @@ const doubledLogos = [...props.logos, ...props.logos];
   padding: 0 2rem;
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .slide {
     padding: 0 0.75rem;
   }

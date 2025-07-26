@@ -22,6 +22,7 @@
 
       <div class="post-content">
         <PortableText :value="post.body" :components="portableTextComponents" />
+        <!-- <pre>{{ post.body }}</pre> -->
       </div>
     </div>
   </section>
@@ -85,7 +86,7 @@ definePageMeta({
 });
 
 function getInstagramCode(url) {
-  const match = url.match(/instagram\.com\/p\/([^/]+)/);
+  const match = url.match(/instagram\.com\/(?:p|reel)\/([^/]+)/);
   return match?.[1] || "";
 }
 

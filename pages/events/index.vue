@@ -76,7 +76,7 @@
                 <p v-if="event.eventType" class="BlogListItem-content category">
                   {{ event.eventType }}
                 </p>
-                <h3 class="u-noMargin blog-title">
+                <h3 class="blog-title">
                   {{ event.title }}
                 </h3>
                 <p v-if="event.excerpt">
