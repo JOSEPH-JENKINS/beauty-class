@@ -10,7 +10,7 @@
         </div>
         <div class="product-header-details">
           <h1>{{ product.title }}</h1>
-          <h2>€{{ product.price }}</h2>
+          <h2>£{{ product.price }}</h2>
           <button
             class="Button filter u-pSize Button__dark Button__large js-form-submit"
             style="margin-top: 3rem"
@@ -94,7 +94,7 @@ async function startCheckout() {
   console.log("Event Data:", {
     title: product.value.title,
     price: priceInCents,
-    currency: "eur",
+    currency: "gbp",
     eventId: product.value._id,
   });
 
