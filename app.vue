@@ -458,7 +458,7 @@ function closeModal() {
   .header--scrolled {
     width: calc(100% - (var(--mobile-side-margin) * 2));
   }
-  .header--home .Mobile-menu-toggle svg rect {
+  .header--scrolled .Mobile-menu-toggle svg rect {
     fill: #84827e;
   }
   .header--default:not(.header--home) {
