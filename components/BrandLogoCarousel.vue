@@ -51,7 +51,6 @@ const doubledLogos = [...props.logos, ...props.logos];
 
 @media (max-width: 768px) {
   .slide {
-    min-width: 120px;
     padding: 0 0.75rem;
   }
 }

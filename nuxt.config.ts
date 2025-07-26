@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     projectId: "cc2xy89a",
     dataset: "production",
     useCdn: true,
+    apiVersion: "2021-10-21",
   },
   // runtimeConfig: {
   //   sanity: {
