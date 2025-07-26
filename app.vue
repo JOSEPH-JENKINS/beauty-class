@@ -61,7 +61,7 @@ useHead({
 
 const MODAL_SEEN_KEY = "lastModalSeen";
 const MODAL_COOLDOWN_PERIOD = 12 * 60 * 60 * 1000;
-const MODAL_SHOW_DELAY = 4000;
+const MODAL_SHOW_DELAY = 10000;
 
 const email = ref("");
 const subscribed = ref(false);
