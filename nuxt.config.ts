@@ -8,11 +8,6 @@ export default defineNuxtConfig({
     dataset: "production",
     useCdn: true,
   },
-  swiper: {
-    prefix: "Swiper",
-    styleLang: "css",
-    modules: ["navigation", "pagination", "autoplay"],
-  },
   // runtimeConfig: {
   //   sanity: {
   //     token: process.env.SANITY_API_TOKEN,
@@ -20,14 +15,4 @@ export default defineNuxtConfig({
   // },
   css: ["@/assets/css/main.css"],
   ssr: true,
-  nitro: {
-    prerender: {
-      crawlLinks: true,
-      routes: [
-        "/contact",
-        // add more static routes as needed
-      ],
-      failOnError: false,
-    },
-  },
 });
