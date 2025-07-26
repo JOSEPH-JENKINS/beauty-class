@@ -9,7 +9,14 @@ export const aboutQuery = groq`
     }
     },
     title,
-    image {
+    mainImage {
+        asset->{
+            _id,
+            url,
+            metadata { lqip, dimensions }
+        }
+    },
+    secondaryImage {
         asset->{
             _id,
             url,

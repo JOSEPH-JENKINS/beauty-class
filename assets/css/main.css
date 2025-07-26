@@ -864,13 +864,13 @@ h6 {
 }
 
 .shop .card-image {
-  aspect-ratio: 2/3;
+  aspect-ratio: 4/5;
 }
 
 .card-image {
   width: 100%;
   flex: 1;
-  aspect-ratio: 2/3;
+  aspect-ratio: 4/5;
   object-fit: cover;
   object-position: center;
   border-radius: 8px;
@@ -1196,7 +1196,7 @@ h6 {
 
 @media only screen and (min-width: 760px) {
   .BlogListItem {
-    width: calc(50% - 1.3rem);
+    width: calc(33.33% - var(--item-spacing));
     margin: 0;
   }
 }
@@ -1233,7 +1233,7 @@ h6 {
 
 @media screen and (min-width: 1024px) {
   .BlogListItem {
-    width: calc(33.33% - 1.67rem); /* For three columns with gaps */
+    width: calc(25% - var(--item-spacing)); /* For three columns with gaps */
   }
 }
 .Blog-container-filters {
@@ -1796,10 +1796,19 @@ nav a {
   justify-content: center;
 }
 
-.social-embed iframe,
-.social-embed blockquote {
-  max-width: 100%;
-  min-height: 480px; /* ensures height is enough for Instagram/TikTok */
+.social-embed > * {
+  width: 100% !important;
+  max-width: 360px !important; /* typical TikTok width */
+  aspect-ratio: 9 / 16;
+  height: auto !important;
+  margin: 0 auto;
+}
+
+/* handle iframe cases too */
+.social-embed iframe {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 9 / 16;
   border: none;
 }
 

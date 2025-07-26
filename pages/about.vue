@@ -6,7 +6,7 @@
           <span class="c-span"></span>
           <img
             class="ls-is-cached lazyloaded c-img"
-            :src="urlFor(data.image.asset.url)"
+            :src="`${data.mainImage.asset.url}?q=90&auto=format`"
             decoding="async"
             data-nimg="responsive"
             sizes="100vw"
@@ -24,11 +24,25 @@
         />
       </div>
     </div>
+    <section class="Hero" style="height: calc(84svh - (84svh * 1 / 4))">
+      <div class="Hero-background">
+        <span class="Image Image--desktop o-placeholder bg-full-height c-image">
+          <span class="c-span"></span>
+          <img
+            class="ls-is-cached lazyloaded c-img"
+            :src="`${data.secondaryImage.asset.url}?q=90&auto=format`"
+            decoding="async"
+            data-nimg="responsive"
+            sizes="100vw"
+            alt=""
+            loading="lazy"
+        /></span>
+      </div>
+    </section>
   </div>
 </template>
 
 <script setup>
-import { urlFor } from "~/composables/useImageBuilder";
 import { aboutQuery } from "@/queries/about";
 import { PortableText } from "@portabletext/vue";
 import { h, onMounted } from "vue";
