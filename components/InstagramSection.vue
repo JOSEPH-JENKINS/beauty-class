@@ -5,7 +5,7 @@
   >
     <div class="instagram-section__container">
       <div class="instagram-section__header section-header">
-        <h1>{{ content.heading }}</h1>
+        <h1 class="heroFontSize">{{ content.heading }}</h1>
         <NuxtLink :to="content.ctaLink" class="Button desktop-cta">
           {{ content.ctaLabel }}
         </NuxtLink>

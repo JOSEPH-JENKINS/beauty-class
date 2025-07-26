@@ -1,24 +1,5 @@
 <template>
   <section>
-    <section
-      class="Hero"
-      style="height: calc(84svh - (84svh * 1 / 4))"
-      v-if="heroSection"
-    >
-      <div class="Hero-background">
-        <img
-          :src="`${eventPage?.image?.asset?.url}?auto=format&q=90`"
-          :alt="eventPage?.heading"
-        />
-      </div>
-      <div class="Hero-content BOTTOM-LEFT">
-        <div class="Hero-content-wrapper TEXT__LEFT BUTTON__LEFT">
-          <h1 data-splitting="lines" style="font-weight: 400">
-            <p>{{ eventPage.heading }}</p>
-          </h1>
-        </div>
-      </div>
-    </section>
     <div class="Blog-container">
       <div class="Blog-container-filters">
         <p class="u-bold u-pSize u-pSize__Medium u-noMargin">filter by:</p>

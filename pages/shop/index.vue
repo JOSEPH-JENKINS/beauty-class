@@ -11,7 +11,7 @@
         <article
           v-for="product in products"
           :key="product._id"
-          class="BlogListItem content-card"
+          class="BlogListItem content-card shop"
         >
           <div class="card-content">
             <div class="card-image fixed-height">
@@ -38,7 +38,7 @@
                 <h3 class="BlogListItem-title u-noMargin blog-title">
                   {{ product.title }}
                 </h3>
-                <p class="Product-price">€{{ product.price }}</p>
+                <p class="Product-price">£{{ product.price }}</p>
               </div>
             </div>
             <div class="Button-container" style="margin-top: 1rem">

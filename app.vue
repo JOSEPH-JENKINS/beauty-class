@@ -385,6 +385,12 @@ function closeModal() {
   background-color: var(--secondary-header-color);
 }
 
+.header--default:not(.header--home)
+  .Mobile-menu-content-container-section-title
+  .link {
+  color: var;
+}
+
 /* homepage: transparent + sticky */
 .header--home {
   position: absolute;
@@ -405,6 +411,10 @@ function closeModal() {
 .header--default nav a,
 .header--scrolled nav a {
   color: #67645e;
+}
+
+.header--home .Mobile-menu-toggle svg rect {
+  fill: #fff;
 }
 
 @media (max-width: 768px) {
