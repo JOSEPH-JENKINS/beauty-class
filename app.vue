@@ -281,6 +281,9 @@ function closeModal() {
     </main>
 
     <footer class="Footer" id="footer">
+      <div class="Footer-logo">
+        <img :src="settings?.logoAlt?.asset?.url" alt="Site Logo" />
+      </div>
       <div class="Footer-content-container">
         <div class="Footer-newsletter">
           <p v-if="!subscribed">{{ settings?.footerText }}</p>
@@ -343,9 +346,6 @@ function closeModal() {
                     </NuxtLink>
                   </li>
                 </ul>
-              </div>
-              <div class="Footer-logo">
-                <img :src="settings?.logoAlt?.asset?.url" alt="Site Logo" />
               </div>
             </nav>
           </div>
