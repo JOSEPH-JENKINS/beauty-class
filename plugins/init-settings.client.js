@@ -28,7 +28,9 @@ export default defineNuxtPlugin(async () => {
   apply("item-spacing", design.itemSpacing);
   apply("section-spacing", design.sectionSpacing);
   apply("top-margin", design.topMargin);
+  apply("mobile-top-margin", design.mobileTopMargin);
   apply("side-margin", design.sideMargin);
+  apply("mobile-side-margin", design.mobileSideMargin);
   apply("button-accent-color", design.buttonAccentColor);
   apply("secondary-header-color", design.secondaryHeaderColor);
 });

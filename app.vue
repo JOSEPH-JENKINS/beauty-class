@@ -454,6 +454,16 @@ function closeModal() {
   margin: 0 auto;
 }
 
+@media (max-width: 768px) {
+  .header-scrolled {
+    width: calc(100% - (var(--mobile-side-margin) * 2));
+  }
+  .header--default:not(.header--home) {
+    width: calc(100% - (var(--mobile-side-margin) * 2));
+    margin: 0 auto;
+  }
+}
+
 .header--default:not(.header--home) ~ .main-content {
   margin-top: 80px;
 }

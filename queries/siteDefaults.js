@@ -32,7 +32,9 @@ export const siteDefaults = groq`
       itemSpacing,
       sectionSpacing,
       topMargin,
+      mobileTopMargin,
       sideMargin,
+      mobileSideMargin,
       buttonAccentColor,
       secondaryHeaderColor,
     }

@@ -72,6 +72,11 @@ body {
   min-height: 100vh;
   padding: var(--top-margin) var(--side-margin) 0;
 }
+@media (max-width: 768px) {
+  .main-container {
+    padding: var(--mobile-top-margin) var(--mobile-side-margin) 0;
+  }
+}
 .Logo img {
   transition: opacity 0.3s ease-in-out;
 }
