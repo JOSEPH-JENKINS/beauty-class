@@ -62,7 +62,7 @@ body {
   background: #fff;
   font-family: var(--font-family);
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.5em;
   font-size: var(--body-size);
   color: #67645e;
   -webkit-font-smoothing: antialiased;
@@ -148,7 +148,7 @@ h3 {
   .header nav a,
   .header nav div:not(.nav-left-container) {
     margin-right: 3rem;
-    font-weight: 700;
+    font-weight: 600;
   }
 }
 .u-showMd,
@@ -186,7 +186,7 @@ h3 {
 p,
 a {
   /* font-size: max(0.825rem + 0.2vw, 0.925vw); */
-  line-height: 150%;
+  line-height: 1.5em;
   letter-spacing: -0.02em;
 }
 
@@ -254,7 +254,7 @@ svg:not(:root) {
 .Mobile-menu-content-container-section-title .link {
   color: #67645e;
   font-size: var(--body-size);
-  font-weight: 700;
+  font-weight: 600;
   line-height: 120%;
   letter-spacing: -0.02em;
   /* text-transform: uppercase; */
@@ -403,7 +403,7 @@ p {
   }
 }
 .u-bold {
-  font-weight: 700;
+  font-weight: 600;
 }
 .Footer-navigation-list ul {
   margin-left: 0;
@@ -669,7 +669,7 @@ h5,
 h6 {
   font-family: var(--font-family), sans-serif;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   color: #67645e;
   text-rendering: optimizeLegibility;
   letter-spacing: -0.035em;
@@ -818,13 +818,12 @@ h6 {
 .testimonial-card__quote {
   font-size: var(--header-size);
   flex: 1;
-  line-height: 1.4;
+  line-height: 1.5em;
   margin-bottom: 1rem;
 }
 
 .testimonial-card__author {
   color: var(--button-accent-color);
-  font-weight: 600;
   margin: 0;
 }
 
@@ -1095,7 +1094,7 @@ h6 {
   line-height: 120%;
   margin-bottom: max(0.75rem, 0.75vw);
   letter-spacing: -0.06em;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .text-indent {
@@ -1235,7 +1234,7 @@ h6 {
 }
 
 .BlogListItem-title {
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .margin-bottom {
@@ -1580,7 +1579,7 @@ nav a {
   color: #67645e;
   margin: 0 0 1.3125rem;
   letter-spacing: -0.09rem;
-  font-weight: 700;
+  font-weight: 600;
   line-height: normal;
 }
 
@@ -1826,4 +1825,8 @@ nav a {
 .post-content img {
   margin-bottom: 20px;
   margin-top: 20px;
+}
+
+.post-content {
+  --body-size: 16px;
 }
