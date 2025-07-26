@@ -143,7 +143,7 @@ function subscribe() {
   grid-template-rows: 1fr;
   gap: 1rem;
   position: relative;
-  width: 50vw;
+  width: 80vw;
   border-radius: 12px;
 }
 
@@ -154,6 +154,7 @@ function subscribe() {
 @media screen and (min-width: 760px) {
   .modal-content {
     grid-template-columns: 1fr 1fr;
+    width: 50vw;
   }
 }
 
