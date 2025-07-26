@@ -801,7 +801,7 @@ h6 {
 }
 
 .testimonial-card__quote {
-  /* font-size: var(--header-size); */
+  font-size: var(--header-size);
   flex: 1;
   line-height: 1.4;
   margin-bottom: 1rem;
@@ -861,7 +861,7 @@ h6 {
 .card-image {
   width: 100%;
   flex: 1;
-  aspect-ratio: 3/4;
+  aspect-ratio: 2/3;
   object-fit: cover;
   object-position: center;
   border-radius: 8px;
