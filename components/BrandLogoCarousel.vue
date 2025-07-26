@@ -49,6 +49,13 @@ const doubledLogos = [...props.logos, ...props.logos];
   padding: 0 2rem;
 }
 
+@media (max-width: 768px) {
+  .slide {
+    min-width: 120px;
+    padding: 0 0.75rem;
+  }
+}
+
 .slide img {
   height: 32px;
   object-fit: contain;

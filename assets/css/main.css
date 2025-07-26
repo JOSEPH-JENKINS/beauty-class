@@ -795,11 +795,15 @@ h6 {
   gap: 1.5rem;
 }
 
+.heroVideo::-webkit-media-controls {
+  display: none !important;
+}
+
 .testimonial-card {
   background-color: #f8f8f8; /* Site's grey color */
   border-radius: 8px;
   padding: 1.5rem;
-  height: 220px;
+  min-height: 220px;
   display: flex;
   flex-direction: column;
   transition: transform 0.2s ease-in-out;
@@ -1804,10 +1808,4 @@ h2,
 h3,
 h4 {
   margin-bottom: 20px;
-}
-
-@media (min-width: 768px) {
-  :root {
-    --header-size: 22px !important;
-  }
 }
