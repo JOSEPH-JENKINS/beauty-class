@@ -284,7 +284,7 @@ function closeModal() {
       <div class="Footer-content-container">
         <div class="Footer-newsletter">
           <div class="Footer-logo">
-            <img :src="settings?.logoAlt?.asset?.url" alt="Site Logo" />
+            <img :src="settings?.footerLogo?.asset?.url" alt="Site Logo" />
           </div>
           <p v-if="!subscribed">{{ settings?.footerText }}</p>
           <p v-if="subscribed">Thank you for subscribing!</p>
@@ -328,10 +328,6 @@ function closeModal() {
           <p class="u-pSize Footer-privacy-policy">
             By signing up, you agree to our Privacy Policy*
           </p>
-          <p class="u-pSize Footer-privacy-policy">
-            &copy; {{ new Date().getFullYear() }} Beauty Class UK. All rights
-            reserved.
-          </p>
         </div>
         <div class="Footer-content">
           <div class="Footer-info">
@@ -350,6 +346,10 @@ function closeModal() {
                     </NuxtLink>
                   </li>
                 </ul>
+                <p class="u-pSize Footer-privacy-policy">
+                  &copy; {{ new Date().getFullYear() }} Beauty Class UK. All
+                  rights reserved.
+                </p>
               </div>
             </nav>
           </div>
