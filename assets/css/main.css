@@ -1828,5 +1828,6 @@ nav a {
 }
 
 .post-content {
-  --body-size: 19px;
+  --body-size: 17px;
+  font-weight: 400;
 }
