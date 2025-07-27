@@ -22,7 +22,7 @@
 
       <div class="post-content">
         <PortableText :value="post.body" :components="portableTextComponents" />
-        <!-- <pre>{{ post.body }}</pre> -->
+        <pre>{{ post.body }}</pre>
       </div>
     </div>
   </section>
@@ -103,8 +103,6 @@ function getTikTokId(url) {
 const portableTextComponents = {
   types: {
     image: ({ value }) => {
-      // The GROQ query for the post must expand image assets.
-      // See /queries/blogPost.js for the implementation.
       if (!value?.asset?.url) {
         return null;
       }
@@ -149,12 +147,30 @@ const portableTextComponents = {
 
       const embedHtml = embedMap[platformName]?.(url);
 
-      if (!embedHtml) return null; // 🔥 this avoids the empty space
+      if (!embedHtml) return null;
 
       return h("div", {
         class: "social-embed my-6",
         innerHTML: embedHtml,
       });
+    },
+  },
+  block: {
+    normal: ({ children }) => {
+      if (!children) return null;
+
+      const processed = children.map((child) => {
+        if (typeof child === "string") {
+          const lines = child.split("\n");
+          return lines.flatMap((line, i) => [
+            line,
+            i < lines.length - 1 ? h("br") : null,
+          ]);
+        }
+        return child;
+      });
+
+      return h("p", {}, processed);
     },
   },
 };

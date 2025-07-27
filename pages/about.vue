@@ -115,8 +115,6 @@ definePageMeta({
 const portableTextComponents = {
   types: {
     image: ({ value }) => {
-      // The GROQ query for the post must expand image assets.
-      // See /queries/blogPost.js for the implementation.
       if (!value?.asset?.url) {
         return null;
       }
@@ -124,6 +122,67 @@ const portableTextComponents = {
         src: value.asset.url,
         alt: value.alt || "Embedded blog image",
       });
+    },
+    socialPost: ({ value }) => {
+      const { platform, url, caption } = value;
+
+      const platformName = platform?.toLowerCase();
+
+      const embedMap = {
+        instagram: (url) =>
+          getInstagramCode(url)
+            ? `<iframe src="https://www.instagram.com/p/${getInstagramCode(
+                url
+              )}/embed" width="400" height="480" frameborder="0" scrolling="no" allowtransparency="true"></iframe>`
+            : null,
+        twitter: (url) =>
+          url
+            ? `<blockquote class="twitter-tweet"><a href="${url}"></a></blockquote>`
+            : null,
+        youtube: (url) =>
+          getYouTubeId(url)
+            ? `<iframe width="560" height="315" src="https://www.youtube.com/embed/${getYouTubeId(
+                url
+              )}" frameborder="0" allowfullscreen></iframe>`
+            : null,
+        tiktok: (url) =>
+          getTikTokId(url)
+            ? `<blockquote class="tiktok-embed" cite="${url}" data-video-id="${getTikTokId(
+                url
+              )}"><a href="${url}"></a></blockquote>`
+            : null,
+        linkedin: (url) =>
+          url
+            ? `<a href="${url}" target="_blank" rel="noopener">View LinkedIn Post</a>`
+            : null,
+      };
+
+      const embedHtml = embedMap[platformName]?.(url);
+
+      if (!embedHtml) return null;
+
+      return h("div", {
+        class: "social-embed my-6",
+        innerHTML: embedHtml,
+      });
+    },
+  },
+  block: {
+    normal: ({ children }) => {
+      if (!children) return null;
+
+      const processed = children.map((child) => {
+        if (typeof child === "string") {
+          const lines = child.split("\n");
+          return lines.flatMap((line, i) => [
+            line,
+            i < lines.length - 1 ? h("br") : null,
+          ]);
+        }
+        return child;
+      });
+
+      return h("p", {}, processed);
     },
   },
 };

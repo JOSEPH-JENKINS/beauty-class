@@ -300,8 +300,13 @@ svg:not(:root) {
 .Footer {
   overflow: hidden;
   background-color: #f8f8f8;
-  padding: 1.75rem 0 0;
   border-radius: 8px;
+  position: relative;
+}
+.Footer-copyright {
+  position: absolute;
+  bottom: 0;
+  right: 1rem;
 }
 .Footer-logo {
   padding: 0 1rem 1.75rem;

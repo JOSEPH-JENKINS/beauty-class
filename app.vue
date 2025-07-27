@@ -346,15 +346,15 @@ function closeModal() {
                     </NuxtLink>
                   </li>
                 </ul>
-                <p class="u-pSize Footer-privacy-policy">
-                  &copy; {{ new Date().getFullYear() }} Beauty Class UK. All
-                  rights reserved.
-                </p>
               </div>
             </nav>
           </div>
         </div>
       </div>
+      <p class="u-pSize Footer-copyright">
+        &copy; {{ new Date().getFullYear() }} Beauty Class UK. All rights
+        reserved.
+      </p>
     </footer>
   </div>
 </template>
