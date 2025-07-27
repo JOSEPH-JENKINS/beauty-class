@@ -1753,9 +1753,9 @@ nav a {
 }
 
 .Product-price {
-  font-size: 1.5em;
-  font-weight: bold;
-  color: #666;
+  --body-size: 19px;
+  font-weight: 400;
+  font-size: var(--body-size);
   margin: 0;
 }
 
