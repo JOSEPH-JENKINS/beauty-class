@@ -114,6 +114,7 @@ body {
 }
 .header nav a {
   color: #fff;
+  font-weight: 600 !important;
 }
 #skip-to-content {
   transition: none;
@@ -218,7 +219,7 @@ svg:not(:root) {
   overflow: hidden;
 }
 .Mobile-menu-wrapper.is-open {
-  max-height: 895px;
+  max-height: 795px;
 }
 .Mobile-menu-container {
   background: #f8f8f8;
