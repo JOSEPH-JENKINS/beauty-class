@@ -145,6 +145,7 @@ function closeModal() {
             'header--scrolled': hasScrolled,
             'header--hidden': isHeaderHidden,
             'header--default': !isHome,
+            'header--menu-open': isMobileMenuOpen,
           },
         ]"
       >
@@ -481,5 +482,19 @@ function closeModal() {
 
 .header--default:not(.header--home) .logo-alt {
   display: block;
+}
+
+/* Hide default logo, show alternate logo when menu is open */
+.header--menu-open .logo-default {
+  display: none !important;
+}
+
+.header--menu-open .logo-alt {
+  display: block !important;
+}
+
+/* Darken the hamburger lines when menu is open */
+.header--menu-open .Mobile-menu-toggle svg rect {
+  fill: #666 !important;
 }
 </style>
