@@ -142,7 +142,7 @@ function subscribe() {
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   position: relative;
-  width: 85vw;
+  width: 50vw;
   border-radius: 8px;
 }
 

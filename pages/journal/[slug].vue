@@ -22,7 +22,6 @@
 
       <div class="post-content">
         <PortableText :value="post.body" :components="portableTextComponents" />
-        <pre>{{ post.body }}</pre>
       </div>
     </div>
   </section>
@@ -153,24 +152,6 @@ const portableTextComponents = {
         class: "social-embed my-6",
         innerHTML: embedHtml,
       });
-    },
-  },
-  block: {
-    normal: ({ children }) => {
-      if (!children) return null;
-
-      const processed = children.map((child) => {
-        if (typeof child === "string") {
-          const lines = child.split("\n");
-          return lines.flatMap((line, i) => [
-            line,
-            i < lines.length - 1 ? h("br") : null,
-          ]);
-        }
-        return child;
-      });
-
-      return h("p", {}, processed);
     },
   },
 };

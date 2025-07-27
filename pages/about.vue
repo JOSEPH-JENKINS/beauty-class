@@ -167,24 +167,6 @@ const portableTextComponents = {
       });
     },
   },
-  block: {
-    normal: ({ children }) => {
-      if (!children) return null;
-
-      const processed = children.map((child) => {
-        if (typeof child === "string") {
-          const lines = child.split("\n");
-          return lines.flatMap((line, i) => [
-            line,
-            i < lines.length - 1 ? h("br") : null,
-          ]);
-        }
-        return child;
-      });
-
-      return h("p", {}, processed);
-    },
-  },
 };
 </script>
 
@@ -193,7 +175,6 @@ const portableTextComponents = {
   padding: 0.5rem;
   margin-left: auto;
   margin-right: auto;
-  text-align: center;
 }
 
 .NoteWithImage h2 {

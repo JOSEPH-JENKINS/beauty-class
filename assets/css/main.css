@@ -138,7 +138,7 @@ a {
 }
 .category {
   text-transform: uppercase;
-  letter-spacing:2px
+  letter-spacing: 2px;
 }
 h3 {
   font-size: var(--header-size);
@@ -316,7 +316,7 @@ svg:not(:root) {
 
 @media (max-width: 1080px) {
   .Hero.home {
-    height: 69svh !important;
+    height: 71svh !important;
   }
 }
 
@@ -1662,7 +1662,6 @@ nav a {
   background: #f8f8f8;
   overflow: hidden;
   border-radius: 8px;
-  text-align: center;
   padding: 2.8125rem 0.9375rem 1.875rem;
   margin-top: 1.2rem;
 }
@@ -1833,7 +1832,7 @@ nav a {
   margin-top: 20px;
 }
 
-.post-content p{
+.post-content p {
   --body-size: 17px;
   font-weight: 400;
 }
