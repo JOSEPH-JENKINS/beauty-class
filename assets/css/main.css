@@ -138,6 +138,7 @@ a {
 }
 .category {
   text-transform: uppercase;
+  letter-spacing:2px
 }
 h3 {
   font-size: var(--header-size);
