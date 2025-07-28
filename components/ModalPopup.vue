@@ -142,20 +142,12 @@ function subscribe() {
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   position: relative;
-  width: 50vw;
+  width: 70vw;
   border-radius: 8px;
 }
 
 .modal-content .Footer-newsletter {
   border-right: 0px;
-}
-
-@media screen and (min-width: 760px) {
-  .modal-content {
-    grid-template-columns: 1fr 1fr;
-    width: 50vw;
-    gap: 1rem;
-  }
 }
 
 .modal-close {
@@ -183,6 +175,18 @@ function subscribe() {
   position: relative;
   border-radius: 4px;
   overflow: hidden;
+  display: hidden;
+}
+
+@media screen and (min-width: 760px) {
+  .modal-content {
+    grid-template-columns: 1fr 1fr;
+    width: 50vw;
+    gap: 1rem;
+  }
+  .image-container {
+    display: block;
+  }
 }
 
 img {
