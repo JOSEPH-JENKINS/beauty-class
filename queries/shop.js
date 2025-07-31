@@ -2,7 +2,7 @@ import groq from "groq";
 
 // For the main shop page (/shop)
 export const allProductsQuery = groq`
-  *[_type == "product"] | order(_createdAt desc) {
+  *[_type == "product"] | order(_createdAt asc) {
     _id,
     title,
     "slug": slug.current,
