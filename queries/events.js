@@ -15,7 +15,7 @@ export const eventPageQuery = groq`
 `;
 
 export const allEventsQuery = groq`
-  *[_type == "event"] | order(date asc) {
+  *[_type == "event"] | order(date desc) {
     _id,
     title,
     excerpt,
@@ -38,7 +38,7 @@ export const allEventsQuery = groq`
 `;
 
 export const allEventsWithTestimonialsQuery = groq`
-  *[_type == "event"] | order(date asc){
+  *[_type == "event"] | order(date desc){
     _id,
     title,
     excerpt,
