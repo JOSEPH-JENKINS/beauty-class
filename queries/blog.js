@@ -1,7 +1,7 @@
 import groq from "groq";
 
 export const allPostsQuery = groq`
-  *[_type == "post"] | order(date desc) {
+  *[_type == "post"] | order(publishedAt desc) {
     _id,
     title,
     body,
