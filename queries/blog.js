@@ -1,7 +1,7 @@
 import groq from "groq";
 
 export const allPostsQuery = groq`
-  *[_type == "post"] | order(date asc) {
+  *[_type == "post"] | order(date desc) {
     _id,
     title,
     body,
@@ -39,7 +39,7 @@ export const blogPageQuery = groq`
 `;
 
 export const featuredPostsQuery = groq`
-  *[_type == "post"] | order(date asc)[0...5] {
+  *[_type == "post"] | order(date desc)[0...5] {
     _id,
     title,
     body,
