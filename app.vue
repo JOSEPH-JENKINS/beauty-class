@@ -1,11 +1,12 @@
 <script setup>
-import { siteDefaults } from "@/queries/siteDefaults";
 import { useRoute } from "vue-router";
 import { popupQuery } from "@/queries/popup";
-const { data: settings } = useSanityQuery(siteDefaults);
 const { data: popup } = useSanityQuery(popupQuery);
 import { ref, onMounted, onBeforeUnmount, computed } from "vue";
 
+const { fetchSettings, settings } = useSettings();
+await fetchSettings();
+  
 useHead({
   title: settings.value?.siteTitle || "Beauty Class UK",
   meta: [
