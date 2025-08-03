@@ -39,7 +39,7 @@ export const blogPageQuery = groq`
 `;
 
 export const featuredPostsQuery = groq`
-  *[_type == "post"] | order(date desc)[0...5] {
+  *[_type == "post"] | order(publishedAt desc)[0...5] {
     _id,
     title,
     body,
