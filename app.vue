@@ -1,4 +1,6 @@
 <script setup>
+const GA_ID = 'G-5LD8T6DE4K' // your id
+
 import { useRoute } from "vue-router";
 import { popupQuery } from "@/queries/popup";
 const { data: popup } = useSanityQuery(popupQuery);
@@ -57,6 +59,21 @@ useHead({
       rel: "icon",
       href: settings.value?.favicon?.asset?.url || "/favicon.ico",
     },
+  ],
+  script: [
+    // load gtag.js
+    { key: 'gtag-src', src: `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`, async: true },
+    // init datalayer + gtag
+    {
+      key: 'gtag-init',
+      children: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        // we disable the automatic page_view so we can control it on router changes
+        gtag('config', '${GA_ID}', { send_page_view: false });
+      `
+    }
   ],
 });
 
