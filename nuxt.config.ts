@@ -9,11 +9,12 @@ export default defineNuxtConfig({
     useCdn: true,
     apiVersion: "2021-10-21",
   },
-  // runtimeConfig: {
-  //   sanity: {
-  //     token: process.env.SANITY_API_TOKEN,
-  //   },
-  // },
+  runtimeConfig: {
+    // These are exposed to server routes
+    mailchimpApiKey: process.env.MAILCHIMP_API_KEY,
+    mailchimpServerPrefix: process.env.MAILCHIMP_SERVER_PREFIX,
+    mailchimpAudienceId: process.env.MAILCHIMP_AUDIENCE_ID,
+  },
   css: ["@/assets/css/main.css"],
   ssr: true,
 });
