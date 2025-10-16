@@ -26,53 +26,46 @@
         </div>
         <p>{{ subtext }}</p>
         <div class="Footer-newsletter modal border-bottom-0">
-          <p v-if="subscribed">Thank you for subscribing!</p>
           <form
             class="Form Form_multi"
-            id="klaviyo"
-            action=""
-            novalidate="novalidate"
+            action="https://beauty-class.us1.list-manage.com/subscribe/post?u=fa6e8aa0d17fd887b05b14006&id=c5186d858b&f_id=0051dbe0f0"
             method="POST"
-            @submit.prevent="subscribe"
+            target="_blank"
+            novalidate="novalidate"
           >
-            <input type="hidden" name="g" value="VyfPYc" />
             <input
               class="Input"
-              name="email"
+              name="EMAIL"
               aria-label="Email Address"
               type="email"
               v-model="email"
               placeholder="Email Address"
               required="true"
-              target-element-id="1745050686649"
             />
+
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              <input
+                type="text"
+                name="b_fa6e8aa0d17fd887b05b14006_c5186d858b"
+                tabindex="-1"
+                value=""
+              >
+            </div>
 
             <div class="Button-container Footer-newsletter-submit-container">
               <button
                 class="Button u-pSize Footer-newsletter-submit Button__white Button__large"
                 type="submit"
-                data-form-id=""
-                data-mode="default"
               >
                 <p class="margin-0 uppercase">subscribe</p>
               </button>
             </div>
           </form>
-          <p
-            role="alert"
-            class="u-pSize Footer-newsletter-success"
-            style="display: none"
-            id="js-newsletter-message"
-          ></p>
+
           <p class="u-pSize Footer-privacy-policy">
             By signing up, you agree to our Privacy Policy*
           </p>
         </div>
-        <!-- <div class="Button-container">
-          <button class="Button Button__dark" to="/events" @click="handleCTA">
-            {{ ctaLabel }}
-          </button>
-        </div> -->
       </div>
     </div>
   </div>
@@ -87,7 +80,6 @@ defineProps({
 });
 
 import { ref, onMounted } from "vue";
-import { urlFor } from "~/composables/useImageBuilder";
 const isVisible = ref(false);
 
 onMounted(() => {
@@ -102,29 +94,14 @@ function close() {
   emit("close");
 }
 
-import { useRouter } from "vue-router";
-
-const router = useRouter();
-
-function handleCTA() {
-  emit("close"); // First, close the modal
-  // Delay navigation slightly to allow modal to close visually
-  // setTimeout(() => {
-  //   router.push("/events");
-  // }, 100);
-}
-
 const email = ref("");
-const subscribed = ref(false);
 
-function subscribe() {
-  subscribed.value = true;
-  email.value = "";
-  handleCTA();
-}
+// REMOVED the 'subscribed' ref and the 'subscribe' function
+// as they are no longer needed for the direct Mailchimp submission.
 </script>
 
 <style scoped>
+/* Your existing styles are perfect and do not need to be changed. */
 .modal-overlay {
   position: fixed;
   inset: 0;
