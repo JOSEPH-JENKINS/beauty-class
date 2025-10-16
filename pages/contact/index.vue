@@ -2,58 +2,66 @@
   <div class="contact-section">
     <div class="contact-wrapper">
       <h1 class="contact-title">{{ contact.heading }}</h1>
-      <div class="contact-description">
-        <PortableText :value="contact.body" />
+
+      <div v-if="messageSent">
+        <div class="contact-description">
+          <p class="contact-title">Thanks for contacting us.</p>
+        </div>
+        <NuxtLink to="/" class="Button Button__dark">Return Home</NuxtLink>
       </div>
 
-      <div v-if="messageSent" class="contact-success">
-        <h2>Thank you!</h2>
-        <p>Your message has been sent successfully. We'll be in touch soon.</p>
+      <div v-else>
+        <div class="contact-description">
+          <PortableText :value="contact.body" />
+        </div>
+        <form class="contact-form" @submit.prevent="sendMessage">
+          <div class="contact-input-wrapper js-input-wrapper">
+            <input
+              type="text"
+              name="name"
+              placeholder="First and Last Name*"
+              required
+              v-model="name"
+              class="contact-input js-form-input"
+            />
+          </div>
+          <div class="contact-input-wrapper js-input-wrapper">
+            <input
+              type="email"
+              name="email"
+              required
+              v-model="emailContact"
+              placeholder="Email*"
+              class="contact-input js-form-input"
+            />
+          </div>
+          <div class="contact-input-wrapper js-input-wrapper">
+            <textarea
+              name="message"
+              placeholder="Tell us the details.*"
+              required
+              v-model="message"
+              style="resize: none"
+              class="contact-textarea contact-input js-form-input"
+            ></textarea>
+          </div>
+          <div class="Button-container">
+            <button
+              class="Button filter u-pSize Button__dark Button__large Button__fullWidth js-form-submit"
+              type="submit"
+              :disabled="isSubmitting"
+            >
+              <h1 class="margin-0 uppercase">
+                {{ isSubmitting ? 'Submitting...' : 'Submit' }}
+              </h1>
+            </button>
+          </div>
+          <p v-if="errorMessage" style="color: red; margin-top: 1rem;">
+            {{ errorMessage }}
+          </p>
+        </form>
       </div>
-
-      <form v-else class="contact-form" @submit.prevent="sendMessage">
-        <div class="contact-input-wrapper js-input-wrapper">
-          <input
-            type="text"
-            name="name" placeholder="First and Last Name*"
-            required
-            v-model="name"
-            class="contact-input js-form-input"
-          />
-        </div>
-        <div class="contact-input-wrapper js-input-wrapper">
-          <input
-            type="email"
-            name="email" required
-            v-model="emailContact"
-            placeholder="Email*"
-            class="contact-input js-form-input"
-          />
-        </div>
-        <div class="contact-input-wrapper js-input-wrapper">
-          <textarea
-            name="message" placeholder="Tell us the details.*"
-            required
-            v-model="message"
-            style="resize: none"
-            class="contact-textarea contact-input js-form-input"
-          ></textarea>
-        </div>
-        <div class="Button-container">
-          <button
-            class="Button filter u-pSize Button__dark Button__large Button__fullWidth js-form-submit"
-            type="submit"
-            :disabled="isSubmitting"
-          >
-            <h1 class="margin-0 uppercase">
-              {{ isSubmitting ? 'Submitting...' : 'Submit' }}
-            </h1>
-          </button>
-        </div>
-        <p v-if="errorMessage" style="color: red; margin-top: 1rem;">
-          {{ errorMessage }}
-        </p>
-      </form>
+      
     </div>
   </div>
 </template>
@@ -63,7 +71,7 @@ import { contactQuery } from "@/queries/contact";
 import { PortableText } from "@portabletext/vue";
 const route = useRoute();
 
-// --- ALL YOUR SANITY AND SEO LOGIC IS UNCHANGED ---
+// --- SANITY.IO AND SEO LOGIC ---
 const { data: contact } = await useAsyncData(
   `contact-${route.fullPath}`,
   async () => {
@@ -102,7 +110,7 @@ useHead(() => {
 
 import { ref } from "vue";
 
-// --- UPDATED SCRIPT LOGIC FOR THE FORM ---
+// --- FORM SUBMISSION LOGIC ---
 const name = ref("");
 const emailContact = ref("");
 const message = ref("");
@@ -114,7 +122,7 @@ async function sendMessage() {
   isSubmitting.value = true;
   errorMessage.value = "";
   try {
-    // Call our NEW contact server endpoint
+    // Call the new contact server endpoint
     await $fetch("/api/contact", {
       method: "POST",
       body: {
@@ -137,7 +145,8 @@ async function sendMessage() {
 </script>
 
 <style scoped>
-/* Add a little style for your new success message */
+/* Add a little style for your new success message if needed, */
+/* or integrate these elements into your existing stylesheet. */
 .contact-success {
   padding: 2rem;
   text-align: center;
